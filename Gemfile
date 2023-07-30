@@ -7,6 +7,8 @@ ruby '3.2.1'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
+# Provides Haml generators for Rails 4 etc
+gem 'haml-rails'
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
@@ -37,6 +39,7 @@ end
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'haml_lint', require: false
   gem 'rspec-rails'
   # A Ruby static code analyzer and formatter, based on the community Ruby style guide.
   gem 'rubocop', require: false
