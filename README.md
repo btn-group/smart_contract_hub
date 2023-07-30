@@ -1,24 +1,19 @@
-# README
+# smart_contract_metadata_hub
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
+Set master.key as required
 
-Things you may want to cover:
+### Development
+In separate terminal windows:
+```
+foreman start --procfile Procfile.dev
+```
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Checking code
+```
+bundle exec rspec
+bundle exec rubocop -A
+bundle exec haml-lint app/views/
+yarn prettier --write app/javascript/
+bundle exec scss-lint app/assets/stylesheets/
+```
