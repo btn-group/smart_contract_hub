@@ -1,0 +1,19 @@
+{
+  "name": "smart_contract_metadata_hub",
+  "private": true,
+  "scripts": {
+    "build": "node esbuild.config.js --platform=node",
+    "build:css": "sass ./app/assets/stylesheets/application.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules"
+  },
+  "dependencies": {
+    "esbuild": "^0.14.23",
+    "esbuild-rails": "^1.0.3",
+    "sass": "^1.64.1"
+  },
+  "devDependencies": {
+    "prettier": "2.7.1"
+  },
+  "engines": {
+    "node": "18.13.0"
+  }
+}
