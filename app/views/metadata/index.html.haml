@@ -1,3 +1,32 @@
-.container
-  .row-12
-    %h1 Metadata
+.container.mt-5
+  .row
+    .col-md-9.mx-auto.mb-5
+      .input-group.input-group-lg
+        %input.form-control{ placeholder: 'address', type: 'text' }
+        %button.btn.btn-primary{ type: 'submit' } Search
+    .col-12
+      %table.table.table-striped
+        %thead
+          %tr
+            %th{ scope: 'col' } #
+            %th{ scope: 'col' } Address
+            %th{ scope: 'col' } Submitted By
+            %th{ scope: 'col' }
+            %th{ scope: 'col' }
+        %tbody
+          %tr
+            %th{ scope: 'row' } 1
+            %td 5Gr2PahYDa6Fxtf6JWv1NhgekjABtGY6Mf8viPJWhMAoqbTZ
+            %td 5HimuS19MhHX9EggD9oZzx297qt3UxEdkcc5NWAianPAQwHG
+            %td
+              .d-flex
+                .d-block
+                  = link_to '#' do
+                    %i.bi-hand-thumbs-up
+                .mx-1.rating 1
+                .d-block
+                  = link_to '#' do
+                    %i.bi-hand-thumbs-down
+            %td
+              = link_to 'https://res.cloudinary.com/hv5cxagki/raw/upload/v1690678972/abis/aleph_zero/az_button_abffui.json', download: true, target: '_blank' do
+                %i.bi-cloud-download
