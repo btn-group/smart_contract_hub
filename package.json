@@ -6,8 +6,11 @@
     "build:css": "sass ./app/assets/stylesheets/application.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.1",
     "esbuild": "^0.14.23",
     "esbuild-rails": "^1.0.3",
+    "jquery": "^3.7.0",
     "sass": "^1.64.1"
   },
   "devDependencies": {
