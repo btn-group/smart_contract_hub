@@ -21,6 +21,7 @@
   %body
     %nav.navbar.bg-body-tertiary
       .container
-        = link_to 'Smart Contract Metadata Hub', root_path, class: 'navbar-brand' 
-        %button.btn.btn-primary New
+        = link_to 'Smart Contract Metadata Hub', root_path, class: 'navbar-brand'
+        = link_to new_metadatum_path, class: 'btn btn-primary' do
+          New
     = yield
