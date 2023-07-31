@@ -1,10 +1,14 @@
-.container.mt-5
+.container.mt-5#metadata-new
   .row
     .col-md-9.mx-auto.mb-5
       .card
         .card-body
+          %h1 New metadata
           %form{ name: 'newForm' }
             .mb-3
               %label.form-label{ for: 'smart-contract-address-input' } Smart contract address
-              %input.form-control#smart-contract-address-input
-            %button.btn.btn-primary{ type: 'submit' } Submit
+              %input.form-control#smart-contract-address-input{ name: 'smartContractAddress' }
+            .mb-3
+              %button.btn.btn-primary.btn-sm#cloudinary-upload-widget{ type: 'button' } Upload metadata.json
+              %input.d-none#avatar-url{ name: 'metadataUrl' }
+            %button.btn.btn-primary{ type: 'submit' } Create
