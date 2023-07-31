@@ -21,5 +21,6 @@
   %body
     %nav.navbar.bg-body-tertiary
       .container
-        %a.navbar-brand{href: "#"} Smart Contract Metadata Hub
+        = link_to 'Smart Contract Metadata Hub', root_path, class: 'navbar-brand' 
+        %button.btn.btn-primary New
     = yield
