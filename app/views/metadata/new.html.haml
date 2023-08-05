@@ -1,4 +1,4 @@
-.container.mt-5#metadata-new
+.container.mt-5.polkadotjs#metadata-new
   .row
     .col-md-9.mx-auto.mb-5
       .card
@@ -7,8 +7,8 @@
           %form{ name: 'newForm' }
             .mb-3
               %label.form-label{ for: 'smart-contract-address-input' } Smart contract address
-              %input.form-control#smart-contract-address-input{ name: 'smartContractAddress' }
+              %input.form-control#smart-contract-address-input{ name: 'smartContractAddress', required: true }
             .mb-3
               %button.btn.btn-primary.btn-sm#cloudinary-upload-widget{ type: 'button' } Upload metadata.json
-              %input.d-none#avatar-url{ name: 'metadataUrl' }
-            %button.btn.btn-primary{ type: 'submit' } Create
+              %input.d-none{ name: 'url' }
+            = render 'button_loading', button_classes: 'btn btn-primary', button_type: 'submit', ready_label: 'Create'
