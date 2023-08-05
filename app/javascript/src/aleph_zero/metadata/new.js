@@ -39,36 +39,33 @@ $(document).ready(function () {
           e.preventDefault();
           let buttonSelector = "[name='newForm'] button[type='submit']";
           document.disableButton(buttonSelector);
-            try {
-              let smartContractAddress = document.newForm.smartContractAddress.value
-              console.log(smartContractAddress)
-              let url = document.newForm.url.value
-              console.log(url)
-              let api = await ALEPH_ZERO.api();
-              let account = ALEPH_ZERO.account;
-              api.setSigner(ALEPH_ZERO.getSigner());
-              const contract = await ALEPH_ZERO.contracts[
-                "azSmartContractMetadataHub"
-              ].getContract();
-              console.log(12)
-              window.contract = contract;
-              await POLKADOTJS.contractTx(
-                api,
-                account.address,
-                contract,
-                "create",
-                {},
-                [smartContractAddress, url]
-              );
-              console.log(34)
-              document.newForm.smartContractAddress.value = "";
-              document.newForm.url.value = "";
-              document.showAlertSuccess("Success", true);
-            } catch (err) {
-              document.showAlertDanger(err);
-            } finally {
-              document.enableButton(buttonSelector);
-            }
+          try {
+            let smartContractAddress =
+              document.newForm.smartContractAddress.value;
+            let url = document.newForm.url.value;
+            let api = await ALEPH_ZERO.api();
+            let account = ALEPH_ZERO.account;
+            api.setSigner(ALEPH_ZERO.getSigner());
+            const contract = await ALEPH_ZERO.contracts[
+              "azSmartContractMetadataHub"
+            ].getContract();
+            window.contract = contract;
+            await POLKADOTJS.contractTx(
+              api,
+              account.address,
+              contract,
+              "create",
+              {},
+              [smartContractAddress, url]
+            );
+            document.newForm.smartContractAddress.value = "";
+            document.newForm.url.value = "";
+            document.showAlertSuccess("Success", true);
+          } catch (err) {
+            document.showAlertDanger(err);
+          } finally {
+            document.enableButton(buttonSelector);
+          }
         };
       },
     };

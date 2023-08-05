@@ -101,14 +101,11 @@ export const POLKADOTJS = {
         options,
         args
       );
-      console.log(8)
       const { isError, decodedOutput } = decodeOutput(
         dryResult,
         contract,
         method
       );
-      console.log(isError)
-      console.log(decodedOutput)
       if (isError)
         return Promise.reject({
           dryResult,
