@@ -56,7 +56,7 @@ $(document).ready(function () {
               contract,
               "create",
               {},
-              [smartContractAddress, url]
+              [smartContractAddress, url, 0]
             );
             document.newForm.smartContractAddress.value = "";
             document.newForm.url.value = "";

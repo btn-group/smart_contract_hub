@@ -8,7 +8,7 @@ export const ALEPH_ZERO = {
   apisProduction: undefined,
   contracts: {
     azSmartContractMetadataHub: {
-      address: "5HVZunQui3k86pBsUFA6CD5DqeUMGyCikTiRXBfue9briQPY",
+      address: "5En4kRj71Vt1D3cQFaNebc35Eo9dWqSeeEALemyjVnGkxEuw",
       getContract: async () => {
         if (
           !ALEPH_ZERO.contractsByAddress[
@@ -17,7 +17,7 @@ export const ALEPH_ZERO = {
         ) {
           let api = await ALEPH_ZERO.api();
           let metadata = await $.ajax({
-            url: "https://res.cloudinary.com/hv5cxagki/raw/upload/v1691195088/az_smart_contract_metadata_hub_f7teig.json",
+            url: "https://res.cloudinary.com/hv5cxagki/raw/upload/v1691289578/abis/aleph_zero/az_smart_contract_metadata_hub_rr4paq.json",
           });
           ALEPH_ZERO.contractsByAddress[
             ALEPH_ZERO.contracts.azSmartContractMetadataHub.address
