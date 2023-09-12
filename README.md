@@ -1,4 +1,4 @@
-# smart_contract_metadata_hub
+# Smart Contracts Hub
 
 ## Setup
 Set master.key as required

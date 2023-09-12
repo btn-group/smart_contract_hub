@@ -1,5 +1,5 @@
 {
-  "name": "smart_contract_metadata_hub",
+  "name": "smart_contracts_hub",
   "private": true,
   "scripts": {
     "build": "node esbuild.config.js --platform=node",
