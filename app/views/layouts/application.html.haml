@@ -13,7 +13,7 @@
     = csp_meta_tag
 
     -# === THEME STYLESHEETS ===
-    = stylesheet_link_tag 'application'
+    = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
     :javascript
       global = globalThis
     = javascript_include_tag 'application', defer: true
@@ -25,7 +25,7 @@
       .container
         = link_to 'Smart Contracts Hub', root_path, class: 'navbar-brand'
         .d-block
-          = link_to new_metadatum_path, class: 'btn btn-primary' do
+          = link_to new_metadatum_path, class: 'btn btn-primary', rel: 'noopener' do
             New
           = link_to '#', class: 'ms-3 align-middle' do
             %i.bi-person-circle.fs-2

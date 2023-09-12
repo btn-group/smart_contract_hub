@@ -1,3 +1,4 @@
+import "@hotwired/turbo-rails";
 import "./src/jquery";
 import { createPopper } from "@popperjs/core";
 import "bootstrap";
