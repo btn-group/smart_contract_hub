@@ -2,7 +2,7 @@
   .row
     .col-md-9.mx-auto.mb-5
       .input-group.input-group-lg
-        %input.form-control{ placeholder: 'address', type: 'text' }
+        %input.form-control{ placeholder: 'contract address, creator or group', type: 'text' }
         %button.btn.btn-primary{ type: 'submit' } Search
     .col-12
       .d-flex
@@ -13,20 +13,43 @@
             %th{ scope: 'col' } #
             %th{ scope: 'col' } Address
             %th{ scope: 'col' }
-            %th{ scope: 'col' }
         %tbody
           %tr
             %th{ scope: 'row' } 1
-            %td 5Gr2PahYDa6Fxtf6JWv1NhgekjABtGY6Mf8viPJWhMAoqbTZ
             %td
-              .d-flex
-                .d-block
-                  = link_to '#' do
-                    %i.bi-hand-thumbs-up
-                .mx-1.rating 1
-                .d-block
-                  = link_to '#' do
-                    %i.bi-hand-thumbs-down
+              .text-bold 5Gr2PahYDa6Fxtf6JWv1NhgekjABtGY6Mf8viPJWhMAoqbTZ
+              .d-block
+                .text-black-50
+                  = link_to 'bg003.azeroid', 'https://azero.id/id/bg003.azero'
+                  5HimuS19MhHX9EggD9oZzx297qt3UxEdkcc5NWAianPAQwHG
+                  %br
+                  = link_to 'Cardinal Cryptography', '#'
+            %td
+              = link_to 'https://res.cloudinary.com/hv5cxagki/raw/upload/v1690678972/abis/aleph_zero/az_button_abffui.json', download: true, target: '_blank' do
+                %i.bi-cloud-download
+          %tr
+            %th{ scope: 'row' } 5
+            %td
+              .d-block.text-bold 5Gr2PahYDa6Fxtf6JWv1NhgekjABtGY6Mf8viPJWhMAoqbTZ
+              .d-block
+                .text-black-50
+                  = link_to 'bg003.azeroid', 'https://azero.id/id/bg003.azero'
+                  5HimuS19MhHX9EggD9oZzx297qt3UxEdkcc5NWAianPAQwHG
+                  %br
+                  = link_to 'Cardinal Cryptography', '#'
+            %td
+              = link_to 'https://res.cloudinary.com/hv5cxagki/raw/upload/v1690678972/abis/aleph_zero/az_button_abffui.json', download: true, target: '_blank' do
+                %i.bi-cloud-download
+          %tr
+            %th{ scope: 'row' } 12
+            %td
+              .text-bold 5Gr2PahYDa6Fxtf6JWv1NhgekjABtGY6Mf8viPJWhMAoqbTZ
+              .d-block
+                .text-black-50
+                  = link_to 'bg003.azeroid', 'https://azero.id/id/bg003.azero'
+                  5HimuS19MhHX9EggD9oZzx297qt3UxEdkcc5NWAianPAQwHG
+                  %br
+                  = link_to 'Cardinal Cryptography', '#'
             %td
               = link_to 'https://res.cloudinary.com/hv5cxagki/raw/upload/v1690678972/abis/aleph_zero/az_button_abffui.json', download: true, target: '_blank' do
                 %i.bi-cloud-download

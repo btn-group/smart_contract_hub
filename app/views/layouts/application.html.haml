@@ -23,9 +23,12 @@
   %body
     %nav.navbar.bg-body-tertiary
       .container
-        = link_to 'Smart Contract Metadata Hub', root_path, class: 'navbar-brand'
-        = link_to new_metadatum_path, class: 'btn btn-primary' do
-          New
-        = render 'polkadot_connect_button'
+        = link_to 'ABI Hub', root_path, class: 'navbar-brand'
+        .d-block
+          = link_to new_metadatum_path, class: 'btn btn-primary' do
+            New
+          = link_to '#', class: 'ms-3 align-middle' do
+            %i.bi-person-circle.fs-2
+          = render 'polkadot_connect_button'
     = yield
     = render 'polkadot_account_list'
