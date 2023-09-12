@@ -7,12 +7,12 @@ export const ALEPH_ZERO = {
   apisStaging: undefined,
   apisProduction: undefined,
   contracts: {
-    azSmartContractMetadataHub: {
+    azSmartContractsHub: {
       address: "5En4kRj71Vt1D3cQFaNebc35Eo9dWqSeeEALemyjVnGkxEuw",
       getContract: async () => {
         if (
           !ALEPH_ZERO.contractsByAddress[
-            ALEPH_ZERO.contracts.azSmartContractMetadataHub.address
+            ALEPH_ZERO.contracts.azSmartContractsHub.address
           ]
         ) {
           let api = await ALEPH_ZERO.api();
@@ -20,15 +20,15 @@ export const ALEPH_ZERO = {
             url: "https://res.cloudinary.com/hv5cxagki/raw/upload/v1691289578/abis/aleph_zero/az_smart_contract_metadata_hub_rr4paq.json",
           });
           ALEPH_ZERO.contractsByAddress[
-            ALEPH_ZERO.contracts.azSmartContractMetadataHub.address
+            ALEPH_ZERO.contracts.azSmartContractsHub.address
           ] = new POLKADOTJS.ContractPromise(
             api,
             metadata,
-            ALEPH_ZERO.contracts.azSmartContractMetadataHub.address
+            ALEPH_ZERO.contracts.azSmartContractsHub.address
           );
         }
         return ALEPH_ZERO.contractsByAddress[
-          ALEPH_ZERO.contracts.azSmartContractMetadataHub.address
+          ALEPH_ZERO.contracts.azSmartContractsHub.address
         ];
       },
     },
