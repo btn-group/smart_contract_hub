@@ -50,7 +50,6 @@ $(document).ready(function () {
             const contract = await ALEPH_ZERO.contracts[
               "azSmartContractMetadataHub"
             ].getContract();
-            window.contract = contract;
             await POLKADOTJS.contractTx(
               api,
               account.address,
@@ -65,7 +64,7 @@ $(document).ready(function () {
           } catch (err) {
             document.showAlertDanger(err);
           } finally {
-            document.enableButton(buttonSelector);
+            HELPERS.buttons.enable(buttonSelector);
           }
         };
       },
