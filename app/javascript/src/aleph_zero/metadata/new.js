@@ -1,5 +1,6 @@
 import { ALEPH_ZERO } from "../helpers";
 import { POLKADOTJS } from "../../polkadotjs";
+import { HELPERS } from "../../../application";
 
 $(document).ready(function () {
   if ($("#metadata-new").length) {
@@ -38,7 +39,7 @@ $(document).ready(function () {
         document.newForm.onsubmit = async (e) => {
           e.preventDefault();
           let buttonSelector = "[name='newForm'] button[type='submit']";
-          document.disableButton(buttonSelector);
+          HELPERS.buttons.disable(buttonSelector);
           try {
             let smartContractAddress =
               document.newForm.smartContractAddress.value;
