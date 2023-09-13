@@ -74,7 +74,7 @@ export const POLKADOTJS = {
     method: string,
     options: any = {},
     args: any[] = [],
-    statusCb?: (() => void)
+    statusCb?: () => void
   ): Promise<any> => {
     try {
       const accountAddress =
