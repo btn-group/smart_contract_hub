@@ -1,6 +1,15 @@
 import toastr from "toastr";
 
-document.showAlertInfo = function (text, autoHide = true) {
+declare global {
+  interface Document {
+    showAlertInfo(text: string, autoHide?: boolean): void;
+    showAlertWarning(error: string, autoHide?: boolean): void;
+    showAlertDanger(error: string, autoHide?: boolean): void;
+    showAlertSuccess(text: string, autoHide?: boolean): void;
+  }
+}
+
+document.showAlertInfo = function (text: string, autoHide: boolean = true): void {
   toastr.options.closeButton = true;
   toastr.options.closeDuration = 0;
   toastr.options.extendedTimeOut = 0;
@@ -11,10 +20,10 @@ document.showAlertInfo = function (text, autoHide = true) {
     toastr.options = {
       progressBar: true,
       preventDuplicates: false,
-      showDuration: "300",
-      hideDuration: "1000",
-      timeOut: "5000",
-      extendedTimeOut: "1000",
+      showDuration: 300,
+      hideDuration: 1000,
+      timeOut: 5000,
+      extendedTimeOut: 1000,
       showEasing: "swing",
       hideEasing: "linear",
       showMethod: "fadeIn",
@@ -24,7 +33,7 @@ document.showAlertInfo = function (text, autoHide = true) {
   toastr.info(text);
 };
 
-document.showAlertWarning = function (error, autoHide = true) {
+document.showAlertWarning = function (error: string, autoHide: boolean = true): void {
   toastr.options.closeButton = true;
   toastr.options.closeDuration = 0;
   toastr.options.extendedTimeOut = 0;
@@ -35,10 +44,10 @@ document.showAlertWarning = function (error, autoHide = true) {
     toastr.options = {
       progressBar: true,
       preventDuplicates: false,
-      showDuration: "300",
-      hideDuration: "1000",
-      timeOut: "5000",
-      extendedTimeOut: "1000",
+      showDuration: 300,
+      hideDuration: 1000,
+      timeOut: 5000,
+      extendedTimeOut: 1000,
       showEasing: "swing",
       hideEasing: "linear",
       showMethod: "fadeIn",
@@ -48,8 +57,7 @@ document.showAlertWarning = function (error, autoHide = true) {
   toastr.warning(error);
 };
 
-document.showAlertDanger = function (error, autoHide = false) {
-  document.eeeeee = error;
+document.showAlertDanger = function (error: any, autoHide: boolean = false): void {
   if (error != "Error: Request rejected") {
     if (error.msg) {
       error = error.msg;
@@ -89,10 +97,10 @@ document.showAlertDanger = function (error, autoHide = false) {
       toastr.options = {
         progressBar: true,
         preventDuplicates: false,
-        showDuration: "300",
-        hideDuration: "1000",
-        timeOut: "5000",
-        extendedTimeOut: "1000",
+        showDuration: 300,
+        hideDuration: 1000,
+        timeOut: 5000,
+        extendedTimeOut: 1000,
         showEasing: "swing",
         hideEasing: "linear",
         showMethod: "fadeIn",
@@ -103,7 +111,7 @@ document.showAlertDanger = function (error, autoHide = false) {
   }
 };
 
-document.showAlertSuccess = function (text, autoHide = false) {
+document.showAlertSuccess = function (text: string, autoHide: boolean = false): void {
   toastr.options.closeButton = true;
   toastr.options.closeDuration = 0;
   toastr.options.extendedTimeOut = 0;
@@ -114,10 +122,10 @@ document.showAlertSuccess = function (text, autoHide = false) {
     toastr.options = {
       progressBar: true,
       preventDuplicates: false,
-      showDuration: "300",
-      hideDuration: "1000",
-      timeOut: "5000",
-      extendedTimeOut: "1000",
+      showDuration: 300,
+      hideDuration: 1000,
+      timeOut: 5000,
+      extendedTimeOut: 1000,
       showEasing: "swing",
       hideEasing: "linear",
       showMethod: "fadeIn",
@@ -125,4 +133,4 @@ document.showAlertSuccess = function (text, autoHide = false) {
     };
   }
   toastr.success(text);
-};
+}
