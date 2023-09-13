@@ -3,10 +3,7 @@ import _ from "lodash";
 // === POLKADOT ===
 import { ApiPromise, WsProvider } from "@polkadot/api";
 import { ContractPromise } from "@polkadot/api-contract";
-import {
-  web3Accounts,
-  web3Enable,
-} from "@polkadot/extension-dapp";
+import { web3Accounts, web3Enable } from "@polkadot/extension-dapp";
 import { BN, bnToBn, hexToU8a, isHex, stringCamelCase } from "@polkadot/util";
 import { decodeAddress, encodeAddress } from "@polkadot/keyring";
 
@@ -219,7 +216,10 @@ export const POLKADOTJS = {
     }
   },
   getBalance,
-  humanizeStringNumberFromSmartContract: (number: string, decimals: number): string => {
+  humanizeStringNumberFromSmartContract: (
+    number: string,
+    decimals: number
+  ): string => {
     return HELPERS.humanizeStringNumberFromSmartContract(
       HELPERS.formatHumanizedNumberForSmartContract(number, 0),
       decimals
@@ -246,7 +246,7 @@ export const POLKADOTJS = {
     });
   },
   listenForAccountSelect: function (scope: any) {
-    $("#polkadot-account-list li").on('click' ,function (e: any) {
+    $("#polkadot-account-list li").on("click", function (e: any) {
       e.preventDefault();
       $("#polkadot-account-list").modal("hide");
       scope.updateAfterAccountSelect(e);

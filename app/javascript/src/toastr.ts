@@ -9,7 +9,10 @@ declare global {
   }
 }
 
-document.showAlertInfo = function (text: string, autoHide: boolean = true): void {
+document.showAlertInfo = function (
+  text: string,
+  autoHide: boolean = true
+): void {
   toastr.options.closeButton = true;
   toastr.options.closeDuration = 0;
   toastr.options.extendedTimeOut = 0;
@@ -33,7 +36,10 @@ document.showAlertInfo = function (text: string, autoHide: boolean = true): void
   toastr.info(text);
 };
 
-document.showAlertWarning = function (error: string, autoHide: boolean = true): void {
+document.showAlertWarning = function (
+  error: string,
+  autoHide: boolean = true
+): void {
   toastr.options.closeButton = true;
   toastr.options.closeDuration = 0;
   toastr.options.extendedTimeOut = 0;
@@ -57,7 +63,10 @@ document.showAlertWarning = function (error: string, autoHide: boolean = true): 
   toastr.warning(error);
 };
 
-document.showAlertDanger = function (error: any, autoHide: boolean = false): void {
+document.showAlertDanger = function (
+  error: any,
+  autoHide: boolean = false
+): void {
   if (error != "Error: Request rejected") {
     if (error.msg) {
       error = error.msg;
@@ -111,7 +120,10 @@ document.showAlertDanger = function (error: any, autoHide: boolean = false): voi
   }
 };
 
-document.showAlertSuccess = function (text: string, autoHide: boolean = false): void {
+document.showAlertSuccess = function (
+  text: string,
+  autoHide: boolean = false
+): void {
   toastr.options.closeButton = true;
   toastr.options.closeDuration = 0;
   toastr.options.extendedTimeOut = 0;
@@ -133,4 +145,4 @@ document.showAlertSuccess = function (text: string, autoHide: boolean = false): 
     };
   }
   toastr.success(text);
-}
+};
