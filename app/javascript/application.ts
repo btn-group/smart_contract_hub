@@ -32,6 +32,13 @@ export const HELPERS = {
         ?.split("=")[1];
     },
   },
+  delay: async (ms) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve("");
+      }, ms);
+    });
+  },
   formatHumanizedNumberForSmartContract: function (
     humanizedNumber: BigNumber | string,
     decimals: number
