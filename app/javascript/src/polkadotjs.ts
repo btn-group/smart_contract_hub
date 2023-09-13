@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 // === POLKADOT ===
 import { ApiPromise, WsProvider } from "@polkadot/api";
 import { ContractPromise } from "@polkadot/api-contract";
@@ -18,6 +20,7 @@ import {
 
 // === CUSTOM ===
 import { HELPERS } from "../application";
+import { IKeyringPair } from "@polkadot/types/types";
 
 export const POLKADOTJS = {
   maxU128: "340282366920938463463374607431768211454",
@@ -29,7 +32,7 @@ export const POLKADOTJS = {
       document
         .querySelectorAll(polkadotConnectButtonSelector)
         .forEach((item) => {
-          item.addEventListener("click", async (evt) => {
+          item.addEventListener("click", async (_evt) => {
             await POLKADOTJS.connectPolkadotjsExtension();
           });
         });
@@ -60,7 +63,7 @@ export const POLKADOTJS = {
       };
     } catch (err) {
       document.showAlertDanger(err);
-      document.enableButton(".polkadot-connect-button");
+      HELPERS.buttons.enable(".polkadot-connect-button");
     }
   },
   contractCallDryRun,
@@ -68,16 +71,15 @@ export const POLKADOTJS = {
   contractQuery,
   // Monkey patch in a monkey patch
   contractTx: async (
-    api,
-    account,
-    contract,
-    method,
-    options = {},
-    args = [],
-    statusCb = undefined
-  ) => {
+    api: any,
+    account: string | IKeyringPair,
+    contract: any,
+    method: string,
+    options: any = {},
+    args: any[] = [],
+    statusCb: (() => void) | undefined
+  ): Promise<any> => {
     try {
-      // Check if account has sufficient balance
       const accountAddress =
         typeof account === "string" ? account : account.address;
       const { freeBalance } = await getBalance(api, accountAddress);
@@ -90,8 +92,8 @@ export const POLKADOTJS = {
         });
       }
 
-      // Dry run to determine required gas and potential errors
       delete options.gasLimit;
+      // https://github.com/scio-labs/use-inkathon/blob/580e023c9844f72993996a1c79e4f96d96240d82/src/helpers/contractCall.ts#L16
       const dryResult = await contractCallDryRun(
         api,
         account,
@@ -100,6 +102,11 @@ export const POLKADOTJS = {
         options,
         args
       );
+      // This is causing a type error when attemping to decode dryResult...
+      // It's expecting a ContractExecResult but it's receiving a ContractCallOutcome
+      // https://github.com/polkadot-js/api/blob/700812aa6075c85d8306451ce062d8c06b161e2b/packages/types/src/interfaces/contracts/types.ts#L73
+      // Thinking I may need to clean this up with: https://github.com/scio-labs/use-inkathon/blob/580e023c9844f72993996a1c79e4f96d96240d82/src/helpers/unwrapResult.ts#L6
+      // https://github.com/scio-labs/use-inkathon/blob/580e023c9844f72993996a1c79e4f96d96240d82/src/helpers/decodeOutput.ts
       const { isError, decodedOutput } = decodeOutput(
         dryResult,
         contract,
@@ -111,7 +118,6 @@ export const POLKADOTJS = {
           errorMessage: decodedOutput || "Error",
         });
 
-      // Call actual query/tx & wrap it in a promise
       const gasLimit = dryResult.gasRequired;
       return new Promise(async (resolve, reject) => {
         try {
@@ -127,23 +133,20 @@ export const POLKADOTJS = {
             ...args
           );
 
-          const unsub = await tx.signAndSend(account, async (result) => {
+          const unsub = await tx.signAndSend(account, async (result: any) => {
             result.options = options;
-            statusCb?.(result);
-
+            statusCb?.();
             const isFinalized = result?.status?.[finalStatus];
             if (!isFinalized) return;
 
-            // Determine extrinsic and block info
             const extrinsicHash = result.txHash.toHex();
             const extrinsicIndex = result.txIndex;
             const blockHash = result.status[asFinalStatus].toHex();
 
-            const errorEvent = result?.events.find(({ event }) =>
+            const errorEvent = result?.events.find(({ event }: any) =>
               api.events.system.ExtrinsicFailed.is(event)
             );
             if (errorEvent) {
-              // Reject if `ExtrinsicFailed` event was found
               reject({
                 dryResult,
                 errorMessage: decodeOutput || "ExtrinsicFailed",
@@ -154,8 +157,7 @@ export const POLKADOTJS = {
               });
               unsub?.();
             } else {
-              // Resolve succesfully otherwise
-              const successEvent = result?.events.find(({ event }) =>
+              const successEvent = result?.events.find(({ event }: any) =>
                 api.events.system.ExtrinsicSuccess.is(event)
               );
 
@@ -217,16 +219,16 @@ export const POLKADOTJS = {
     }
   },
   getBalance,
-  humanizeStringNumberFromSmartContract: (number, decimals) => {
-    return document.humanizeStringNumberFromSmartContract(
-      document.formatHumanizedNumberForSmartContract(number, 0),
+  humanizeStringNumberFromSmartContract: (number: string, decimals: number): string => {
+    return HELPERS.humanizeStringNumberFromSmartContract(
+      HELPERS.formatHumanizedNumberForSmartContract(number, 0),
       decimals
     );
   },
-  initAccountList: (accounts) => {
+  initAccountList: (accounts: any[]) => {
     $("#polkadot-account-list .list").html("");
     _.sortBy(accounts, ["meta.source", "meta.name"]).forEach(function (
-      account
+      account: any
     ) {
       $("#polkadot-account-list .list").append(
         `<li class='bg-hover-light p-0' data-account-address= '${
@@ -242,26 +244,15 @@ export const POLKADOTJS = {
         }</div></div></div>`
       );
     });
-    // if (accounts.length) {
-    //   $("#change-account-link").removeClass("d-none");
-    // } else {
-    //   $("#change-account-link").addClass("d-none");
-    // }
-    // // Enable clicking change button
-    // $("#change-account-link").click(function (e) {
-    //   e.preventDefault();
-    //   $("#polkadot-account-list").modal("show");
-    // });
   },
-  listenForAccountSelect: function (scope) {
-    $("#polkadot-account-list li").click(function (e) {
+  listenForAccountSelect: function (scope: any) {
+    $("#polkadot-account-list li").on('click' ,function (e: any) {
       e.preventDefault();
       $("#polkadot-account-list").modal("hide");
       scope.updateAfterAccountSelect(e);
     });
   },
-  // https://polkadot.js.org/docs/util-crypto/examples/validate-address
-  validateAddress: function (address) {
+  validateAddress: function (address: string) {
     try {
       encodeAddress(
         isHex(address) ? hexToU8a(address) : decodeAddress(address)
