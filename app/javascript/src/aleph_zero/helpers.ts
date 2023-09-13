@@ -1,11 +1,12 @@
+import _ from "lodash";
 import { HELPERS } from "../../application";
 import { POLKADOTJS } from "./../polkadotjs";
 
 export const ALEPH_ZERO = {
-  account: undefined,
-  allAccounts: undefined,
-  apisStaging: undefined,
-  apisProduction: undefined,
+  account: undefined as any,
+  allAccounts: undefined as any,
+  apisStaging: undefined as any,
+  apisProduction: undefined as any,
   contracts: {
     azSmartContractsHub: {
       address: "5En4kRj71Vt1D3cQFaNebc35Eo9dWqSeeEALemyjVnGkxEuw",
@@ -34,11 +35,13 @@ export const ALEPH_ZERO = {
     },
   },
   contractsByAddress: {},
-  extensions: undefined,
+  extensions: undefined as any,
   activatePolkadotJsExtension: async () => {
     let response = await POLKADOTJS.activatePolkadotjsExtension();
-    ALEPH_ZERO.extensions = response.extensions;
-    ALEPH_ZERO.allAccounts = response.allAccounts;
+    if (response) {
+      ALEPH_ZERO.extensions = response.extensions;
+      ALEPH_ZERO.allAccounts = response.allAccounts;
+    }
     // Set account
     // There's three options here
     if (ALEPH_ZERO.allAccounts.length) {
@@ -66,13 +69,13 @@ export const ALEPH_ZERO = {
           // 3. User has multiple accounts: Show modal to select account
         } else {
           $("#polkadot-account-list").modal("show");
-          document.enableButton(".polkadot-connect-button");
+          HELPERS.buttons.enable(".polkadot-connect-button");
         }
       }
     }
   },
   // AKA API
-  api: async (environment = "staging") => {
+  api: async function (environment = "staging") {
     let apis;
     let httpUrls = await ALEPH_ZERO.httpUrls(environment);
     switch (environment) {
@@ -101,7 +104,7 @@ export const ALEPH_ZERO = {
           }
         }
         while (ALEPH_ZERO.apisProduction.length == 0) {
-          await document.delay(1_000);
+          await HELPERS.delay(1_000);
         }
         apis = ALEPH_ZERO.apisProduction;
         break;
@@ -116,7 +119,7 @@ export const ALEPH_ZERO = {
       document.showAlertDanger(err);
     }
   },
-  getSigner: () => {
+  getSigner: function () {
     let signer;
     ALEPH_ZERO.extensions.forEach(function (extension) {
       if (extension.name == ALEPH_ZERO.account.meta.source) {
@@ -125,14 +128,14 @@ export const ALEPH_ZERO = {
     });
     return signer;
   },
-  httpUrls: async (environment = "production") => {
+  httpUrls: async function (environment = "production") {
     let urls = ["wss://ws.azero.dev"];
     if (environment == "staging") {
       urls = ["wss://ws.test.azero.dev"];
     }
     return urls;
   },
-  linkToExplorer: (identifier, type = "account") => {
+  linkToExplorer: function (identifier, type = "account") {
     let link;
     link = `https://alephzero.subscan.io/${type}/${identifier}`;
     return link;
@@ -144,17 +147,16 @@ export const ALEPH_ZERO = {
   // } catch (err) {
   //   document.showAlertDanger(err);
   // }
-  // },
   setUserBlockExplorerLinks: () => {
     $("#polkadot-user-menu-toggle .block-explorers").removeClass("d-none");
     let html = "";
-    [["Subscan", "https://alephzero.subscan.io/account/"]].forEach(function (
-      blockExplorerDetails
-    ) {
-      html += `<div class="menu-item px-3"><a class="menu-link px-5" href="${
-        blockExplorerDetails[1] + ALEPH_ZERO.account.address
-      }" target="_blank">${blockExplorerDetails[0]}</a></div>`;
-    });
+    [["Subscan", "https://alephzero.subscan.io/account/"]].forEach(
+      (blockExplorerDetails) => {
+        html += `<div class="menu-item px-3"><a class="menu-link px-5" href="${
+          blockExplorerDetails[1] + ALEPH_ZERO.account.address
+        }" target="_blank">${blockExplorerDetails[0]}</a></div>`;
+      }
+    );
     $("#polkadot-user-menu-toggle .block-explorers .menu-sub").html(html);
   },
   updateAfterAccountSelect: (event) => {
@@ -172,7 +174,7 @@ export const ALEPH_ZERO = {
       setNewAccount = true;
     }
     if (setNewAccount) {
-      ALEPH_ZERO.allAccounts.forEach(function (account) {
+      ALEPH_ZERO.allAccounts.forEach((account) => {
         if (account.address == newAddress && account.meta.source == newSource) {
           ALEPH_ZERO.account = account;
           ALEPH_ZERO.updateAfterAccountSet();
@@ -185,11 +187,10 @@ export const ALEPH_ZERO = {
     $("#polkadot-user-menu-toggle .wallet-address").text(
       ALEPH_ZERO.account.address
     );
-    HELPERS.copyToClipboard("polkadot-user-account-menu-wallet-address");
     document.cookie = `polkadot_account_name=${ALEPH_ZERO.account.meta.name};`;
     document.cookie = `polkadot_extension=${ALEPH_ZERO.account.meta.source};`;
     $(".polkadot-connect-button").addClass("d-none");
-    document.enableButton(".polkadot-connect-button");
+    HELPERS.buttons.enable(".polkadot-connect-button");
     ALEPH_ZERO.setUserBlockExplorerLinks();
     HELPERS.setUserAccountMenuToggle(
       "#polkadot-user-menu-toggle",
