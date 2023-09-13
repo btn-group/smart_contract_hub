@@ -40,7 +40,7 @@ export const POLKADOTJS = {
   ApiPromise,
   BN,
   connectPolkadotjsExtension: async () => {
-    document.disableButton(".polkadot-connect-button");
+    HELPERS.buttons.disable(".polkadot-connect-button");
     // returns an array of all the injected sources
     // (this needs to be called first, before other requests)
     // this call fires up the authorization popup
