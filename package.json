@@ -15,17 +15,18 @@
     "@polkadot/util-crypto": "^10.4.1",
     "@popperjs/core": "^2.11.8",
     "@scio-labs/use-inkathon": "^0.0.1-alpha.42",
-    "bootstrap": "^5.3.1",
+    "@types/bootstrap": "^5.2.6",
     "clipboard": "^2.0.11",
     "esbuild": "^0.14.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.64.1",
-    "toastr": "^2.1.4"
+    "sass": "^1.64.1"
   },
   "devDependencies": {
     "@types/jquery": "^3.5.18",
     "@types/lodash": "^4.14.198",
+    "@types/toastr": "^2.1.41",
+    "bignumber.js": "^9.1.2",
     "prettier": "2.7.1"
   },
   "engines": {
