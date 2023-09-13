@@ -4,7 +4,6 @@ import { ContractPromise } from "@polkadot/api-contract";
 import {
   web3Accounts,
   web3Enable,
-  web3FromAddress,
 } from "@polkadot/extension-dapp";
 import { BN, bnToBn, hexToU8a, isHex, stringCamelCase } from "@polkadot/util";
 import { decodeAddress, encodeAddress } from "@polkadot/keyring";
