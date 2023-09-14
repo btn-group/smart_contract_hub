@@ -17,7 +17,6 @@
     "@popperjs/core": "^2.11.8",
     "@scio-labs/use-inkathon": "^0.0.1-alpha.42",
     "bootstrap": "^5.3.1",
-    "clipboard": "^2.0.11",
     "esbuild": "^0.14.23",
     "jquery": "^3.7.0",
     "lodash": "^4.17.21",
