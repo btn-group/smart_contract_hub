@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   resources :groups, only: %i[index show]
-  resources :metadata, only: :new
+  resources :smart_contracts, only: :new
 
-  root 'metadata#index'
+  root 'smart_contracts#index'
 end
