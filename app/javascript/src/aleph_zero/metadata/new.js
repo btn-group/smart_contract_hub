@@ -1,7 +1,7 @@
 import { ALEPH_ZERO } from "../helpers";
 import { POLKADOTJS } from "../../polkadotjs";
 
-$(document).ready(function () {
+$(document).on('turbo:load', function() {
   if ($("#metadata-new").length) {
     const METADATA_NEW = {
       init: async () => {
