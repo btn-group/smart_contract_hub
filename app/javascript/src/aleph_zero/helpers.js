@@ -6,35 +6,42 @@ export const ALEPH_ZERO = {
   allAccounts: undefined,
   apisStaging: undefined,
   apisProduction: undefined,
+  b3: "5HimuS19MhHX9EggD9oZzx297qt3UxEdkcc5NWAianPAQwHG",
   contracts: {
     azGroups: {
-      getContract: async (environment = "production") => {
-        let address;
+      address: (environment = "production") => {
         if (environment == "production") {
-          address = "FILLTHISLATER"
+          return "FILLTHISLATER";
         } else {
-          address = "5C6uExVKN4HtRXmmTZexzfRDEoKnRuDa6zEYQ445Sw8AnRGH"
-        };
-        if (
-          !ALEPH_ZERO.contractsByAddress[
-            address
-          ]
-        ) {
+          return "5C6uExVKN4HtRXmmTZexzfRDEoKnRuDa6zEYQ445Sw8AnRGH";
+        }
+      },
+      getContract: async (environment = "production") => {
+        let address = ALEPH_ZERO.contracts.azGroups.address(environment);
+        if (!ALEPH_ZERO.contractsByAddress[address]) {
           let api = await ALEPH_ZERO.api(environment);
           let metadata = await $.ajax({
             url: "https://res.cloudinary.com/hv5cxagki/raw/upload/v1694690121/abis/aleph_zero/az_groups_bdrmyz.json",
           });
-          ALEPH_ZERO.contractsByAddress[
-            address
-          ] = new POLKADOTJS.ContractPromise(
-            api,
-            metadata,
-            address
-          );
+          ALEPH_ZERO.contractsByAddress[address] =
+            new POLKADOTJS.ContractPromise(api, metadata, address);
         }
-        return ALEPH_ZERO.contractsByAddress[
-          address
-        ];
+        return ALEPH_ZERO.contractsByAddress[address];
+      },
+      show: async (id, environment = "production") => {
+        let contract = await ALEPH_ZERO.contracts.azGroups.getContract(
+          environment
+        );
+        let api = await ALEPH_ZERO.api(environment);
+        let response = await POLKADOTJS.contractQuery(
+          api,
+          ALEPH_ZERO.b3,
+          contract,
+          "groupsShow",
+          undefined,
+          [id]
+        );
+        return response.output.asOk.asOk.toHuman();
       },
     },
   },
