@@ -4,7 +4,6 @@ import { ContractPromise } from "@polkadot/api-contract";
 import {
   web3Accounts,
   web3Enable,
-  web3FromAddress,
 } from "@polkadot/extension-dapp";
 import { BN, bnToBn, hexToU8a, isHex, stringCamelCase } from "@polkadot/util";
 import { decodeAddress, encodeAddress } from "@polkadot/keyring";
@@ -30,7 +29,7 @@ export const POLKADOTJS = {
       document
         .querySelectorAll(polkadotConnectButtonSelector)
         .forEach((item) => {
-          item.addEventListener("click", async (evt) => {
+          item.addEventListener("click", async (_evt) => {
             await POLKADOTJS.connectPolkadotjsExtension();
           });
         });
@@ -49,7 +48,7 @@ export const POLKADOTJS = {
       // no extension installed, or the user did not accept the authorization
       // in this case we should inform the use and give a link to the extension
       if (extensions.length === 0) {
-        throw "Please install SubWallet, Polkadotjs or Talisman browser extension. If you have one of these extensions installed already, please goto the setttings and allow btn.group access.";
+        throw "Please install SubWallet, Aleph Zero Signer, Polkadotjs or Talisman browser extension. If you have one of these extensions installed already, please goto the settings and allow Smart Contract Hub access.";
       }
       // returns an array of { address, meta: { name, source } }
       // meta.source contains the name of the extension that provides this account
@@ -255,7 +254,7 @@ export const POLKADOTJS = {
     // });
   },
   listenForAccountSelect: function (scope) {
-    $("#polkadot-account-list li").click(function (e) {
+    $("#polkadot-account-list li").on("click", function (e) {
       e.preventDefault();
       $("#polkadot-account-list").modal("hide");
       scope.updateAfterAccountSelect(e);
