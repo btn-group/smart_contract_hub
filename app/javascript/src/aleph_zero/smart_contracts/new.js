@@ -1,11 +1,11 @@
 import { ALEPH_ZERO } from "../helpers";
 import { POLKADOTJS } from "../../polkadotjs";
 
-$(document).on('turbo:load', function() {
-  if ($("#metadata-new").length) {
-    const METADATA_NEW = {
+$(document).on("turbo:load", function () {
+  if ($("#smart-contracts-new").length) {
+    const SMART_CONTRACTS_NEW = {
       init: async () => {
-        METADATA_NEW.addListeners();
+        SMART_CONTRACTS_NEW.addListeners();
         await ALEPH_ZERO.activatePolkadotJsExtension();
       },
       addListeners: () => {
@@ -45,6 +45,6 @@ $(document).on('turbo:load', function() {
       },
     };
 
-    METADATA_NEW.init();
+    SMART_CONTRACTS_NEW.init();
   }
 });
