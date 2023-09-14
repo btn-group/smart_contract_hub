@@ -9,31 +9,6 @@ $(document).on('turbo:load', function() {
         await ALEPH_ZERO.activatePolkadotJsExtension();
       },
       addListeners: () => {
-        // === CLOUDINARY ===
-        var myWidget = cloudinary.createUploadWidget(
-          {
-            cloudName: "hv5cxagki",
-            uploadPreset: "smart_contract_metadata",
-            multiple: false,
-            maxImageFileSize: 50_000,
-            resourceType: "raw",
-          },
-          (error, result) => {
-            if (!error && result && result.event === "success") {
-              document.newForm.url.value = result.info.secure_url;
-            }
-          }
-        );
-
-        document.getElementById("cloudinary-upload-widget").addEventListener(
-          "click",
-          function (evt) {
-            myWidget.open();
-            evt.preventDefault();
-          },
-          false
-        );
-
         // === FORMS ===
         document.newForm.onsubmit = async (e) => {
           e.preventDefault();

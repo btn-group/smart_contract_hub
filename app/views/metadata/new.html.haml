@@ -9,6 +9,6 @@
               %label.form-label{ for: 'smart-contract-address-input' } Smart contract address
               %input.form-control#smart-contract-address-input{ name: 'smartContractAddress', required: true }
             .mb-3
-              %button.btn.btn-primary.btn-sm#cloudinary-upload-widget{ type: 'button' } Upload metadata.json
+              %button.btn.btn-primary.btn-sm{ type: 'button' } Upload metadata.json
               %input.d-none{ name: 'url' }
             = render 'button_loading', button_classes: 'btn btn-primary', button_type: 'submit', ready_label: 'Create'
