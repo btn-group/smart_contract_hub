@@ -1,10 +1,7 @@
 // === POLKADOT ===
 import { ApiPromise, WsProvider } from "@polkadot/api";
 import { ContractPromise } from "@polkadot/api-contract";
-import {
-  web3Accounts,
-  web3Enable,
-} from "@polkadot/extension-dapp";
+import { web3Accounts, web3Enable } from "@polkadot/extension-dapp";
 import { BN, bnToBn, hexToU8a, isHex, stringCamelCase } from "@polkadot/util";
 import { decodeAddress, encodeAddress } from "@polkadot/keyring";
 

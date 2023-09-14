@@ -6,30 +6,42 @@ export const ALEPH_ZERO = {
   allAccounts: undefined,
   apisStaging: undefined,
   apisProduction: undefined,
+  b3: "5HimuS19MhHX9EggD9oZzx297qt3UxEdkcc5NWAianPAQwHG",
   contracts: {
-    azSmartContractsHub: {
-      address: "5En4kRj71Vt1D3cQFaNebc35Eo9dWqSeeEALemyjVnGkxEuw",
-      getContract: async () => {
-        if (
-          !ALEPH_ZERO.contractsByAddress[
-            ALEPH_ZERO.contracts.azSmartContractsHub.address
-          ]
-        ) {
-          let api = await ALEPH_ZERO.api();
-          let metadata = await $.ajax({
-            url: "https://res.cloudinary.com/hv5cxagki/raw/upload/v1691289578/abis/aleph_zero/az_smart_contract_metadata_hub_rr4paq.json",
-          });
-          ALEPH_ZERO.contractsByAddress[
-            ALEPH_ZERO.contracts.azSmartContractsHub.address
-          ] = new POLKADOTJS.ContractPromise(
-            api,
-            metadata,
-            ALEPH_ZERO.contracts.azSmartContractsHub.address
-          );
+    azGroups: {
+      address: (environment = "production") => {
+        if (environment == "production") {
+          return "FILLTHISLATER";
+        } else {
+          return "5C6uExVKN4HtRXmmTZexzfRDEoKnRuDa6zEYQ445Sw8AnRGH";
         }
-        return ALEPH_ZERO.contractsByAddress[
-          ALEPH_ZERO.contracts.azSmartContractsHub.address
-        ];
+      },
+      getContract: async (environment = "production") => {
+        let address = ALEPH_ZERO.contracts.azGroups.address(environment);
+        if (!ALEPH_ZERO.contractsByAddress[address]) {
+          let api = await ALEPH_ZERO.api(environment);
+          let metadata = await $.ajax({
+            url: "https://res.cloudinary.com/hv5cxagki/raw/upload/v1694690121/abis/aleph_zero/az_groups_bdrmyz.json",
+          });
+          ALEPH_ZERO.contractsByAddress[address] =
+            new POLKADOTJS.ContractPromise(api, metadata, address);
+        }
+        return ALEPH_ZERO.contractsByAddress[address];
+      },
+      show: async (id, environment = "production") => {
+        let contract = await ALEPH_ZERO.contracts.azGroups.getContract(
+          environment
+        );
+        let api = await ALEPH_ZERO.api(environment);
+        let response = await POLKADOTJS.contractQuery(
+          api,
+          ALEPH_ZERO.b3,
+          contract,
+          "groupsShow",
+          undefined,
+          [id]
+        );
+        return response.output.asOk.asOk.toHuman();
       },
     },
   },

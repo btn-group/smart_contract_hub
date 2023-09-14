@@ -13,8 +13,7 @@ const SMART_CONTRACTS_NEW = {
       let buttonSelector = "[name='newForm'] button[type='submit']";
       document.disableButton(buttonSelector);
       try {
-        let smartContractAddress =
-          document.newForm.smartContractAddress.value;
+        let smartContractAddress = document.newForm.smartContractAddress.value;
         let url = document.newForm.url.value;
         let api = await ALEPH_ZERO.api();
         let account = ALEPH_ZERO.account;
