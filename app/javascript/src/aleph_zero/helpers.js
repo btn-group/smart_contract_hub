@@ -7,28 +7,33 @@ export const ALEPH_ZERO = {
   apisStaging: undefined,
   apisProduction: undefined,
   contracts: {
-    azSmartContractsHub: {
-      address: "5En4kRj71Vt1D3cQFaNebc35Eo9dWqSeeEALemyjVnGkxEuw",
-      getContract: async () => {
+    azGroups: {
+      getContract: async (environment = "production") => {
+        let address;
+        if (environment == "production") {
+          address = "FILLTHISLATER"
+        } else {
+          address = "5C6uExVKN4HtRXmmTZexzfRDEoKnRuDa6zEYQ445Sw8AnRGH"
+        };
         if (
           !ALEPH_ZERO.contractsByAddress[
-            ALEPH_ZERO.contracts.azSmartContractsHub.address
+            address
           ]
         ) {
-          let api = await ALEPH_ZERO.api();
+          let api = await ALEPH_ZERO.api(environment);
           let metadata = await $.ajax({
-            url: "https://res.cloudinary.com/hv5cxagki/raw/upload/v1691289578/abis/aleph_zero/az_smart_contract_metadata_hub_rr4paq.json",
+            url: "https://res.cloudinary.com/hv5cxagki/raw/upload/v1694690121/abis/aleph_zero/az_groups_bdrmyz.json",
           });
           ALEPH_ZERO.contractsByAddress[
-            ALEPH_ZERO.contracts.azSmartContractsHub.address
+            address
           ] = new POLKADOTJS.ContractPromise(
             api,
             metadata,
-            ALEPH_ZERO.contracts.azSmartContractsHub.address
+            address
           );
         }
         return ALEPH_ZERO.contractsByAddress[
-          ALEPH_ZERO.contracts.azSmartContractsHub.address
+          address
         ];
       },
     },
