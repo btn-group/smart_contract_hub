@@ -1,5 +1,5 @@
 {
-  "name": "smart_contracts_hub",
+  "name": "smart_contract_hub",
   "private": true,
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",

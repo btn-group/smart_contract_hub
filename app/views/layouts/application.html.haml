@@ -1,14 +1,14 @@
 !!!
 %html.h-100.js{ lang: 'eng' }
   %head
-    %title Smart Contracts Hub
+    %title Smart Contract Hub
     %meta{ charset: 'utf-8' }
     %link{ href: 'https://res.cloudinary.com/hv5cxagki/image/upload/c_scale,dpr_2,f_auto,h_15,q_auto/v1/logos/btn_purple_background_uu2ere', rel: 'shortcut icon' }
-    %meta{ name: 'description', content: 'Smart contracts hub for Aleph Zero.' }
+    %meta{ name: 'description', content: 'Smart contract hub for Aleph Zero.' }
     %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' }
     %meta{ property: 'og:image', content: 'https://res.cloudinary.com/hv5cxagki/image/upload/c_scale,h_80/v1621228725/logos/btn_purple_background_uu2ere.png'
      }
-    %meta{ property: 'og:site_name', content: 'Smart Contracts Hub' }
+    %meta{ property: 'og:site_name', content: 'Smart Contract Hub' }
     = csrf_meta_tags
     = csp_meta_tag
 
@@ -20,7 +20,7 @@
   %body
     %nav.navbar.bg-body-tertiary
       .container
-        = link_to 'Smart Contracts Hub', root_path, class: 'navbar-brand'
+        = link_to 'Smart Contract Hub', root_path, class: 'navbar-brand'
         .d-block
           = link_to new_smart_contract_path, class: 'btn btn-primary', rel: 'noopener' do
             New

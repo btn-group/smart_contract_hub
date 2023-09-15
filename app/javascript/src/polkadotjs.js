@@ -41,7 +41,7 @@ export const POLKADOTJS = {
     // (this needs to be called first, before other requests)
     // this call fires up the authorization popup
     try {
-      const extensions = await web3Enable("Smart Contracts Hub");
+      const extensions = await web3Enable("Smart Contract Hub");
       // no extension installed, or the user did not accept the authorization
       // in this case we should inform the use and give a link to the extension
       if (extensions.length === 0) {
