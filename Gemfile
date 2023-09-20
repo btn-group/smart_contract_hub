@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.2.1'
 
+gem 'aws-sdk-s3', require: false
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
@@ -23,8 +24,6 @@ gem 'rails', '~> 7.0.5', '>= 7.0.5.1'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
 gem 'sassc-rails'
-# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem 'sprockets-rails'
 gem 'turbo-rails'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
