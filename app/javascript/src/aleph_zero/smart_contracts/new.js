@@ -7,6 +7,22 @@ const SMART_CONTRACTS_NEW = {
     await ALEPH_ZERO.activatePolkadotJsExtension();
   },
   addListeners: () => {
+    $(document).on("aleph_zero_account_selected", async () => {
+      await ALEPH_ZERO.contracts.azeroIdRouter.getAndSetDomains();
+      let $selectBox = $("select[name=azeroId]");
+      $selectBox.html("");
+      ALEPH_ZERO.contracts.azeroIdRouter.domains.forEach(function (domain) {
+        $selectBox.append(
+          $("<option>", {
+            value: domain,
+            text: domain,
+            selected:
+              domain == ALEPH_ZERO.contracts.azeroIdRouter.primaryDomain,
+          })
+        );
+      });
+    });
+
     // === FORMS ===
     document.newForm.onsubmit = async (e) => {
       e.preventDefault();
