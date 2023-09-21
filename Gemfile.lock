@@ -46,6 +46,11 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_storage_validations (1.0.4)
+      activejob (>= 5.2.0)
+      activemodel (>= 5.2.0)
+      activestorage (>= 5.2.0)
+      activesupport (>= 5.2.0)
     activejob (7.0.6)
       activesupport (= 7.0.6)
       globalid (>= 0.3.6)
@@ -102,12 +107,21 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.2.0)
       railties (>= 6.0.0)
+    database_cleaner-active_record (2.1.0)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
     date (3.3.3)
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     diff-lcs (1.5.0)
     erubi (1.12.0)
+    factory_bot (6.2.1)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
@@ -261,6 +275,8 @@ GEM
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
     ruby-progressbar (1.13.0)
+    ruby-vips (2.1.4)
+      ffi (~> 1.12)
     rubyzip (2.3.2)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
@@ -281,6 +297,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    shoulda-matchers (5.3.0)
+      activesupport (>= 5.2.0)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -321,11 +339,14 @@ PLATFORMS
   x86_64-darwin-22
 
 DEPENDENCIES
+  active_storage_validations
   aws-sdk-s3
   bootsnap
   capybara
   cssbundling-rails (>= 0.1.0)
+  database_cleaner-active_record
   debug
+  factory_bot_rails
   haml-rails
   haml_lint
   jbuilder
@@ -339,9 +360,11 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   rubocop-rspec
+  ruby-vips (>= 2.1.0)
   sassc-rails
   scss_lint
   selenium-webdriver
+  shoulda-matchers
   turbo-rails
   tzinfo-data
   web-console
