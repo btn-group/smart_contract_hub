@@ -6,6 +6,7 @@
     "build:css": "sass ./app/assets/stylesheets/application.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules"
   },
   "dependencies": {
+    "@azns/resolver-core": "^1.6.0",
     "@hotwired/turbo-rails": "^7.3.0",
     "@polkadot/api": "^9.14.0",
     "@polkadot/api-contract": "^9.14.0",
