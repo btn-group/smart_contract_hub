@@ -17,3 +17,8 @@ haml-lint app/views/
 yarn prettier --write app/javascript/
 scss-lint app/assets/stylesheets/
 ```
+
+## References
+
+1. https://docs.storj.io/dcs/code/rails-activestorage
+2. https://edgeguides.rubyonrails.org/active_storage_overview.html
