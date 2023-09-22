@@ -3,3 +3,8 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 @import 'dropzone/src/dropzone';
 @import 'toastr/toastr';
+
+label.required:after {
+  content: " *";
+ 	color: red;
+}
