@@ -95,6 +95,27 @@ export const ALEPH_ZERO = {
         }
       },
     },
+    smartContractHub: {
+      address: (environment = "staging") => {
+        if (environment == "production") {
+          return "FILLTHISLATER";
+        } else {
+          return "5ECjyxrhzN54it7ALyJ9w4U8PC9JqpsvY9wHW78LEBarv8qZ";
+        }
+      },
+      getContract: async (environment = "staging") => {
+        let address = ALEPH_ZERO.contracts.smartContractHub.address(environment);
+        if (!ALEPH_ZERO.contractsByAddress[address]) {
+          let api = await ALEPH_ZERO.api(environment);
+          let metadata = await $.ajax({
+            url: "https://res.cloudinary.com/hv5cxagki/raw/upload/v1695379983/abis/aleph_zero/az_smart_contract_hub_pbawtd.json",
+          });
+          ALEPH_ZERO.contractsByAddress[address] =
+            new POLKADOTJS.ContractPromise(api, metadata, address);
+        }
+        return ALEPH_ZERO.contractsByAddress[address];
+      },
+    },
   },
   contractsByAddress: {},
   extensions: undefined,
