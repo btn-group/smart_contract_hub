@@ -1,4 +1,5 @@
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import 'bootstrap/dist/css/bootstrap.min';
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+@import 'dropzone/src/dropzone';
 @import 'toastr/toastr';
