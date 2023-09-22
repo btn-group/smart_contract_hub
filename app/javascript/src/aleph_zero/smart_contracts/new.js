@@ -1,3 +1,5 @@
+import { DirectUpload } from "@rails/activestorage";
+import Dropzone from "dropzone";
 import { ALEPH_ZERO } from "../helpers";
 import { POLKADOTJS } from "../../polkadotjs";
 
@@ -23,14 +25,17 @@ const SMART_CONTRACTS_NEW = {
       });
     });
 
+    // === DROPZONE ===
+    SMART_CONTRACTS_NEW.createDropZones();
+
     // === FORMS ===
-    document.newForm.onsubmit = async (e) => {
+    document.smartContractNewForm.onsubmit = async (e) => {
       e.preventDefault();
-      let buttonSelector = "[name='newForm'] button[type='submit']";
+      let buttonSelector = "[name='smartContractNewForm'] button[type='submit']";
       document.disableButton(buttonSelector);
       try {
-        let smartContractAddress = document.newForm.smartContractAddress.value;
-        let url = document.newForm.url.value;
+        let smartContractAddress = document.smartContractNewForm.smartContractAddress.value;
+        let url = document.smartContractNewForm.url.value;
         let api = await ALEPH_ZERO.api();
         let account = ALEPH_ZERO.account;
         api.setSigner(ALEPH_ZERO.getSigner());
@@ -45,8 +50,8 @@ const SMART_CONTRACTS_NEW = {
           {},
           [smartContractAddress, url, 0]
         );
-        document.newForm.smartContractAddress.value = "";
-        document.newForm.url.value = "";
+        document.smartContractNewForm.smartContractAddress.value = "";
+        document.smartContractNewForm.url.value = "";
         document.showAlertSuccess("Success", true);
       } catch (err) {
         document.showAlertDanger(err);
@@ -54,6 +59,46 @@ const SMART_CONTRACTS_NEW = {
         document.enableButton(buttonSelector);
       }
     };
+  },
+  createDropZones: function () {
+    let url = $("#smart_contract_abi").attr("data-direct-upload-url");
+    let headers = {
+      "X-CSRF-Token": $(
+        "form#new_smart_contract input[name=authenticity_token]"
+      ).val(),
+    };
+    [
+      ["#abi-dropzone", "application/json", "#smart_contract_abi_url"],
+      ["#contract-dropzone", ".contract", "#smart_contract_contract_url"],
+      ["#wasm-dropzone", "application/wasm", "#smart_contract_wasm_url"],
+    ].forEach(function (dzParams) {
+      let dropZone = new Dropzone(dzParams[0], {
+        url,
+        headers,
+        maxFiles: 1,
+        maxFilesize: 0.5,
+        acceptedFiles: dzParams[1],
+        addRemoveLinks: true,
+        autoQueue: false,
+      });
+      dropZone.on("addedfile", function (file) {
+        const upload = new DirectUpload(file, url);
+        upload.create((error, blob) => {
+          if (error) {
+            document.showAlertDanger(error);
+            return;
+          } else {
+            let url;
+            if ($("body.rails-env-development").length) {
+              url = `https://link.storjshare.io/jxilw2olwgoskdx2k4fvsswcfwfa/smart-contract-hub-development/${blob.key}`;
+            } else {
+              url = `https://link.storjshare.io/juldos5d7qtuwqx2itvdhgtgp3vq/smart-contract-hub-production/${blob.key}`;
+            }
+            $(dzParams[2]).val(url);
+          }
+        });
+      });
+    });
   },
 };
 

@@ -14,10 +14,8 @@
 
     -# === THEME STYLESHEETS ===
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
-    :javascript
-      global = globalThis
-    = javascript_include_tag 'application', defer: true
-  %body
+    = javascript_include_tag 'application', 'data-turbo-track': 'reload'
+  %body{ class: "rails-env-#{Rails.env}" }
     %nav.navbar.bg-body-tertiary
       .container
         = link_to 'Smart Contract Hub', root_path, class: 'navbar-brand'

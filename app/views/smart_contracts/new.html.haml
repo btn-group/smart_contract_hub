@@ -4,14 +4,29 @@
       .card
         .card-body
           %h1 New smart contract
-          %form{ name: 'newForm' }
+          = form_for SmartContract.new, multipart: true, html: { name: 'smartContractNewForm' } do |f|
             .mb-3
-              %label.form-label{ for: 'smart-contract-address-input' } Smart contract address
-              %input.form-control#smart-contract-address-input{ name: 'smartContractAddress', required: true }
+              = f.label :smart_contract_address, class: 'form-label'
+              = f.text_field :smart_contract_address, class: 'form-control', required: true
             .mb-3
-              %label.form-label AZERO.ID
-              %select.form-select#test{ required: true, name: 'azeroId' }
-            / .mb-3
-            /   %button.btn.btn-primary.btn-sm{ type: 'button' } Upload metadata.json
-            /   %input.d-none{ name: 'url' }
+              = f.label :environment, class: 'form-label'
+              = f.select :environment, [["Production", 0], ["Testnet", 1]], { include_blank: false }, { class: 'form-select' }
+            .mb-3
+              = f.label :azero_id, 'AZERO.ID', class: 'form-label'
+              = f.text_field :azero_id, class: 'form-control', required: true
+            .mb-3
+              = f.label :abi, class: 'form-label'
+              = f.file_field :abi, direct_upload: true, hidden: true, disabled: true
+              .dropzone#abi-dropzone
+              = f.text_field :abi_url, hidden: true, required: true
+            .mb-3
+              = f.label :contract, class: 'form-label'
+              = f.file_field :contract, direct_upload: true, hidden:true, disabled: true
+              .dropzone#contract-dropzone
+              = f.text_field :contract_url, hidden: true
+            .mb-3
+              = f.label :wasm, class: 'form-label'
+              = f.file_field :wasm, direct_upload: true, hidden:true, disabled: true
+              .dropzone#wasm-dropzone
+              = f.text_field :wasm_url, hidden: true
             = render 'button_loading', button_classes: 'btn btn-primary', button_type: 'submit', ready_label: 'Create'

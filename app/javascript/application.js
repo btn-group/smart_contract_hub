@@ -4,6 +4,10 @@ import "bootstrap";
 import "./src/lodash";
 import "./src/toastr";
 
+// === ACTIVE STORAGE ===
+import * as ActiveStorage from "@rails/activestorage";
+ActiveStorage.start();
+
 // === CUSTOM ===
 import "./src/polkadotjs";
 import "./src/aleph_zero/helpers";
