@@ -80,6 +80,7 @@ const SMART_CONTRACTS_NEW = {
         acceptedFiles: dzParams[1],
         addRemoveLinks: true,
         autoQueue: false,
+        dictDefaultMessage: "Drop file here to upload"
       });
       dropZone.on("addedfile", function (file) {
         const upload = new DirectUpload(file, url);
