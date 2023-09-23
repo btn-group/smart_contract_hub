@@ -11,7 +11,7 @@ const SMART_CONTRACTS_NEW = {
   addListeners: () => {
     $(document).on("aleph_zero_account_selected", async () => {
       await ALEPH_ZERO.contracts.azeroIdRouter.getAndSetDomains();
-      let $selectBox = $("select[name=azeroId]");
+      let $selectBox = $("select[name='smart_contract[azero_id]']");
       $selectBox.html("");
       ALEPH_ZERO.contracts.azeroIdRouter.domains.forEach(function (domain) {
         $selectBox.append(

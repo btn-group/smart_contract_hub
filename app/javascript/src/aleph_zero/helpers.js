@@ -89,7 +89,6 @@ export const ALEPH_ZERO = {
             response.allPrimaryDomains;
           ALEPH_ZERO.contracts.azeroIdRouter.primaryDomain =
             response.primaryDomain;
-          console.log(ALEPH_ZERO.contracts.azeroIdRouter.domains);
         } catch (err) {
           document.showAlertDanger(err);
         }
