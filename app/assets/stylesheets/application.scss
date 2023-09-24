@@ -8,3 +8,9 @@ label.required:after {
   content: " *";
  	color: red;
 }
+
+// === DROPZONE ===
+.dz-progress {
+  // We need autoQueue set to false which breaks progress bar
+  display: none !important;
+}
