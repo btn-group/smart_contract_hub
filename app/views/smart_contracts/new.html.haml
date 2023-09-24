@@ -17,20 +17,34 @@
             .mb-3
               = f.label :group_id, 'Group', class: 'form-label'
               = f.text_field :group_id, class: 'form-control'
+            .mb-3
+              = f.label :project_name, class: 'form-label'
+              = f.text_field :project_name, class: 'form-control'
+            .mb-3
+              = f.label :project_website, class: 'form-label'
+              = f.text_field :project_website, class: 'form-control'
+            .mb-3
+              = f.label :github, class: 'form-label'
+              = f.text_field :github, class: 'form-control'
             .row.mb-3
-              .col-md-4
+              .col-md-3
                 = f.label :abi, class: 'form-label required'
                 = f.file_field :abi, direct_upload: true, hidden: true, disabled: true
                 .dropzone#abi-dropzone
                 = f.text_field :abi_url, hidden: true, required: true
-              .col-md-4
+              .col-md-3
                 = f.label :contract, class: 'form-label'
                 = f.file_field :contract, direct_upload: true, hidden:true, disabled: true
                 .dropzone#contract-dropzone
                 = f.text_field :contract_url, hidden: true
-              .col-md-4
+              .col-md-3
                 = f.label :wasm, class: 'form-label'
                 = f.file_field :wasm, direct_upload: true, hidden:true, disabled: true
                 .dropzone#wasm-dropzone
                 = f.text_field :wasm_url, hidden: true
+              .col-md-3
+                = f.label :audit, class: 'form-label'
+                = f.file_field :audit, direct_upload: true, hidden:true, disabled: true
+                .dropzone#audit-dropzone
+                = f.text_field :audit_url, hidden: true
             = render 'button_loading', button_classes: 'btn btn-primary', button_type: 'submit', ready_label: 'Create'

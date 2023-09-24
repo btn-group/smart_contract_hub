@@ -16,6 +16,8 @@ RSpec.describe SmartContract do
       it { should validate_size_of(:contract).less_than(500.kilobytes) }
       it { should validate_content_type_of(:wasm).allowing('application/wasm') }
       it { should validate_size_of(:wasm).less_than(500.kilobytes) }
+      it { should validate_content_type_of(:audit).allowing('application/pdf') }
+      it { should validate_size_of(:audit).less_than(2.megabytes) }
     end
   end
 end
