@@ -103,7 +103,8 @@ export const ALEPH_ZERO = {
         }
       },
       getContract: async (environment = "staging") => {
-        let address = ALEPH_ZERO.contracts.smartContractHub.address(environment);
+        let address =
+          ALEPH_ZERO.contracts.smartContractHub.address(environment);
         if (!ALEPH_ZERO.contractsByAddress[address]) {
           let api = await ALEPH_ZERO.api(environment);
           let metadata = await $.ajax({

@@ -31,10 +31,12 @@ const SMART_CONTRACTS_NEW = {
     // === FORMS ===
     document.smartContractNewForm.onsubmit = async (e) => {
       e.preventDefault();
-      let buttonSelector = "[name='smartContractNewForm'] button[type='submit']";
+      let buttonSelector =
+        "[name='smartContractNewForm'] button[type='submit']";
       document.disableButton(buttonSelector);
       try {
-        let smartContractAddress = document.smartContractNewForm.smartContractAddress.value;
+        let smartContractAddress =
+          document.smartContractNewForm.smartContractAddress.value;
         let url = document.smartContractNewForm.url.value;
         let api = await ALEPH_ZERO.api();
         let account = ALEPH_ZERO.account;
@@ -71,7 +73,7 @@ const SMART_CONTRACTS_NEW = {
       ["#abi-dropzone", "application/json", "#smart_contract_abi_url"],
       ["#contract-dropzone", ".contract", "#smart_contract_contract_url"],
       ["#wasm-dropzone", "application/wasm", "#smart_contract_wasm_url"],
-      ["#audit-dropzone", "application/pdf", "#smart_contract_audit_url"]
+      ["#audit-dropzone", "application/pdf", "#smart_contract_audit_url"],
     ].forEach(function (dzParams) {
       let dropZone = new Dropzone(dzParams[0], {
         url,
@@ -81,7 +83,7 @@ const SMART_CONTRACTS_NEW = {
         acceptedFiles: dzParams[1],
         addRemoveLinks: true,
         autoQueue: false,
-        dictDefaultMessage: "Drop file here to upload"
+        dictDefaultMessage: "Drop file here to upload",
       });
       dropZone.on("addedfile", function (file) {
         const upload = new DirectUpload(file, url);
