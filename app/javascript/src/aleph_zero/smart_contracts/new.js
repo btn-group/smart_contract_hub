@@ -71,6 +71,7 @@ const SMART_CONTRACTS_NEW = {
       ["#abi-dropzone", "application/json", "#smart_contract_abi_url"],
       ["#contract-dropzone", ".contract", "#smart_contract_contract_url"],
       ["#wasm-dropzone", "application/wasm", "#smart_contract_wasm_url"],
+      ["#audit-dropzone", "application/pdf", "#smart_contract_audit_url"]
     ].forEach(function (dzParams) {
       let dropZone = new Dropzone(dzParams[0], {
         url,
