@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SmartContract < ApplicationRecord
-  attr_accessor :smart_contract_address, :environment, :azero_id, :abi_url, :contract_url, :wasm_url
+  attr_accessor :smart_contract_address, :environment, :azero_id, :group_id, :abi_url, :contract_url, :wasm_url
 
   # === ACTIVE STORAGE ===
   has_one_attached :abi
