@@ -14,7 +14,7 @@ export const ALEPH_ZERO = {
         if (environment == "production") {
           return "FILLTHISLATER";
         } else {
-          return "5HnfHhSbMrjuZTeLhsfVwTgBahVizF2SL5vRSouat112yGYS";
+          return "5EHMGoUrkSHCBqLYmAMbzBeXJwZzeGLVXgpWw585j8ciyrte";
         }
       },
       getContract: async (environment = "staging") => {
@@ -22,7 +22,7 @@ export const ALEPH_ZERO = {
         if (!ALEPH_ZERO.contractsByAddress[address]) {
           let api = await ALEPH_ZERO.api(environment);
           let metadata = await $.ajax({
-            url: "https://res.cloudinary.com/hv5cxagki/raw/upload/v1695382267/abis/aleph_zero/az_groups_lavjk6.json",
+            url: "https://res.cloudinary.com/hv5cxagki/raw/upload/v1695880748/abis/aleph_zero/az_groups_p1reza.json",
           });
           ALEPH_ZERO.contractsByAddress[address] =
             new POLKADOTJS.ContractPromise(api, metadata, address);
