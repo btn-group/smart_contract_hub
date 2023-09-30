@@ -8,3 +8,17 @@ label.required:after {
   content: " *";
  	color: red;
 }
+
+// === DROPZONE ===
+.dropzone {
+  border-style: dashed;
+
+  .dz-message {
+    margin: 0;
+  }
+
+  .dz-progress {
+    // We need autoQueue set to false which breaks progress bar
+    display: none !important;
+  }  
+}
