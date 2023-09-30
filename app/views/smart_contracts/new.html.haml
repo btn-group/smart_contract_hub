@@ -16,7 +16,7 @@
               = f.select :azero_id, [], { include_blank: false }, { class: 'form-select' }
             .mb-3
               = f.label :group_id, 'Group', class: 'form-label'
-              = f.text_field :group_id, class: 'form-control'
+              = f.select :group_id, [], { include_blank: true }, { class: 'form-select' }
             .mb-3
               = f.label :project_name, class: 'form-label'
               = f.text_field :project_name, class: 'form-control'
