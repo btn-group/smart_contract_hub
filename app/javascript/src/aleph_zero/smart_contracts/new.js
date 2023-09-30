@@ -29,7 +29,7 @@ const SMART_CONTRACTS_NEW = {
       $selectBox.append(
         $("<option>", {
           value: undefined,
-          text: '',
+          text: "",
         })
       );
       let groups = await $.ajax({
@@ -37,17 +37,18 @@ const SMART_CONTRACTS_NEW = {
         url: "https://squid.subsquid.io/smart-contract-hub/v/v1/graphql",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({
-          "query": "query MyQuery($role_in: [String!] = [\"Member\", \"Admin\", \"SuperAdmin\"]) { groupUsers(where: {accountId_eq: \"5HimuS19MhHX9EggD9oZzx297qt3UxEdkcc5NWAianPAQwHG\", role_in: $role_in}) { accountId id role group { enabled id name } }}"
+          query:
+            'query MyQuery($role_in: [String!] = ["Member", "Admin", "SuperAdmin"]) { groupUsers(where: {accountId_eq: "5HimuS19MhHX9EggD9oZzx297qt3UxEdkcc5NWAianPAQwHG", role_in: $role_in}) { accountId id role group { enabled id name } }}',
         }),
       });
-      groups.data.groupUsers.forEach(function(groupUser) {
+      groups.data.groupUsers.forEach(function (groupUser) {
         $selectBox.append(
           $("<option>", {
             value: groupUser.group.id,
             text: groupUser.group.name,
           })
         );
-      })
+      });
     });
 
     // === DROPZONE ===
