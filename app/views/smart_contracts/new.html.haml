@@ -9,8 +9,8 @@
               = f.label :smart_contract_address, class: 'form-label required'
               = f.text_field :smart_contract_address, class: 'form-control', required: true
             .mb-3
-              = f.label :environment, class: 'form-label required'
-              = f.select :environment, [["Production", 0], ["Testnet", 1]], { include_blank: false }, { class: 'form-select' }
+              = f.label :chain, class: 'form-label required'
+              = f.select :chain, [['Production', 0], ['Testnet', 1]], { include_blank: false }, { class: 'form-select' }
             .mb-3
               = f.label :azero_id, 'AZERO.ID', class: 'form-label required'
               = f.select :azero_id, [], { include_blank: false }, { class: 'form-select' }
@@ -27,24 +27,24 @@
               = f.label :github, class: 'form-label'
               = f.text_field :github, class: 'form-control'
             .row.mb-3
-              .col-6.col-md-3.mb-3
+              .col-6.col-lg-3.mb-3
                 = f.label :abi, class: 'form-label required'
                 = f.file_field :abi, direct_upload: true, hidden: true, disabled: true
                 .dropzone#abi-dropzone
                 = f.text_field :abi_url, hidden: true, required: true
-              .col-6.col-md-3.mb-3
+              .col-6.col-lg-3.mb-3
                 = f.label :contract, class: 'form-label'
-                = f.file_field :contract, direct_upload: true, hidden:true, disabled: true
+                = f.file_field :contract, direct_upload: true, hidden: true, disabled: true
                 .dropzone#contract-dropzone
                 = f.text_field :contract_url, hidden: true
-              .col-6.col-md-3
+              .col-6.col-lg-3
                 = f.label :wasm, class: 'form-label'
-                = f.file_field :wasm, direct_upload: true, hidden:true, disabled: true
+                = f.file_field :wasm, direct_upload: true, hidden: true, disabled: true
                 .dropzone#wasm-dropzone
                 = f.text_field :wasm_url, hidden: true
-              .col-6.col-md-3
+              .col-6.col-lg-3
                 = f.label :audit, class: 'form-label'
-                = f.file_field :audit, direct_upload: true, hidden:true, disabled: true
+                = f.file_field :audit, direct_upload: true, hidden: true, disabled: true
                 .dropzone#audit-dropzone
                 = f.text_field :audit_url, hidden: true
             = render 'button_loading', button_classes: 'btn btn-primary mt-3', button_type: 'submit', ready_label: 'Create'
