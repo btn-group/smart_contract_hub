@@ -4,9 +4,9 @@
 @import 'dropzone/src/dropzone';
 @import 'toastr/toastr';
 
-label.required:after {
-  content: " *";
- 	color: red;
+.required::after {
+  color: var(--bs-red);
+  content: ' *';
 }
 
 // === DROPZONE ===
@@ -17,8 +17,17 @@ label.required:after {
     margin: 0;
   }
 
+  .dz-preview {
+    margin: 0;
+    max-width: 100%;
+
+    .dz-image {
+      max-width: 100%;
+    }
+  }
+
   .dz-progress {
     // We need autoQueue set to false which breaks progress bar
-    display: none !important;
-  }  
+    display: none;
+  }
 }
