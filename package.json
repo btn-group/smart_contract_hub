@@ -19,6 +19,7 @@
     "@rails/activestorage": "^7.0.8",
     "@scio-labs/use-inkathon": "^0.0.1-alpha.42",
     "bootstrap": "^5.3.1",
+    "datatables.net-bs5": "^1.13.6",
     "dropzone": "^6.0.0-beta.2",
     "esbuild": "^0.14.23",
     "jquery": "^3.7.0",
