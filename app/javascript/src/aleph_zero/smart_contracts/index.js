@@ -14,6 +14,14 @@ const SMART_CONTRACTS_INDEX = {
           data: "address",
           title: "Smart Contract",
         },
+        {
+          data: "caller",
+          title: "Caller",
+        },
+        {
+          data: "group.name",
+          title: "Group",
+        },
       ],
       ordering: false,
       paging: false,
@@ -30,7 +38,7 @@ const SMART_CONTRACTS_INDEX = {
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({
           query: `query MyQuery {
-            smartContracts(where: {address_containsInsensitive: "${search}", OR: {group: {name_containsInsensitive: "${search}"}}}) {
+            smartContracts(where: {address_containsInsensitive: "${search}", OR: {group: {name_containsInsensitive: "${search}"}, OR: {caller_containsInsensitive: "${search}"}}}) {
               abiUrl
               address
               auditUrl
@@ -44,8 +52,12 @@ const SMART_CONTRACTS_INDEX = {
               projectName
               wasmUrl
               projectWebsite
+              group {
+                name
+              }
             }
-          }`,
+          }
+          `,
         }),
       });
       smartContracts = smartContracts.data.smartContracts;
