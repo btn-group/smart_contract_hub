@@ -22,14 +22,15 @@ const SMART_CONTRACTS_INDEX = {
     });
   },
   addListeners: () => {
-    $("#search-input").on("input", async (evt) => {
+    $("#search-input").on("input", async (_evt) => {
       let search = $("#search-input").val();
       let smartContracts = await $.ajax({
         type: "post",
         url: "http://localhost:4350/graphql",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({
-          query: `query MyQuery { smartContracts(where: {address_containsInsensitive: "${search}"}) {
+          query: `query MyQuery {
+            smartContracts(where: {address_containsInsensitive: "${search}", OR: {group: {name_containsInsensitive: "${search}"}}}) {
               abiUrl
               address
               auditUrl
@@ -42,7 +43,9 @@ const SMART_CONTRACTS_INDEX = {
               id
               projectName
               wasmUrl
-              projectWebsite}}`,
+              projectWebsite
+            }
+          }`,
         }),
       });
       smartContracts = smartContracts.data.smartContracts;
