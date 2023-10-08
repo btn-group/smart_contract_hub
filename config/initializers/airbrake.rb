@@ -75,6 +75,6 @@ if (project_id = Rails.application.credentials.airbrake[:project_id]) &&
 else
   Rails.logger.warn(
     "#{__FILE__}: Airbrake project id or project key is not set. " \
-    "Skipping Airbrake configuration"
+    'Skipping Airbrake configuration'
   )
 end
