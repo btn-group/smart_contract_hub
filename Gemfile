@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.1'
 
 gem 'active_storage_validations'
+gem 'activesupport', '>=7.0.7.1'
 gem 'airbrake'
 gem 'aws-sdk-s3', require: false
 # Reduces boot times through caching; required in config/boot.rb
