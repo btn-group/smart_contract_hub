@@ -32,5 +32,8 @@ module SmartContractHub
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # https://stackoverflow.com/questions/70401077/rails-7-asset-pipeline-sasscsyntaxerror-with-tailwind
+    config.assets.css_compressor = nil
   end
 end
