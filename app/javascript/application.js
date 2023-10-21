@@ -11,7 +11,6 @@ ActiveStorage.start();
 // === CUSTOM ===
 import "./src/polkadotjs";
 import "./src/aleph_zero/helpers";
-import "./src/aleph_zero/groups/edit";
 import "./src/aleph_zero/smart_contracts/index";
 import "./src/aleph_zero/smart_contracts/new";
 

@@ -29,21 +29,6 @@ export const ALEPH_ZERO = {
         }
         return ALEPH_ZERO.contractsByAddress[address];
       },
-      show: async (id, environment = "staging") => {
-        let contract = await ALEPH_ZERO.contracts.azGroups.getContract(
-          environment
-        );
-        let api = await ALEPH_ZERO.api(environment);
-        let response = await POLKADOTJS.contractQuery(
-          api,
-          ALEPH_ZERO.b3,
-          contract,
-          "groupsShow",
-          undefined,
-          [id]
-        );
-        return response.output.asOk.asOk.toHuman();
-      },
     },
     azeroIdRouter: {
       domains: [],
