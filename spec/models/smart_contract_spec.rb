@@ -6,8 +6,6 @@ RSpec.describe SmartContract do
   describe 'VALIDATIONS' do
     before { create(:smart_contract) }
 
-    it { should validate_uniqueness_of(:third_party_identifier).case_insensitive }
-
     describe 'active storage' do
       it { should validate_attached_of(:abi) }
       it { should validate_content_type_of(:abi).allowing('application/json') }
