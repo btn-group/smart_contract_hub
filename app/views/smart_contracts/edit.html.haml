@@ -1,0 +1,71 @@
+.container.mt-5.polkadotjs#smart-contracts-edit
+  .row
+    .col-md-9.mx-auto.mb-5
+      .card
+        .card-body
+          %h1 Edit smart contract
+          / // DO NEED DROPZONE AND GOING THROUGH BACKEND FOR AUDIT URL
+          / %form.form{ name: "smartContractEditForm" }
+          /   .mb-5
+          /     %label.form-label ID
+          /     %input.form-control{ name: 'id', disabled: true }
+          /   .mb-5
+          /     %label.form-label.required Enabled
+          /     %select.form-select{ name: 'enabled' }
+          /       - [[true, "True"], [false, "False"]].each do |enabled|
+          /         %option{ value: enabled[0] }= enabled[1]
+          /   .mb-5
+          /     %label.form-label.required AZERO.ID
+          /     %select.form-select{ name: 'azeroId' }
+          /   .mb-5
+          /     %label.form-label.required Group
+          /     %select.form-select{ name: 'group' }
+          /   .d-flex.pt-5
+          /     %button.btn.btn-secondary.me-5{ type: 'button' }
+          /       Cancel
+          /     = render 'button_loading', button_classes: 'btn btn-primary', ready_label: 'Update', button_type: 'submit'
+
+          / = form_for SmartContract.new, multipart: true, html: { name: 'smartContractNewForm' } do |f|
+          /   .mb-3
+          /     = f.label :smart_contract_address, class: 'form-label required'
+          /     = f.text_field :smart_contract_address, class: 'form-control', required: true
+          /   .mb-3
+          /     = f.label :chain, class: 'form-label required'
+          /     = f.select :chain, [['Production', 0], ['Testnet', 1]], { include_blank: false }, { class: 'form-select' }
+          /   .mb-3
+          /     = f.label :azero_id, 'AZERO.ID', class: 'form-label required'
+          /     = f.select :azero_id, [], { include_blank: false }, { class: 'form-select' }
+          /   .mb-3
+          /     = f.label :group_id, 'Group', class: 'form-label'
+          /     = f.select :group_id, [], { include_blank: true }, { class: 'form-select' }
+          /   .mb-3
+          /     = f.label :project_name, class: 'form-label'
+          /     = f.text_field :project_name, class: 'form-control'
+          /   .mb-3
+          /     = f.label :project_website, class: 'form-label'
+          /     = f.text_field :project_website, class: 'form-control'
+          /   .mb-3
+          /     = f.label :github, class: 'form-label'
+          /     = f.text_field :github, class: 'form-control'
+          /   .row.mb-3
+          /     .col-6.col-lg-3.mb-3
+          /       = f.label :abi, class: 'form-label required'
+          /       = f.file_field :abi, direct_upload: true, hidden: true, disabled: true
+          /       .dropzone#abi-dropzone
+          /       = f.text_field :abi_url, hidden: true, required: true
+          /     .col-6.col-lg-3.mb-3
+          /       = f.label :contract, class: 'form-label'
+          /       = f.file_field :contract, direct_upload: true, hidden: true, disabled: true
+          /       .dropzone#contract-dropzone
+          /       = f.text_field :contract_url, hidden: true
+          /     .col-6.col-lg-3
+          /       = f.label :wasm, class: 'form-label'
+          /       = f.file_field :wasm, direct_upload: true, hidden: true, disabled: true
+          /       .dropzone#wasm-dropzone
+          /       = f.text_field :wasm_url, hidden: true
+          /     .col-6.col-lg-3
+          /       = f.label :audit, class: 'form-label'
+          /       = f.file_field :audit, direct_upload: true, hidden: true, disabled: true
+          /       .dropzone#audit-dropzone
+          /       = f.text_field :audit_url, hidden: true
+          /   = render 'button_loading', button_classes: 'btn btn-primary mt-3', button_type: 'submit', ready_label: 'Create'

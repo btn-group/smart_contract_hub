@@ -13,6 +13,7 @@ import "./src/polkadotjs";
 import "./src/aleph_zero/helpers";
 import "./src/aleph_zero/smart_contracts/index";
 import "./src/aleph_zero/smart_contracts/new";
+import "./src/aleph_zero/smart_contracts/edit";
 
 export const HELPERS = {
   cookies: {
