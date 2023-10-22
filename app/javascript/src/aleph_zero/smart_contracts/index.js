@@ -36,7 +36,6 @@ const SMART_CONTRACTS_INDEX = {
         searching: false,
       });
     }
-    document.datatable = SMART_CONTRACTS_INDEX.datatable;
   },
   addListeners: () => {
     $("#search-input").on("input", async (_evt) => {
