@@ -51,6 +51,14 @@ export const HELPERS = {
   },
 };
 
+document.delay = async (ms) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("");
+    }, ms);
+  });
+};
+
 document.disableButton = function (selector) {
   let $button = $(selector);
   $button.prop("disabled", true);
