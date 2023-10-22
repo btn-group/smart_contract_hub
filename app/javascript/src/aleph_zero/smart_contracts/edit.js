@@ -1,11 +1,15 @@
 import { DirectUpload } from "@rails/activestorage";
 import Dropzone from "dropzone";
+import { HELPERS } from "../../../application";
 import { ALEPH_ZERO } from "../helpers";
 import { POLKADOTJS } from "../../polkadotjs";
 
 const SMART_CONTRACTS_EDIT = {
+  smartContract: undefined,
   init: async () => {
     SMART_CONTRACTS_EDIT.addListeners();
+    // GET SMART CONTRACT
+    await SMART_CONTRACTS_EDIT.getAndSetContract();
     await ALEPH_ZERO.activatePolkadotJsExtension();
   },
   addListeners: () => {
@@ -23,7 +27,6 @@ const SMART_CONTRACTS_EDIT = {
       //     })
       //   );
       // });
-
       // $selectBox = $("select[name='smart_contract[group_id]']");
       // $selectBox.html("");
       // $selectBox.append(
@@ -194,6 +197,36 @@ const SMART_CONTRACTS_EDIT = {
   //     });
   //   });
   // },
+  getAndSetContract: async () => {
+    try {
+      let id = Number(
+        document.smartContractEditForm["smart_contract[id]"].value
+      );
+      const contract = await ALEPH_ZERO.contracts[
+        "smartContractHub"
+      ].getContract();
+      let api = await ALEPH_ZERO.api();
+      let response = await POLKADOTJS.contractQuery(
+        api,
+        ALEPH_ZERO.b3,
+        contract,
+        "show",
+        undefined,
+        [id]
+      );
+      document.response = response;
+      if (response.output.asOk.isErr) {
+        HELPERS.toastr.message = "Smart contract not found";
+        HELPERS.toastr.alertType = document.showAlertDanger;
+        Turbo.visit("/");
+      } else {
+        SMART_CONTRACTS_EDIT.smartContract =
+          response.output.asOk.asOk.toHuman();
+      }
+    } catch (err) {
+      document.showAlertDanger(err);
+    }
+  },
 };
 
 // Even with turbo, init is called every time as listeners need to be replaced

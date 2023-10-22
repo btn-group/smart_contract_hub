@@ -4,6 +4,13 @@
       .card
         .card-body
           %h1 Edit smart contract
+          = form_for SmartContract.new, multipart: true, html: { name: 'smartContractEditForm' } do |f|
+            .mb-3
+              = f.label :id, class: 'form-label required'
+              = f.text_field :id, class: 'form-control', required: true, disabled: true, value: params[:id]
+            = render 'button_loading', button_classes: 'btn btn-primary mt-3', button_type: 'submit', ready_label: 'Update'
+
+
           / // DO NEED DROPZONE AND GOING THROUGH BACKEND FOR AUDIT URL
           / %form.form{ name: "smartContractEditForm" }
           /   .mb-5

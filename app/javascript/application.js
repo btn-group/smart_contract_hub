@@ -24,6 +24,7 @@ export const HELPERS = {
         ?.split("=")[1];
     },
   },
+  toastr: {},
   walletCloudinaryPublicId: function (id) {
     switch (id) {
       case "keplr":
