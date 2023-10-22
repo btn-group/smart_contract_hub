@@ -1,15 +1,20 @@
 .container.mt-5#smart-contracts-index
   .row
-    .col-md-9.mx-auto.mb-5
-      .input-group.input-group-lg
-        %input.form-control#search-input{ placeholder: 'contract address, creator or group', type: 'text' }
     .col-12
-      %table.table.table-striped#smart-contracts-table
-        %thead
-          %tr
-            %th{ scope: 'col' } #
-            %th{ scope: 'col' } Address
-            %th{ scope: 'col' } Caller
-            %th{ scope: 'col' } AZERO.ID
-            %th{ scope: 'col' } Group
-        %tbody
+      .d-flex.flex-stack.flex-wrap.justify-content-between.mb-3
+        .d-flex.align-items-center.position-relative.my-2.overflow-auto
+          %i.bi.bi-search.fs-2.position-absolute.ms-3
+          %input.form-control.form-control-lg#search-input{ placeholder: 'Search by group name, id or wallet address', type: 'text', autocomplete: 'off', style: 'width: 550px; max-width 100%; padding-left: 60px;' }
+        .align-self-center
+          = link_to new_smart_contract_path, class: 'btn btn-primary btn-lg', rel: 'noopener' do
+            New
+      .overflow-auto
+        %table.table.table-striped#smart-contracts-table
+          %thead
+            %tr
+              %th{ scope: 'col' } #
+              %th{ scope: 'col' } Address
+              %th{ scope: 'col' } Caller
+              %th{ scope: 'col' } AZERO.ID
+              %th{ scope: 'col' } Group
+          %tbody
