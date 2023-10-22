@@ -34,7 +34,7 @@ const SMART_CONTRACTS_NEW = {
       );
       let groups = await $.ajax({
         type: "post",
-        url: "https://squid.subsquid.io/smart-contract-hub/graphql",
+        url: ALEPH_ZERO.subsquid.url,
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({
           query:

@@ -1,73 +1,95 @@
-import DataTable from "datatables.net-bs5";
+import { ALEPH_ZERO } from "../helpers";
 
 const SMART_CONTRACTS_INDEX = {
   datatable: undefined,
+  queryCount: 0,
   init: async () => {
     SMART_CONTRACTS_INDEX.addListeners();
-    SMART_CONTRACTS_INDEX.datatable = new DataTable("#smart-contracts-table", {
-      columns: [
-        {
-          data: "id",
-          title: "#",
-        },
-        {
-          data: "address",
-          title: "Smart Contract",
-        },
-        {
-          data: "caller",
-          title: "Caller",
-        },
-        {
-          data: "azeroId",
-          title: "AZERO.ID",
-        },
-        {
-          data: "group.name",
-          title: "Group",
-        },
-      ],
-      ordering: false,
-      paging: false,
-      bInfo: false,
-      searching: false,
-    });
+    if (!SMART_CONTRACTS_INDEX.datatable) {
+      SMART_CONTRACTS_INDEX.datatable = new DataTable("#smart-contracts-table", {
+        columns: [
+          {
+            data: "id",
+            title: "#",
+          },
+          {
+            data: "address",
+            title: "Smart Contract",
+          },
+          {
+            data: "caller",
+            title: "Caller",
+          },
+          {
+            data: "azeroId",
+            title: "AZERO.ID",
+          },
+          {
+            data: "group.name",
+            title: "Group",
+          },
+        ],
+        ordering: false,
+        paging: false,
+        processing: true,
+        bInfo: false,
+        searching: false,
+      });
+    }
   },
   addListeners: () => {
     $("#search-input").on("input", async (_evt) => {
-      let search = $("#search-input").val();
-      let smartContracts = await $.ajax({
-        type: "post",
-        url: "https://squid.subsquid.io/smart-contract-hub/graphql",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({
-          query: `query MyQuery {
-            smartContracts(where: {address_containsInsensitive: "${search}", OR: {group: {name_containsInsensitive: "${search}"}, OR: {caller_containsInsensitive: "${search}", OR: {azeroId_containsInsensitive: "${search}"}}}}) {
-              abiUrl
-              address
-              auditUrl
-              azeroId
-              caller
-              chain
-              contractUrl
-              enabled
-              github
-              id
-              projectName
-              wasmUrl
-              projectWebsite
-              group {
-                name
-              }
-            }
-          }`,
-        }),
-      });
-      smartContracts = smartContracts.data.smartContracts;
+      // 1. Set to loading and clear table
       SMART_CONTRACTS_INDEX.datatable.clear();
-      SMART_CONTRACTS_INDEX.datatable.rows.add(smartContracts);
-      SMART_CONTRACTS_INDEX.datatable.columns.adjust().draw();
-      console.log(smartContracts);
+      SMART_CONTRACTS_INDEX.datatable.processing(true);
+
+      // 2. Increase query count
+      SMART_CONTRACTS_INDEX.queryCount += 1;
+      let currentQueryCount = SMART_CONTRACTS_INDEX.queryCount;
+
+      // 3. Search
+      let search = $("#search-input").val();
+      let smartContracts = [];
+      try {
+        if (search.length) {
+          await document.delay(500);
+          let response = await $.ajax({
+            type: "post",
+            url: ALEPH_ZERO.subsquid.url,
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+              query: `query MyQuery {
+                smartContracts(where: {address_containsInsensitive: "${search}", OR: {group: {name_containsInsensitive: "${search}"}, OR: {caller_containsInsensitive: "${search}", OR: {azeroId_containsInsensitive: "${search}"}}}}) {
+                  abiUrl
+                  address
+                  auditUrl
+                  azeroId
+                  caller
+                  chain
+                  contractUrl
+                  enabled
+                  github
+                  id
+                  projectName
+                  wasmUrl
+                  projectWebsite
+                  group {
+                    name
+                  }
+                }
+              }`,
+            }),
+          });
+          smartContracts = response.data.smartContracts;
+        }
+      } finally {
+        if (currentQueryCount == SMART_CONTRACTS_INDEX.queryCount) {
+          SMART_CONTRACTS_INDEX.datatable.rows.add(smartContracts);
+          $('#smart-contracts-table').width("100%");
+          SMART_CONTRACTS_INDEX.datatable.columns.adjust().draw();
+          SMART_CONTRACTS_INDEX.datatable.processing(false);
+        }
+      }
     });
   },
 };

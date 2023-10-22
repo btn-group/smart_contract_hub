@@ -104,6 +104,45 @@ export const ALEPH_ZERO = {
   },
   contractsByAddress: {},
   extensions: undefined,
+  subsquid: {
+    url: "http://localhost:4350/graphql",
+    height: async () => {
+      try {
+        let response = await $.ajax({
+          type: "post",
+          url: ALEPH_ZERO.subsquid.url,
+          contentType: "application/json; charset=utf-8",
+          data: JSON.stringify({
+            query: `query MyQuery {
+              squidStatus {
+                height
+              }
+            }`,
+          }),
+        });
+        return response.data.squidStatus.height;
+      } catch (err) {
+        document.showAlertDanger(err);
+      }
+    },
+    waitForSync: async (response) => {
+      let attempt = 1;
+      let height = response.result.blockNumber.toNumber();
+      let syncing = true;
+      while (syncing) {
+        await document.delay(3_000);
+        let squidHeight = await ALEPH_ZERO.subsquid.height();
+        if (squidHeight >= height) {
+          syncing = false;
+        }
+        attempt += 1;
+        if (attempt == 5) {
+          syncing = true;
+          document.showAlertInfo("Subsquid is out of sync");
+        }
+      }
+    },
+  },
   activatePolkadotJsExtension: async () => {
     let response = await POLKADOTJS.activatePolkadotjsExtension();
     ALEPH_ZERO.extensions = response.extensions;
