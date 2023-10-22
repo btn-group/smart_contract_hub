@@ -15,6 +15,9 @@
     -# === THEME STYLESHEETS ===
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
     = javascript_include_tag 'application', 'data-turbo-track': 'reload'
+    %link{href: "https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.min.css", rel: "stylesheet"}/
+    %script{src: "https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.min.js"}
+    %script{src: "https://cdn.datatables.net/plug-ins/1.13.6/api/processing().js", type: "text/javascript"}
   %body{ class: "rails-env-#{Rails.env}" }
     %nav.navbar.bg-body-tertiary
       .container
