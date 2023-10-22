@@ -1,40 +1,49 @@
+import { HELPERS } from "../../../application";
 import { ALEPH_ZERO } from "../helpers";
 
 const SMART_CONTRACTS_INDEX = {
   datatable: undefined,
   queryCount: 0,
   init: async () => {
+    if (HELPERS.toastr.message) {
+      HELPERS.toastr.alertType(HELPERS.toastr.message, true);
+      HELPERS.toastr.message = undefined;
+      HELPERS.toastr.alertType = undefined;
+    }
     SMART_CONTRACTS_INDEX.addListeners();
     if (!SMART_CONTRACTS_INDEX.datatable) {
-      SMART_CONTRACTS_INDEX.datatable = new DataTable("#smart-contracts-table", {
-        columns: [
-          {
-            data: "id",
-            title: "#",
-          },
-          {
-            data: "address",
-            title: "Smart Contract",
-          },
-          {
-            data: "caller",
-            title: "Caller",
-          },
-          {
-            data: "azeroId",
-            title: "AZERO.ID",
-          },
-          {
-            data: "group.name",
-            title: "Group",
-          },
-        ],
-        ordering: false,
-        paging: false,
-        processing: true,
-        bInfo: false,
-        searching: false,
-      });
+      SMART_CONTRACTS_INDEX.datatable = new DataTable(
+        "#smart-contracts-table",
+        {
+          columns: [
+            {
+              data: "id",
+              title: "#",
+            },
+            {
+              data: "address",
+              title: "Smart Contract",
+            },
+            {
+              data: "caller",
+              title: "Caller",
+            },
+            {
+              data: "azeroId",
+              title: "AZERO.ID",
+            },
+            {
+              data: "group.name",
+              title: "Group",
+            },
+          ],
+          ordering: false,
+          paging: false,
+          processing: true,
+          bInfo: false,
+          searching: false,
+        }
+      );
     }
   },
   addListeners: () => {
@@ -85,7 +94,7 @@ const SMART_CONTRACTS_INDEX = {
       } finally {
         if (currentQueryCount == SMART_CONTRACTS_INDEX.queryCount) {
           SMART_CONTRACTS_INDEX.datatable.rows.add(smartContracts);
-          $('#smart-contracts-table').width("100%");
+          $("#smart-contracts-table").width("100%");
           SMART_CONTRACTS_INDEX.datatable.columns.adjust().draw();
           SMART_CONTRACTS_INDEX.datatable.processing(false);
         }
