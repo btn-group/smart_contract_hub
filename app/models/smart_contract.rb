@@ -10,7 +10,6 @@ class SmartContract < ApplicationRecord
   has_one_attached :audit
 
   # === VALIDATIONS ===
-  validates :third_party_identifier, uniqueness: { case_sensitive: false }
   # ACTIVE STORAGE
   validates :abi, attached: true, content_type: :json, size: { less_than: 500.kilobyte }
   # octet_stream is the content_type of a .contract file
