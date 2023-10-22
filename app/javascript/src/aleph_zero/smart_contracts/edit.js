@@ -14,6 +14,7 @@ const SMART_CONTRACTS_EDIT = {
   },
   addListeners: () => {
     $(document).on("aleph_zero_account_selected", async () => {
+      await SMART_CONTRACTS_EDIT.validateAuthorisedToEdit();
       // await ALEPH_ZERO.contracts.azeroIdRouter.getAndSetDomains();
       // let $selectBox = $("select[name='smart_contract[azero_id]']");
       // $selectBox.html("");
@@ -227,6 +228,17 @@ const SMART_CONTRACTS_EDIT = {
       document.showAlertDanger(err);
     }
   },
+  validateAuthorisedToEdit: async () => {
+    try {
+      if (SMART_CONTRACTS_EDIT.smartContract.caller != ALEPH_ZERO.account.address) {
+        HELPERS.toastr.message = "Unauthorised";
+        HELPERS.toastr.alertType = document.showAlertDanger;
+        Turbo.visit("/");
+      }
+    } catch (err) {
+      document.showAlertDanger(err);
+    }
+  }
 };
 
 // Even with turbo, init is called every time as listeners need to be replaced
