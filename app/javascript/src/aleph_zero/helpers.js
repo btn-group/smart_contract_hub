@@ -106,17 +106,16 @@ export const ALEPH_ZERO = {
   extensions: undefined,
   subsquid: {
     url: "http://localhost:4350/graphql",
-    groupUsers: async() => {
+    groupUsers: async () => {
       let response = await $.ajax({
         type: "post",
         url: ALEPH_ZERO.subsquid.url,
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({
-          query:
-            `query MyQuery($role_in: [String!] = ["Member", "Admin", "SuperAdmin"]) { groupUsers(where: {accountId_eq: "${ALEPH_ZERO.account.address}", role_in: $role_in}) { accountId id role group { enabled id name } }}`,
+          query: `query MyQuery($role_in: [String!] = ["Member", "Admin", "SuperAdmin"]) { groupUsers(where: {accountId_eq: "${ALEPH_ZERO.account.address}", role_in: $role_in}) { accountId id role group { enabled id name } }}`,
         }),
       });
-      return response.data.groupUsers
+      return response.data.groupUsers;
     },
     height: async () => {
       try {

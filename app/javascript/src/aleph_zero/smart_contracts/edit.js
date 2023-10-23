@@ -16,25 +16,8 @@ const SMART_CONTRACTS_EDIT = {
   addListeners: () => {
     $(document).on("aleph_zero_account_selected", async () => {
       await SMART_CONTRACTS_EDIT.validateAuthorisedToEdit();
-      // set groups select box
-      let $selectBox = $("select[name='smart_contract[group_id]']");
-      $selectBox.html("");
-      $selectBox.append(
-        $("<option>", {
-          value: undefined,
-          text: "",
-        })
-      );
-      let groupUsers = await ALEPH_ZERO.subsquid.groupUsers();
-      groupUsers.forEach(function (groupUser) {
-        $selectBox.append(
-          $("<option>", {
-            value: groupUser.group.id,
-            selected: Number(groupUser.group.id) == Number(SMART_CONTRACTS_EDIT.smartContract.groupId),
-            text: groupUser.group.name,
-          })
-        );
-      });
+      SMART_CONTRACTS_EDIT.getAndSetGroups();
+      SMART_CONTRACTS_EDIT.getAndSetAzeroIds();
       // await ALEPH_ZERO.contracts.azeroIdRouter.getAndSetDomains();
       // let $selectBox = $("select[name='smart_contract[azero_id]']");
       // $selectBox.html("");
@@ -262,6 +245,43 @@ const SMART_CONTRACTS_EDIT = {
     } catch (err) {
       document.showAlertDanger(err);
     }
+  },
+  getAndSetAzeroIds: async () => {
+    await ALEPH_ZERO.contracts.azeroIdRouter.getAndSetDomains();
+    let $selectBox = $("select[name='smart_contract[azero_id]']");
+    $selectBox.html("");
+    ALEPH_ZERO.contracts.azeroIdRouter.domains.forEach(function (domain) {
+      $selectBox.append(
+        $("<option>", {
+          value: domain,
+          text: domain,
+          selected: domain == SMART_CONTRACTS_EDIT.smartContract.azeroId,
+        })
+      );
+    });
+  },
+  getAndSetGroups: async () => {
+    // set groups select box
+    let $selectBox = $("select[name='smart_contract[group_id]']");
+    $selectBox.html("");
+    $selectBox.append(
+      $("<option>", {
+        value: undefined,
+        text: "",
+      })
+    );
+    let groupUsers = await ALEPH_ZERO.subsquid.groupUsers();
+    groupUsers.forEach(function (groupUser) {
+      $selectBox.append(
+        $("<option>", {
+          value: groupUser.group.id,
+          selected:
+            Number(groupUser.group.id) ==
+            Number(SMART_CONTRACTS_EDIT.smartContract.groupId),
+          text: groupUser.group.name,
+        })
+      );
+    });
   },
   validateAuthorisedToEdit: async () => {
     try {
