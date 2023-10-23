@@ -32,16 +32,8 @@ const SMART_CONTRACTS_NEW = {
           text: "",
         })
       );
-      let groups = await $.ajax({
-        type: "post",
-        url: ALEPH_ZERO.subsquid.url,
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({
-          query:
-            `query MyQuery($role_in: [String!] = ["Member", "Admin", "SuperAdmin"]) { groupUsers(where: {accountId_eq: "${ALEPH_ZERO.account.address}", role_in: $role_in}) { accountId id role group { enabled id name } }}`,
-        }),
-      });
-      groups.data.groupUsers.forEach(function (groupUser) {
+      let groupUsers = await ALEPH_ZERO.subsquid.groupUsers();
+      groupUsers.forEach(function (groupUser) {
         $selectBox.append(
           $("<option>", {
             value: groupUser.group.id,
