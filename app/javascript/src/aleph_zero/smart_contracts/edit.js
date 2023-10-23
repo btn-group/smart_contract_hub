@@ -10,6 +10,7 @@ const SMART_CONTRACTS_EDIT = {
     SMART_CONTRACTS_EDIT.addListeners();
     // GET SMART CONTRACT
     await SMART_CONTRACTS_EDIT.getAndSetContract();
+    SMART_CONTRACTS_EDIT.fillForm();
     await ALEPH_ZERO.activatePolkadotJsExtension();
   },
   addListeners: () => {
@@ -198,6 +199,21 @@ const SMART_CONTRACTS_EDIT = {
   //     });
   //   });
   // },
+  fillForm: () => {
+    document.smartContractEditForm[
+      "smart_contract[smart_contract_address]"
+    ].value = SMART_CONTRACTS_EDIT.smartContract.smartContractAddress;
+    document.smartContractEditForm["smart_contract[project_name]"].value =
+      SMART_CONTRACTS_EDIT.smartContract.projectName;
+    document.smartContractEditForm["smart_contract[project_website]"].value =
+      SMART_CONTRACTS_EDIT.smartContract.projectWebsite;
+    document.smartContractEditForm["smart_contract[github]"].value =
+      SMART_CONTRACTS_EDIT.smartContract.github;
+    $("#smart_contract_enabled").prop(
+      "checked",
+      SMART_CONTRACTS_EDIT.smartContract.enabled
+    );
+  },
   getAndSetContract: async () => {
     try {
       let id = Number(
@@ -230,7 +246,9 @@ const SMART_CONTRACTS_EDIT = {
   },
   validateAuthorisedToEdit: async () => {
     try {
-      if (SMART_CONTRACTS_EDIT.smartContract.caller != ALEPH_ZERO.account.address) {
+      if (
+        SMART_CONTRACTS_EDIT.smartContract.caller != ALEPH_ZERO.account.address
+      ) {
         HELPERS.toastr.message = "Unauthorised";
         HELPERS.toastr.alertType = document.showAlertDanger;
         Turbo.visit("/");
@@ -238,7 +256,7 @@ const SMART_CONTRACTS_EDIT = {
     } catch (err) {
       document.showAlertDanger(err);
     }
-  }
+  },
 };
 
 // Even with turbo, init is called every time as listeners need to be replaced
