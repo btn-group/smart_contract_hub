@@ -16,6 +16,25 @@ const SMART_CONTRACTS_EDIT = {
   addListeners: () => {
     $(document).on("aleph_zero_account_selected", async () => {
       await SMART_CONTRACTS_EDIT.validateAuthorisedToEdit();
+      // set groups select box
+      let $selectBox = $("select[name='smart_contract[group_id]']");
+      $selectBox.html("");
+      $selectBox.append(
+        $("<option>", {
+          value: undefined,
+          text: "",
+        })
+      );
+      let groupUsers = await ALEPH_ZERO.subsquid.groupUsers();
+      groupUsers.forEach(function (groupUser) {
+        $selectBox.append(
+          $("<option>", {
+            value: groupUser.group.id,
+            selected: Number(groupUser.group.id) == Number(SMART_CONTRACTS_EDIT.smartContract.groupId),
+            text: groupUser.group.name,
+          })
+        );
+      });
       // await ALEPH_ZERO.contracts.azeroIdRouter.getAndSetDomains();
       // let $selectBox = $("select[name='smart_contract[azero_id]']");
       // $selectBox.html("");
