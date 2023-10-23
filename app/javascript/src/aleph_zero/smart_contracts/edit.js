@@ -10,6 +10,8 @@ const SMART_CONTRACTS_EDIT = {
     SMART_CONTRACTS_EDIT.addListeners();
     // GET SMART CONTRACT
     await SMART_CONTRACTS_EDIT.getAndSetContract();
+    // === DROPZONE ===
+    SMART_CONTRACTS_EDIT.createDropZones();
     SMART_CONTRACTS_EDIT.fillForm();
     await ALEPH_ZERO.activatePolkadotJsExtension();
   },
@@ -18,48 +20,7 @@ const SMART_CONTRACTS_EDIT = {
       await SMART_CONTRACTS_EDIT.validateAuthorisedToEdit();
       SMART_CONTRACTS_EDIT.getAndSetGroups();
       SMART_CONTRACTS_EDIT.getAndSetAzeroIds();
-      // await ALEPH_ZERO.contracts.azeroIdRouter.getAndSetDomains();
-      // let $selectBox = $("select[name='smart_contract[azero_id]']");
-      // $selectBox.html("");
-      // ALEPH_ZERO.contracts.azeroIdRouter.domains.forEach(function (domain) {
-      //   $selectBox.append(
-      //     $("<option>", {
-      //       value: domain,
-      //       text: domain,
-      //       selected:
-      //         domain == ALEPH_ZERO.contracts.azeroIdRouter.primaryDomain,
-      //     })
-      //   );
-      // });
-      // $selectBox = $("select[name='smart_contract[group_id]']");
-      // $selectBox.html("");
-      // $selectBox.append(
-      //   $("<option>", {
-      //     value: undefined,
-      //     text: "",
-      //   })
-      // );
-      // let groups = await $.ajax({
-      //   type: "post",
-      //   url: ALEPH_ZERO.subsquid.url,
-      //   contentType: "application/json; charset=utf-8",
-      //   data: JSON.stringify({
-      //     query:
-      //       'query MyQuery($role_in: [String!] = ["Member", "Admin", "SuperAdmin"]) { groupUsers(where: {accountId_eq: "5HimuS19MhHX9EggD9oZzx297qt3UxEdkcc5NWAianPAQwHG", role_in: $role_in}) { accountId id role group { enabled id name } }}',
-      //   }),
-      // });
-      // groups.data.groupUsers.forEach(function (groupUser) {
-      //   $selectBox.append(
-      //     $("<option>", {
-      //       value: groupUser.group.id,
-      //       text: groupUser.group.name,
-      //     })
-      //   );
-      // });
     });
-
-    // === DROPZONE ===
-    // SMART_CONTRACTS_EDIT.createDropZones();
 
     // === FORMS ===
     // pub fn create(
@@ -156,51 +117,87 @@ const SMART_CONTRACTS_EDIT = {
     //   }
     // };
   },
-  // createDropZones: function () {
-  //   let url = $("#smart_contract_abi").attr("data-direct-upload-url");
-  //   let headers = {
-  //     "X-CSRF-Token": $(
-  //       "form#new_smart_contract input[name=authenticity_token]"
-  //     ).val(),
-  //   };
-  //   [
-  //     ["#abi-dropzone", "application/json", "#smart_contract_abi_url", 0.5],
-  //     ["#contract-dropzone", ".contract", "#smart_contract_contract_url", 0.5],
-  //     ["#wasm-dropzone", "application/wasm", "#smart_contract_wasm_url", 0.5],
-  //     ["#audit-dropzone", "application/pdf", "#smart_contract_audit_url", 2.5],
-  //   ].forEach(function (dzParams) {
-  //     let dropZone = new Dropzone(dzParams[0], {
-  //       url,
-  //       headers,
-  //       maxFiles: 1,
-  //       maxFilesize: dzParams[3],
-  //       acceptedFiles: dzParams[1],
-  //       addRemoveLinks: true,
-  //       autoQueue: false,
-  //       dictDefaultMessage: "Drop file here to upload",
-  //     });
-  //     dropZone.on("addedfile", function (file) {
-  //       const upload = new DirectUpload(file, url);
-  //       upload.create((error, blob) => {
-  //         if (error) {
-  //           document.showAlertDanger(error);
-  //           return;
-  //         } else {
-  //           let url;
-  //           if ($("body.rails-env-development").length) {
-  //             url = `https://link.storjshare.io/jxilw2olwgoskdx2k4fvsswcfwfa/smart-contract-hub-development/${blob.key}`;
-  //           } else {
-  //             url = `https://link.storjshare.io/juldos5d7qtuwqx2itvdhgtgp3vq/smart-contract-hub-production/${blob.key}`;
-  //           }
-  //           $(dzParams[2]).val(url);
-  //         }
-  //       });
-  //     });
-  //     dropZone.on("removedfile", function (file) {
-  //       $(dzParams[2]).val(undefined);
-  //     });
-  //   });
-  // },
+  createDropZones: function () {
+    let url = $("#smart_contract_audit").attr("data-direct-upload-url");
+    let headers = {
+      "X-CSRF-Token": $(
+        "form#new_smart_contract input[name=authenticity_token]"
+      ).val(),
+    };
+    [
+      ["#audit-dropzone", "application/pdf", "#smart_contract_audit_url", 2.5],
+    ].forEach(function (dzParams) {
+      let dropZone = new Dropzone(dzParams[0], {
+        url,
+        headers,
+        maxFiles: 1,
+        maxFilesize: dzParams[3],
+        acceptedFiles: dzParams[1],
+        addRemoveLinks: true,
+        autoQueue: false,
+        dictDefaultMessage: "Drop file here to upload",
+        init: function () {
+          let myDropzone = this;
+          let auditUrl = SMART_CONTRACTS_EDIT.smartContract.auditUrl;
+          if (auditUrl.length) {
+            let fileDetails = {
+              id: "fileOnServer",
+              name: undefined,
+              size: 12345,
+              imageUrl: undefined,
+              accepted: true,
+            };
+            if (auditUrl.split("/smart-contract-hub-development/")[1].length) {
+              fileDetails.name = auditUrl.split(
+                "/smart-contract-hub-development/"
+              )[1];
+            } else if (
+              auditUrl.split("/smart-contract-hub-production/")[1].length
+            ) {
+              fileDetails.name = auditUrl.split(
+                "/smart-contract-hub-production/"
+              )[1];
+            }
+            myDropzone.files.push(fileDetails);
+            myDropzone.options.addedfile.call(myDropzone, fileDetails);
+            // myDropzone.options.thumbnail.call(myDropzone, fileDetails, "/images/"+value.name);
+            myDropzone.options.complete.call(myDropzone, fileDetails);
+            myDropzone.options.success.call(myDropzone, fileDetails);
+          }
+        },
+      });
+      // This if you don't want the exceeded file shown at all
+      dropZone.on("maxfilesexceeded", function (file) {
+        dropZone.removeFile(file);
+      });
+      // Doesn't get called on showing file on server
+      // This gets called even when maxfilesexceeded
+      // manually check the number of accepted files before uploading
+      dropZone.on("addedfile", function (file) {
+        if (dropZone.getAcceptedFiles().length == 0) {
+          const upload = new DirectUpload(file, url);
+          upload.create((error, blob) => {
+            if (error) {
+              document.showAlertDanger(error);
+              dropZone.removeFile(file);
+              return;
+            } else {
+              let url;
+              if ($("body.rails-env-development").length) {
+                url = `https://link.storjshare.io/jxilw2olwgoskdx2k4fvsswcfwfa/smart-contract-hub-development/${blob.key}`;
+              } else {
+                url = `https://link.storjshare.io/juldos5d7qtuwqx2itvdhgtgp3vq/smart-contract-hub-production/${blob.key}`;
+              }
+              $(dzParams[2]).val(url);
+            }
+          });
+        }
+      });
+      dropZone.on("removedfile", function (file) {
+        $(dzParams[2]).val(undefined);
+      });
+    });
+  },
   fillForm: () => {
     document.smartContractEditForm[
       "smart_contract[smart_contract_address]"
@@ -211,6 +208,8 @@ const SMART_CONTRACTS_EDIT = {
       SMART_CONTRACTS_EDIT.smartContract.projectWebsite;
     document.smartContractEditForm["smart_contract[github]"].value =
       SMART_CONTRACTS_EDIT.smartContract.github;
+    document.smartContractEditForm["smart_contract[audit_url]"].value =
+      SMART_CONTRACTS_EDIT.smartContract.auditUrl;
     $("#smart_contract_enabled").prop(
       "checked",
       SMART_CONTRACTS_EDIT.smartContract.enabled
