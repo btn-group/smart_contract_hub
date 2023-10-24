@@ -62,9 +62,7 @@ const SMART_CONTRACTS_NEW = {
     // ) -> Result<SmartContract> {
     document.smartContractNewForm.onsubmit = async (e) => {
       e.preventDefault();
-      let buttonSelector =
-        "[name='smartContractNewForm'] button[type='submit']";
-      document.disableButton(buttonSelector);
+      document.disableButton(e.submitter);
       try {
         let address =
           document.smartContractNewForm[
@@ -136,7 +134,7 @@ const SMART_CONTRACTS_NEW = {
       } catch (err) {
         document.showAlertDanger(err);
       } finally {
-        document.enableButton(buttonSelector);
+        document.enableButton(e.submitter);
       }
     };
   },

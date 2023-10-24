@@ -34,5 +34,5 @@
                 = f.text_field :audit_url, hidden: true
             .mb-3
               = f.check_box :enabled
-              = f.label :enabled, class: 'form-label required'
+              = f.label :enabled, class: 'form-label'
             = render 'button_loading', button_classes: 'btn btn-primary mt-3', button_type: 'submit', ready_label: 'Update'
