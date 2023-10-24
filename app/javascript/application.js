@@ -3,6 +3,8 @@ import "./src/jquery";
 import "bootstrap";
 import "./src/lodash";
 import "./src/toastr";
+import { DirectUpload } from "@rails/activestorage";
+import Dropzone from "dropzone";
 
 // === ACTIVE STORAGE ===
 import * as ActiveStorage from "@rails/activestorage";
@@ -22,6 +24,91 @@ export const HELPERS = {
         .split("; ")
         .find((row) => row.startsWith(`${id}=`))
         ?.split("=")[1];
+    },
+  },
+  dropzone: {
+    create: (
+      selector,
+      acceptedFiles,
+      inputSelector,
+      maxFileSize,
+      csrfToken,
+      directUploadUrl
+    ) => {
+      let headers = {
+        "X-CSRF-Token": csrfToken,
+      };
+      let dropZone = new Dropzone(selector, {
+        url,
+        headers,
+        maxFiles: 1,
+        maxFileSize,
+        acceptedFiles,
+        addRemoveLinks: true,
+        autoQueue: false,
+        dictDefaultMessage: "Drop file here to upload",
+        init: function () {
+          let myDropzone = this;
+          let existingFileUrl = $(inputSelector).val();
+          if (existingFileUrl.length) {
+            let fileDetails = {
+              id: inputSelector,
+              name: undefined,
+              size: 12345,
+              imageUrl: undefined,
+              accepted: true,
+            };
+            if (
+              existingFileUrl.split("/smart-contract-hub-development/")[1]
+                .length
+            ) {
+              fileDetails.name = existingFileUrl.split(
+                "/smart-contract-hub-development/"
+              )[1];
+            } else if (
+              existingFileUrl.split("/smart-contract-hub-production/")[1].length
+            ) {
+              fileDetails.name = existingFileUrl.split(
+                "/smart-contract-hub-production/"
+              )[1];
+            }
+            myDropzone.files.push(fileDetails);
+            myDropzone.options.addedfile.call(myDropzone, fileDetails);
+            myDropzone.options.complete.call(myDropzone, fileDetails);
+            myDropzone.options.success.call(myDropzone, fileDetails);
+          }
+        },
+      });
+      // a. Doesn't get called on showing file on server
+      // b. This gets called even when maxfilesexceeded
+      // manually check the number of accepted files before uploading
+      dropZone.on("addedfile", function (file) {
+        if (dropZone.getAcceptedFiles().length == 0) {
+          const upload = new DirectUpload(file, directUploadUrl);
+          upload.create((error, blob) => {
+            if (error) {
+              document.showAlertDanger(error);
+              dropZone.removeFile(file);
+              return;
+            } else {
+              let url;
+              if ($("body.rails-env-development").length) {
+                url = `https://link.storjshare.io/jxilw2olwgoskdx2k4fvsswcfwfa/smart-contract-hub-development/${blob.key}`;
+              } else {
+                url = `https://link.storjshare.io/juldos5d7qtuwqx2itvdhgtgp3vq/smart-contract-hub-production/${blob.key}`;
+              }
+              $(inputSelector).val(url);
+            }
+          });
+        }
+      });
+      // This if you don't want the exceeded file shown at all
+      dropZone.on("maxfilesexceeded", function (file) {
+        dropZone.removeFile(file);
+      });
+      dropZone.on("removedfile", function () {
+        $(inputSelector).val(undefined);
+      });
     },
   },
   toastr: {},
