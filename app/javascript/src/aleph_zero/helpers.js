@@ -264,18 +264,6 @@ export const ALEPH_ZERO = {
   //   document.showAlertDanger(err);
   // }
   // },
-  setUserBlockExplorerLinks: () => {
-    $("#polkadot-user-menu-toggle .block-explorers").removeClass("d-none");
-    let html = "";
-    [["Subscan", "https://alephzero.subscan.io/account/"]].forEach(function (
-      blockExplorerDetails
-    ) {
-      html += `<div class="menu-item px-3"><a class="menu-link px-5" href="${
-        blockExplorerDetails[1] + ALEPH_ZERO.account.address
-      }" target="_blank">${blockExplorerDetails[0]}</a></div>`;
-    });
-    $("#polkadot-user-menu-toggle .block-explorers .menu-sub").html(html);
-  },
   updateAfterAccountSelect: (event) => {
     let setNewAccount = false;
     let newAddress = event.currentTarget.dataset.accountAddress;
@@ -308,7 +296,6 @@ export const ALEPH_ZERO = {
     document.cookie = `polkadot_extension=${ALEPH_ZERO.account.meta.source};`;
     $(".polkadot-connect-button").addClass("d-none");
     document.enableButton(".polkadot-connect-button");
-    ALEPH_ZERO.setUserBlockExplorerLinks();
     HELPERS.setUserAccountMenuToggle(
       "#polkadot-user-menu-toggle",
       ALEPH_ZERO.account.address,

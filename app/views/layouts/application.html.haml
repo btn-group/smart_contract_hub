@@ -23,8 +23,20 @@
       .container
         = link_to 'Smart Contract Hub', root_path, class: 'navbar-brand'
         .d-block
-          = link_to '#', class: 'ms-3 align-middle' do
-            %i.bi-person-circle.fs-2
+          .dropdown.dropdown-menu-end.d-none#polkadot-user-menu-toggle
+            %a#navbarDropdown.nav-link{ "aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button", "data-bs-auto-close": "outside" }
+              .d-flex.align-items-center{ style: "height: 35px;" }
+                %img.h-100{ alt: 'Wallet logo', src: 'https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Clipart.png' }
+                .ms-2
+                  .account-name.fw-bolder{ style: 'font-size: 13.8px;' }
+                  .account-address-abbreviated.fw-semibold.text-muted{ style: 'font-size: 12.9px;' }
+            .dropdown-menu.dropdown-menu-end.p-3{"aria-labelledby" => "navbarDropdown"}
+              .d-flex.flex-column
+                .d-flex.align-items-center.flex-wrap
+                  .wallet-address.me-user-account-menu-wallet-address-id
+                  %button.btn.btn-icon.btn-sm.btn-light{ 'data-clipboard-target' => "#user-account-menu-wallet-address-id" }
+                    %i.bi.bi-clipboard.fs-2.text-muted
+                = link_to 'Change', '#', id: 'change-account-link'
           = render 'polkadot_connect_button'
     = yield
     = render 'polkadot_account_list'
