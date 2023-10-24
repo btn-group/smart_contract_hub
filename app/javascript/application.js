@@ -84,8 +84,26 @@ export const HELPERS = {
       // manually check the number of accepted files before uploading
       dropZone.on("addedfile", function (file) {
         if (dropZone.getAcceptedFiles().length == 0) {
+          let $button = $(selector)
+            .closest("form")
+            .find("button[type='submit']");
+          $button.find(".loading-status").text("Uploading file...");
+          document.disableButton($button);
+          $(selector).attr("data-uploading-file", true);
+
+          // disable form submit button and set text of button to uploading file
+          // Set data attribute of input selector to uploading file
+          // Afterwards, enable button, change text back to loading if no more uploading
           const upload = new DirectUpload(file, directUploadUrl);
           upload.create((error, blob) => {
+            $(selector).attr("data-uploading-file", false);
+            if (
+              $(selector).closest("form").find('[data-uploading-file="true"]')
+                .length == 0
+            ) {
+              document.enableButton($button);
+              $button.find(".loading-status").text("Loading...");
+            }
             if (error) {
               document.showAlertDanger(error);
               dropZone.removeFile(file);
