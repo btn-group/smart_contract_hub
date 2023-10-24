@@ -101,7 +101,7 @@ const SMART_CONTRACTS_NEW = {
         const contract = await ALEPH_ZERO.contracts[
           "smartContractHub"
         ].getContract();
-        await POLKADOTJS.contractTx(
+        let response = await POLKADOTJS.contractTx(
           api,
           account.address,
           contract,
@@ -121,6 +121,7 @@ const SMART_CONTRACTS_NEW = {
             github,
           ]
         );
+        await ALEPH_ZERO.subsquid.waitForSync(response);
         HELPERS.toastr.message = "Success";
         HELPERS.toastr.alertType = document.showAlertSuccess;
         Turbo.visit("/");
