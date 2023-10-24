@@ -108,7 +108,7 @@ export const HELPERS = {
               document.showAlertDanger(error);
               dropZone.removeFile(file);
               return;
-            } else {
+            } else if (dropZone.getAcceptedFiles()[0] && dropZone.getAcceptedFiles()[0].upload.uuid == file.upload.uuid) {
               let url;
               if ($("body.rails-env-development").length) {
                 url = `https://link.storjshare.io/jxilw2olwgoskdx2k4fvsswcfwfa/smart-contract-hub-development/${blob.key}`;
