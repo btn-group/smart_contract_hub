@@ -292,6 +292,7 @@ export const ALEPH_ZERO = {
     $("#polkadot-user-menu-toggle .wallet-address").text(
       ALEPH_ZERO.account.address
     );
+    HELPERS.copyToClipboard("polkadot-user-account-menu-wallet-address");
     document.cookie = `polkadot_account_name=${ALEPH_ZERO.account.meta.name};`;
     document.cookie = `polkadot_extension=${ALEPH_ZERO.account.meta.source};`;
     $(".polkadot-connect-button").addClass("d-none");
