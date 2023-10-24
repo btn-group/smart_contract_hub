@@ -75,20 +75,25 @@ const SMART_CONTRACTS_NEW = {
         let abiUrl =
           document.smartContractNewForm["smart_contract[abi_url]"].value;
         let contractUrl =
-          document.smartContractNewForm["smart_contract[contract_url]"].value;
+          document.smartContractNewForm["smart_contract[contract_url]"].value ||
+          undefined;
         let wasmUrl =
-          document.smartContractNewForm["smart_contract[wasm_url]"].value;
+          document.smartContractNewForm["smart_contract[wasm_url]"].value ||
+          undefined;
         let auditUrl =
-          document.smartContractNewForm["smart_contract[audit_url]"].value;
+          document.smartContractNewForm["smart_contract[audit_url]"].value ||
+          undefined;
         let groupId =
-          document.smartContractNewForm["smart_contract[group_id]"].value;
+          document.smartContractNewForm["smart_contract[group_id]"].value
         let projectName =
-          document.smartContractNewForm["smart_contract[project_name]"].value;
+          document.smartContractNewForm["smart_contract[project_name]"].value ||
+          undefined;
         let projectWebsite =
           document.smartContractNewForm["smart_contract[project_website]"]
-            .value;
+            .value || undefined;
         let github =
-          document.smartContractNewForm["smart_contract[github]"].value;
+          document.smartContractNewForm["smart_contract[github]"].value ||
+          undefined;
 
         let api = await ALEPH_ZERO.api();
         let account = ALEPH_ZERO.account;
@@ -116,21 +121,9 @@ const SMART_CONTRACTS_NEW = {
             github,
           ]
         );
-        document.showAlertSuccess("Success", true);
-        // reset
-        document.smartContractNewForm[
-          "smart_contract[smart_contract_address]"
-        ].value = "";
-        document.smartContractNewForm["smart_contract[azero_id]"].value = "";
-        Dropzone.forElement("#abi-dropzone").removeAllFiles(true);
-        Dropzone.forElement("#contract-dropzone").removeAllFiles(true);
-        Dropzone.forElement("#wasm-dropzone").removeAllFiles(true);
-        Dropzone.forElement("#audit-dropzone").removeAllFiles(true);
-        document.smartContractNewForm["smart_contract[project_name]"].value =
-          "";
-        document.smartContractNewForm["smart_contract[project_website]"].value =
-          "";
-        document.smartContractNewForm["smart_contract[github]"].value = "";
+        HELPERS.toastr.message = "Success";
+        HELPERS.toastr.alertType = document.showAlertSuccess;
+        Turbo.visit("/");
       } catch (err) {
         document.showAlertDanger(err);
       } finally {
