@@ -6,11 +6,11 @@ const SMART_CONTRACTS_EDIT = {
   smartContract: undefined,
   init: async () => {
     SMART_CONTRACTS_EDIT.addListeners();
-    // GET SMART CONTRACT
+    // === GET SMART CONTRACT ===
     await SMART_CONTRACTS_EDIT.getAndSetContract();
+    SMART_CONTRACTS_EDIT.fillForm();
     // === DROPZONE ===
     SMART_CONTRACTS_EDIT.createDropZones();
-    SMART_CONTRACTS_EDIT.fillForm();
     await ALEPH_ZERO.activatePolkadotJsExtension();
   },
   addListeners: () => {
@@ -34,85 +34,64 @@ const SMART_CONTRACTS_EDIT = {
     //     project_website: Option<String>,
     //     github: Option<String>,
     // ) -> Result<SmartContract> {
-    // document.smartContractNewForm.onsubmit = async (e) => {
-    //   e.preventDefault();
-    //   let buttonSelector =
-    //     "[name='smartContractNewForm'] button[type='submit']";
-    //   document.disableButton(buttonSelector);
-    //   try {
-    //     let address =
-    //       document.smartContractNewForm[
-    //         "smart_contract[smart_contract_address]"
-    //       ].value;
-    //     let chain =
-    //       document.smartContractNewForm["smart_contract[chain]"].value;
-    //     let azeroId =
-    //       document.smartContractNewForm["smart_contract[azero_id]"].value;
-    //     let abiUrl =
-    //       document.smartContractNewForm["smart_contract[abi_url]"].value;
-    //     let contractUrl =
-    //       document.smartContractNewForm["smart_contract[contract_url]"].value;
-    //     let wasmUrl =
-    //       document.smartContractNewForm["smart_contract[wasm_url]"].value;
-    //     let auditUrl =
-    //       document.smartContractNewForm["smart_contract[audit_url]"].value;
-    //     let groupId =
-    //       document.smartContractNewForm["smart_contract[group_id]"].value;
-    //     let projectName =
-    //       document.smartContractNewForm["smart_contract[project_name]"].value;
-    //     let projectWebsite =
-    //       document.smartContractNewForm["smart_contract[project_website]"]
-    //         .value;
-    //     let github =
-    //       document.smartContractNewForm["smart_contract[github]"].value;
+    document.smartContractEditForm.onsubmit = async (e) => {
+      e.preventDefault();
+      document.disableButton(e.submitter);
+      try {
+        let id = Number(
+          document.smartContractEditForm["smart_contract[id]"].value
+        );
+        let enabled = $("#smart_contract_enabled").prop("checked");
+        let azeroId =
+          document.smartContractEditForm["smart_contract[azero_id]"].value;
+        let groupId =
+          document.smartContractEditForm["smart_contract[group_id]"].value ||
+          undefined;
+        let auditUrl =
+          document.smartContractEditForm["smart_contract[audit_url]"].value ||
+          undefined;
+        let projectName =
+          document.smartContractEditForm["smart_contract[project_name]"]
+            .value || undefined;
+        let projectWebsite =
+          document.smartContractEditForm["smart_contract[project_website]"]
+            .value || undefined;
+        let github =
+          document.smartContractEditForm["smart_contract[github]"].value ||
+          undefined;
+        let api = await ALEPH_ZERO.api();
+        let account = ALEPH_ZERO.account;
+        api.setSigner(ALEPH_ZERO.getSigner());
+        const contract = await ALEPH_ZERO.contracts[
+          "smartContractHub"
+        ].getContract();
+        await POLKADOTJS.contractTx(
+          api,
+          account.address,
+          contract,
+          "update",
+          undefined,
+          [
+            id,
+            enabled,
+            azeroId,
+            groupId,
+            auditUrl,
+            projectName,
+            projectWebsite,
+            github,
+          ]
+        );
 
-    //     let api = await ALEPH_ZERO.api();
-    //     let account = ALEPH_ZERO.account;
-    //     api.setSigner(ALEPH_ZERO.getSigner());
-    //     const contract = await ALEPH_ZERO.contracts[
-    //       "smartContractHub"
-    //     ].getContract();
-    //     await POLKADOTJS.contractTx(
-    //       api,
-    //       account.address,
-    //       contract,
-    //       "create",
-    //       { value: 1_000_000_000_000 },
-    //       [
-    //         address,
-    //         chain,
-    //         azeroId,
-    //         abiUrl,
-    //         contractUrl,
-    //         wasmUrl,
-    //         auditUrl,
-    //         groupId,
-    //         projectName,
-    //         projectWebsite,
-    //         github,
-    //       ]
-    //     );
-    //     document.showAlertSuccess("Success", true);
-    //     // reset
-    //     document.smartContractNewForm[
-    //       "smart_contract[smart_contract_address]"
-    //     ].value = "";
-    //     document.smartContractNewForm["smart_contract[azero_id]"].value = "";
-    //     Dropzone.forElement("#abi-dropzone").removeAllFiles(true);
-    //     Dropzone.forElement("#contract-dropzone").removeAllFiles(true);
-    //     Dropzone.forElement("#wasm-dropzone").removeAllFiles(true);
-    //     Dropzone.forElement("#audit-dropzone").removeAllFiles(true);
-    //     document.smartContractNewForm["smart_contract[project_name]"].value =
-    //       "";
-    //     document.smartContractNewForm["smart_contract[project_website]"].value =
-    //       "";
-    //     document.smartContractNewForm["smart_contract[github]"].value = "";
-    //   } catch (err) {
-    //     document.showAlertDanger(err);
-    //   } finally {
-    //     document.enableButton(buttonSelector);
-    //   }
-    // };
+        HELPERS.toastr.message = "Success";
+        HELPERS.toastr.alertType = document.showAlertSuccess;
+        Turbo.visit("/");
+      } catch (err) {
+        document.showAlertDanger(err);
+      } finally {
+        document.enableButton(e.submitter);
+      }
+    };
   },
   createDropZones: function () {
     let csrfToken = $(
@@ -164,7 +143,6 @@ const SMART_CONTRACTS_EDIT = {
         undefined,
         [id]
       );
-      document.response = response;
       if (response.output.asOk.isErr) {
         HELPERS.toastr.message = "Smart contract not found";
         HELPERS.toastr.alertType = document.showAlertDanger;
@@ -203,12 +181,14 @@ const SMART_CONTRACTS_EDIT = {
     );
     let groupUsers = await ALEPH_ZERO.subsquid.groupUsers();
     groupUsers.forEach(function (groupUser) {
+      let selected =
+        SMART_CONTRACTS_EDIT.smartContract.groupId &&
+        Number(groupUser.group.id) ==
+          Number(SMART_CONTRACTS_EDIT.smartContract.groupId);
       $selectBox.append(
         $("<option>", {
           value: groupUser.group.id,
-          selected:
-            Number(groupUser.group.id) ==
-            Number(SMART_CONTRACTS_EDIT.smartContract.groupId),
+          selected,
           text: groupUser.group.name,
         })
       );

@@ -39,7 +39,7 @@ export const HELPERS = {
         "X-CSRF-Token": csrfToken,
       };
       let dropZone = new Dropzone(selector, {
-        url,
+        url: directUploadUrl,
         headers,
         maxFiles: 1,
         maxFileSize,

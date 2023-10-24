@@ -61,7 +61,8 @@ document.showAlertDanger = function (error, autoHide = false) {
       error = error.responseText;
     } else if (error.errorMessage) {
       error = error.errorMessage;
-      if (error.toLowerCase() == "usercancelled") {
+      // Subwallet return "Error" when user cancels
+      if (error.toLowerCase() == "usercancelled" || error == "Error") {
         return;
       }
     }
