@@ -9,13 +9,12 @@
           = link_to new_smart_contract_path, class: 'btn btn-primary btn-lg', rel: 'noopener' do
             New
       .overflow-auto
-        %table.table.table-striped#smart-contracts-table
+        %table.table.table-striped.mb-5#smart-contracts-table
           %thead
             %tr
+              %th{ scope: 'col' }
               %th{ scope: 'col' } #
               %th{ scope: 'col' } Address
               %th{ scope: 'col' } Caller
-              %th{ scope: 'col' } AZERO.ID
-              %th{ scope: 'col' } Group
-              %th{ scope: 'col' }
+              %th{ scope: 'col' } Actions
           %tbody
