@@ -221,34 +221,29 @@ export const POLKADOTJS = {
     );
   },
   initAccountList: (accounts) => {
-    $("#polkadot-account-list .list").html("");
+    $("#polkadot-account-list .modal-body").html("");
     _.sortBy(accounts, ["meta.source", "meta.name"]).forEach(function (
       account
     ) {
-      $("#polkadot-account-list .list").append(
-        `<li class='bg-hover-light p-0' data-account-address= '${
+      $("#polkadot-account-list .modal-body").append(
+        `<div class="overflow-hidden" data-account-address= '${
           account.address
         }', data-account-name= '${account.meta.name}', data-account-source= '${
           account.meta.source
-        }'><a href='#' class='d-flex align-items-center'><div class='h-40px w-40px text-center me-3'><img class="h-100" src='https://res.cloudinary.com/hv5cxagki/image/upload/c_pad,dpr_2,f_auto,h_25,w_25,q_100/v1/${HELPERS.walletCloudinaryPublicId(
+        }'><a href='#' class='d-flex align-items-center text-decoration-none'><div class='text-center me-3' style='height: 40px; width: 40px;'><img class="h-100" src='https://res.cloudinary.com/hv5cxagki/image/upload/c_pad,dpr_2,f_auto,h_25,w_25,q_100/v1/${HELPERS.walletCloudinaryPublicId(
           account.meta.source
         )}'></div><div class="d-block"><div class="fw-bold text-gray-900">${
           account.meta.name
-        }</div><div class="fs-4 text-muted fw-semibold"><div class="lh-base">${
+        }</div><div class="text-muted fw-semibold"><div class="lh-base">${
           account.address
         }</div></div></div>`
       );
     });
-    // if (accounts.length) {
-    //   $("#change-account-link").removeClass("d-none");
-    // } else {
-    //   $("#change-account-link").addClass("d-none");
-    // }
-    // // Enable clicking change button
-    // $("#change-account-link").click(function (e) {
-    //   e.preventDefault();
-    //   $("#polkadot-account-list").modal("show");
-    // });
+    // Enable clicking change button
+    $("#change-account-link").click(function (e) {
+      e.preventDefault();
+      $("#polkadot-account-list").modal("show");
+    });
   },
   listenForAccountSelect: function (scope) {
     $("#polkadot-account-list li").on("click", function (e) {

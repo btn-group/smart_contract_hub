@@ -1,10 +1,8 @@
-.modal.fade#polkadot-account-list{ 'aria-hidden' => 'true', role: 'dialog', tabindex: '-1' }
+.modal.fade#polkadot-account-list{ 'aria-hidden' => 'true', role: 'dialog', tabindex: '-1', style: "--bs-modal-width: 575px; max-width: 100%;" }
   .modal-dialog.modal-dialog-scrollable.modal-dialog-centered.mw-fit-content
     .modal-content
       .modal-header.pb-0.border-0
         %h3.modal-title Select an account
-        .btn.btn-icon.btn-sm.btn-active-light-primary.ms-2{ 'aria-label' => 'Close', 'data-bs-dismiss' => '#polkadot-account-list' }
-          %i.bi-x
+        .btn.btn-icon.btn-sm{ 'aria-label' => 'Close', 'data-bs-dismiss' => 'modal' }
+          %i.bi-x-lg
       .modal-body
-        .card
-          %ul.list
