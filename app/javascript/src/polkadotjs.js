@@ -246,7 +246,7 @@ export const POLKADOTJS = {
     });
   },
   listenForAccountSelect: function (scope) {
-    $("#polkadot-account-list li").on("click", function (e) {
+    $("#polkadot-account-list [data-account-address]").on("click", function (e) {
       e.preventDefault();
       $("#polkadot-account-list").modal("hide");
       scope.updateAfterAccountSelect(e);
