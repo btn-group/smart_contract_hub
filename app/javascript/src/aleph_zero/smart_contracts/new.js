@@ -167,7 +167,9 @@ const SMART_CONTRACTS_NEW = {
       "#audit-dropzone",
       "application/pdf",
       "#smart_contract_audit_url",
-      2.5
+      2.5,
+      csrfToken,
+      directUploadUrl
     );
   },
 };
