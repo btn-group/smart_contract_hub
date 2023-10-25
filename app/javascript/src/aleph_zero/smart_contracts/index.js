@@ -10,8 +10,6 @@ const SMART_CONTRACTS_INDEX = {
       HELPERS.toastr.message = undefined;
       HELPERS.toastr.alertType = undefined;
     }
-    SMART_CONTRACTS_INDEX.addListeners();
-    await ALEPH_ZERO.activatePolkadotJsExtension();
     if (!SMART_CONTRACTS_INDEX.datatable) {
       SMART_CONTRACTS_INDEX.datatable = new DataTable(
         "#smart-contracts-table",
@@ -75,8 +73,14 @@ const SMART_CONTRACTS_INDEX = {
         }
       );
     }
+    SMART_CONTRACTS_INDEX.addListeners();
+    await ALEPH_ZERO.activatePolkadotJsExtension();
   },
   addListeners: () => {
+    $(document).on("aleph_zero_account_selected", async () => {
+      $("#search-input").trigger("input");
+    });
+
     $("#search-input").on("input", async (_evt) => {
       // 1. Set to loading and clear table
       SMART_CONTRACTS_INDEX.datatable.clear();

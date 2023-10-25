@@ -246,11 +246,14 @@ export const POLKADOTJS = {
     });
   },
   listenForAccountSelect: function (scope) {
-    $("#polkadot-account-list [data-account-address]").on("click", function (e) {
-      e.preventDefault();
-      $("#polkadot-account-list").modal("hide");
-      scope.updateAfterAccountSelect(e);
-    });
+    $("#polkadot-account-list [data-account-address]").on(
+      "click",
+      function (e) {
+        e.preventDefault();
+        $("#polkadot-account-list").modal("hide");
+        scope.updateAfterAccountSelect(e);
+      }
+    );
   },
   // https://polkadot.js.org/docs/util-crypto/examples/validate-address
   validateAddress: function (address) {
