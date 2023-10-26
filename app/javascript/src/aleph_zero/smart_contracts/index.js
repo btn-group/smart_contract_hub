@@ -20,24 +20,39 @@ const SMART_CONTRACTS_INDEX = {
               orderable: false,
               data: null,
               defaultContent: "",
+              width: 62,
             },
             {
               data: "id",
               title: "#",
+              width: 20,
             },
             {
               data: "address",
               title: "Smart Contract",
+              width: "40%",
+              fnCreatedCell: function (nTd, sData, _oData, _iRow) {
+                $(nTd).html(
+                  `<div class="cell"><div class="cell-overflow">${sData}</div></div>`
+                );
+              },
             },
             {
               data: "caller",
               title: "Caller",
+              width: "40%",
+              fnCreatedCell: function (nTd, sData, _oData, _iRow) {
+                $(nTd).html(
+                  `<div class="cell"><div class="cell-overflow">${sData}</div></div>`
+                );
+              },
             },
             {
               searchable: false,
               className: "text-end",
               defaultContent: "",
               title: "Actions",
+              width: 58,
               fnCreatedCell: function (nTd, _sData, oData, _iRow) {
                 if (
                   ALEPH_ZERO.account &&
