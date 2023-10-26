@@ -191,7 +191,7 @@ const SMART_CONTRACTS_INDEX = {
     // id
     html += `<tr><th>#</th><td>${d.id}</td></tr>`;
     // smart_contract_address
-    html += `<tr><th>Address</th><td>${d.smartContractAddress}</td></tr>`;
+    html += `<tr><th>Address</th><td>${d.address}</td></tr>`;
     // chain
     html += `<tr><th>Chain</th><td>${SMART_CONTRACTS_INDEX.chainToString(
       d.chain
