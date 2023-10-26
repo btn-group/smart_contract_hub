@@ -33,7 +33,7 @@ const SMART_CONTRACTS_INDEX = {
               width: "40%",
               fnCreatedCell: function (nTd, sData, _oData, _iRow) {
                 $(nTd).html(
-                  `<div class="cell"><div class="cell-overflow">${sData}</div></div>`
+                  `<div class="cell-wrapper-wrapper"><div class="cell"><div class="cell-overflow">${sData}</div></div></div>`
                 );
               },
             },
@@ -43,7 +43,7 @@ const SMART_CONTRACTS_INDEX = {
               width: "40%",
               fnCreatedCell: function (nTd, sData, _oData, _iRow) {
                 $(nTd).html(
-                  `<div class="cell"><div class="cell-overflow">${sData}</div></div>`
+                  `<div class="cell-wrapper-wrapper"><div class="cell"><div class="cell-overflow">${sData}</div></div></div>`
                 );
               },
             },
