@@ -4,6 +4,8 @@
 @import 'dropzone/src/dropzone';
 @import 'toastr/toastr';
 
+@import 'smart_contracts/index';
+
 .required::after {
   color: var(--bs-red);
   content: ' *';
