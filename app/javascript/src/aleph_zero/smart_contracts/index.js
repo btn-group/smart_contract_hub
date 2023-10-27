@@ -147,6 +147,7 @@ const SMART_CONTRACTS_INDEX = {
                   wasmUrl
                   projectWebsite
                   group {
+                    id
                     name
                   }
                 }
@@ -215,11 +216,11 @@ const SMART_CONTRACTS_INDEX = {
     // audit_url
     html += `<tr><th>Audit URL</th><td><a href="${d.auditUrl}" target="_blank">${d.auditUrl}</a></td></tr>`;
     // group_id
-    let groupName = "";
     if (d.group) {
-      groupName = d.group.name;
+      html += `<tr><th>Group</th><td><a href="https://btn.group/aleph_zero/groups?id=${d.group.id}" target="_blank">${d.group.name}</a></td></tr>`;
+    } else {
+      html += `<tr><th>Group</th><td></td></tr>`;
     }
-    html += `<tr><th>Group</th><td>${groupName}</td></tr>`;
     // project_name
     html += `<tr><th>Project Name</th><td>${d.projectName}</td></tr>`;
     // project_website
