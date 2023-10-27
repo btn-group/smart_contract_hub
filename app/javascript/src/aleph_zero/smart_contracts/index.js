@@ -221,7 +221,7 @@ const SMART_CONTRACTS_INDEX = {
     // project_website
     html += `<tr><th>Project Website</th><td>${d.projectWebsite}</td></tr>`;
     // github
-    html += `<tr><th>Github</th><td>${d.github}</td></tr>`;
+    html += `<tr><th>Github</th><td><a href="${d.github}" target="_blank">${d.github}</a></td></tr>`;
     html += "</tbody></table></div>";
     return html;
   },
