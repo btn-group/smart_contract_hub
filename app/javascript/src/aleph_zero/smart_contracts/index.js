@@ -39,7 +39,7 @@ const SMART_CONTRACTS_INDEX = {
             },
             {
               data: "caller",
-              title: "Caller",
+              title: "Added By",
               width: "40%",
               fnCreatedCell: function (nTd, sData, _oData, _iRow) {
                 $(nTd).html(
@@ -197,7 +197,7 @@ const SMART_CONTRACTS_INDEX = {
       d.chain
     )}</td></tr>`;
     // caller
-    html += `<tr><th>Caller</th><td>${d.caller}</td></tr>`;
+    html += `<tr><th>Added By</th><td>${d.caller}</td></tr>`;
     // enabled
     html += `<tr><th>Enabled</th><td>${d.enabled}</td></tr>`;
     // azero_id
