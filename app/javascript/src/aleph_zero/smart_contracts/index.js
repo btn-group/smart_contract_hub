@@ -191,7 +191,11 @@ const SMART_CONTRACTS_INDEX = {
     // id
     html += `<tr><th>#</th><td>${d.id}</td></tr>`;
     // smart_contract_address
-    html += `<tr><th>Address</th><td>${d.address}</td></tr>`;
+    if (d.chain == 0) {
+      html += `<tr><th>Address</th><td><a href="https://alephzero.subscan.io/wasm_contract/${d.address}" target="_blank">${d.address}</a></td></tr>`;
+    } else {
+      html += `<tr><th>Address</th><td>${d.address}</td></tr>`;
+    }
     // chain
     html += `<tr><th>Chain</th><td>${SMART_CONTRACTS_INDEX.chainToString(
       d.chain
