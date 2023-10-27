@@ -201,7 +201,7 @@ const SMART_CONTRACTS_INDEX = {
     // enabled
     html += `<tr><th>Enabled</th><td>${d.enabled}</td></tr>`;
     // azero_id
-    html += `<tr><th>AZERO.ID</th><td>${d.azeroId}</td></tr>`;
+    html += `<tr><th>AZERO.ID</th><td><a href="https://azero.id/id/${d.azeroId}" target="_blank">${d.azeroId}</a></td></tr>`;
     // abi_url
     html += `<tr><th>ABI URL</th><td>${d.abiUrl}</td></tr>`;
     // contract_url
