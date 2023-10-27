@@ -197,7 +197,7 @@ const SMART_CONTRACTS_INDEX = {
       d.chain
     )}</td></tr>`;
     // caller
-    html += `<tr><th>Added By</th><td>${d.caller}</td></tr>`;
+    html += `<tr><th>Added By</th><td><a href="https://alephzero.subscan.io/account/${d.caller}" target="_blank">${d.caller}</a></td></tr>`;
     // enabled
     html += `<tr><th>Enabled</th><td>${d.enabled}</td></tr>`;
     // azero_id
