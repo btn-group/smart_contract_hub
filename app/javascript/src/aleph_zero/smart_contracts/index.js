@@ -203,13 +203,13 @@ const SMART_CONTRACTS_INDEX = {
     // azero_id
     html += `<tr><th>AZERO.ID</th><td><a href="https://azero.id/id/${d.azeroId}" target="_blank">${d.azeroId}</a></td></tr>`;
     // abi_url
-    html += `<tr><th>ABI URL</th><td>${d.abiUrl}</td></tr>`;
+    html += `<tr><th>ABI URL</th><td><a href="${d.abiUrl}" target="_blank">${d.abiUrl}</a></td></tr>`;
     // contract_url
-    html += `<tr><th>Contract URL</th><td>${d.contractUrl}</td></tr>`;
+    html += `<tr><th>Contract URL</th><td><a href="${d.contractUrl}" target="_blank">${d.contractUrl}</a></td></tr>`;
     // wasm_url
-    html += `<tr><th>WASM URL</th><td>${d.wasmUrl}</td></tr>`;
+    html += `<tr><th>WASM URL</th><td><a href="${d.wasmUrl}" target="_blank">${d.wasmUrl}</a></td></tr>`;
     // audit_url
-    html += `<tr><th>Audit URL</th><td>${d.auditUrl}</td></tr>`;
+    html += `<tr><th>Audit URL</th><td><a href="${d.auditUrl}" target="_blank">${d.auditUrl}</a></td></tr>`;
     // group_id
     let groupName = "";
     if (d.group) {
