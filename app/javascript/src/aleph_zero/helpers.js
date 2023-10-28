@@ -105,7 +105,7 @@ export const ALEPH_ZERO = {
   contractsByAddress: {},
   extensions: undefined,
   subsquid: {
-    url: "http://localhost:4350/graphql",
+    url: "https://squid.subsquid.io/smart-contract-hub/graphql",
     groupUsers: async () => {
       let response = await $.ajax({
         type: "post",
