@@ -10,83 +10,78 @@ const SMART_CONTRACTS_INDEX = {
       HELPERS.toastr.message = undefined;
       HELPERS.toastr.alertType = undefined;
     }
-    if (!SMART_CONTRACTS_INDEX.datatable) {
-      SMART_CONTRACTS_INDEX.datatable = new DataTable(
-        "#smart-contracts-table",
+    SMART_CONTRACTS_INDEX.datatable = new DataTable("#smart-contracts-table", {
+      columns: [
         {
-          columns: [
-            {
-              className: "dt-control",
-              orderable: false,
-              data: null,
-              defaultContent: "",
-              width: 62,
-            },
-            {
-              data: "id",
-              title: "#",
-              width: 20,
-            },
-            {
-              data: "address",
-              title: "Smart Contract",
-              width: "40%",
-              fnCreatedCell: function (nTd, sData, _oData, _iRow) {
-                $(nTd).html(
-                  `<div class="cell-wrapper-wrapper"><div class="cell"><div class="cell-overflow">${sData}</div></div></div>`
-                );
-              },
-            },
-            {
-              data: "caller",
-              title: "Added By",
-              width: "40%",
-              fnCreatedCell: function (nTd, sData, _oData, _iRow) {
-                $(nTd).html(
-                  `<div class="cell-wrapper-wrapper"><div class="cell"><div class="cell-overflow">${sData}</div></div></div>`
-                );
-              },
-            },
-            {
-              searchable: false,
-              className: "text-end",
-              defaultContent: "",
-              title: "Actions",
-              width: 58,
-              fnCreatedCell: function (nTd, _sData, oData, _iRow) {
-                if (
-                  ALEPH_ZERO.account &&
-                  ALEPH_ZERO.account.address == oData.caller
-                ) {
-                  let html =
-                    '<div class="d-flex justify-content-end flex-shrink-0">';
-                  html += `<a href="#" data-smart-contract-id=${oData.id} class="edit-smart-contract-link btn btn-icon btn-color-muted btn-bg-light btn-active-color-primary btn-sm"><i class="bi bi-pencil-square fs-3"></i></a>`;
-                  html += "</div>";
-                  $(nTd).html(html);
-                }
-              },
-            },
-          ],
-          ordering: false,
-          paging: false,
-          processing: true,
-          bInfo: false,
-          searching: false,
-          drawCallback: function () {
-            $("#smart-contracts-index .edit-smart-contract-link").on(
-              "click",
-              async function (e) {
-                e.preventDefault();
-                let smartContractId = e.currentTarget.getAttribute(
-                  "data-smart-contract-id"
-                );
-                Turbo.visit(`/smart_contracts/${smartContractId}/edit`);
-              }
+          className: "dt-control",
+          orderable: false,
+          data: null,
+          defaultContent: "",
+          width: 62,
+        },
+        {
+          data: "id",
+          title: "#",
+          width: 20,
+        },
+        {
+          data: "address",
+          title: "Smart Contract",
+          width: "40%",
+          fnCreatedCell: function (nTd, sData, _oData, _iRow) {
+            $(nTd).html(
+              `<div class="cell-wrapper-wrapper"><div class="cell"><div class="cell-overflow">${sData}</div></div></div>`
             );
           },
-        }
-      );
-    }
+        },
+        {
+          data: "caller",
+          title: "Added By",
+          width: "40%",
+          fnCreatedCell: function (nTd, sData, _oData, _iRow) {
+            $(nTd).html(
+              `<div class="cell-wrapper-wrapper"><div class="cell"><div class="cell-overflow">${sData}</div></div></div>`
+            );
+          },
+        },
+        {
+          searchable: false,
+          className: "text-end",
+          defaultContent: "",
+          title: "Actions",
+          width: 58,
+          fnCreatedCell: function (nTd, _sData, oData, _iRow) {
+            if (
+              ALEPH_ZERO.account &&
+              ALEPH_ZERO.account.address == oData.caller
+            ) {
+              let html =
+                '<div class="d-flex justify-content-end flex-shrink-0">';
+              html += `<a href="#" data-smart-contract-id=${oData.id} class="edit-smart-contract-link btn btn-icon btn-color-muted btn-bg-light btn-active-color-primary btn-sm"><i class="bi bi-pencil-square fs-3"></i></a>`;
+              html += "</div>";
+              $(nTd).html(html);
+            }
+          },
+        },
+      ],
+      ordering: false,
+      paging: false,
+      processing: true,
+      bInfo: false,
+      searching: false,
+      drawCallback: function () {
+        $("#smart-contracts-index .edit-smart-contract-link").on(
+          "click",
+          async function (e) {
+            e.preventDefault();
+            let smartContractId = e.currentTarget.getAttribute(
+              "data-smart-contract-id"
+            );
+            Turbo.visit(`/smart_contracts/${smartContractId}/edit`);
+          }
+        );
+      },
+    });
     SMART_CONTRACTS_INDEX.addListeners();
     await ALEPH_ZERO.activatePolkadotJsExtension();
   },
