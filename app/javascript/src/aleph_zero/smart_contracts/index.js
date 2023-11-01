@@ -83,6 +83,7 @@ const SMART_CONTRACTS_INDEX = {
       },
     });
     SMART_CONTRACTS_INDEX.addListeners();
+    $("html").attr("data-preloader", "disable");
     await ALEPH_ZERO.activatePolkadotJsExtension();
   },
   addListeners: () => {

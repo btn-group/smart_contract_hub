@@ -11,6 +11,7 @@ const SMART_CONTRACTS_EDIT = {
     SMART_CONTRACTS_EDIT.fillForm();
     // === DROPZONE ===
     SMART_CONTRACTS_EDIT.createDropZones();
+    $("html").attr("data-preloader", "disable");
     await ALEPH_ZERO.activatePolkadotJsExtension();
   },
   addListeners: () => {

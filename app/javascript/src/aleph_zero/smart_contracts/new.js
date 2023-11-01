@@ -5,6 +5,7 @@ import { POLKADOTJS } from "../../polkadotjs";
 const SMART_CONTRACTS_NEW = {
   init: async () => {
     SMART_CONTRACTS_NEW.addListeners();
+    $("html").attr("data-preloader", "disable");
     await ALEPH_ZERO.activatePolkadotJsExtension();
   },
   addListeners: () => {
