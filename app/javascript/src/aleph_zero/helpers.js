@@ -289,9 +289,7 @@ export const ALEPH_ZERO = {
   },
   updateAfterAccountSet: () => {
     $("#page-header-user-dropdown").removeClass("d-none");
-    $(".dropdown-menu .wallet-address").text(
-      ALEPH_ZERO.account.address
-    );
+    $(".dropdown-menu .wallet-address").text(ALEPH_ZERO.account.address);
     HELPERS.copyToClipboard("polkadot-user-account-menu-wallet-address");
     document.cookie = `polkadot_account_name=${ALEPH_ZERO.account.meta.name};`;
     document.cookie = `polkadot_extension=${ALEPH_ZERO.account.meta.source};`;
