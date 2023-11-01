@@ -23,49 +23,19 @@
           %button.btn.btn-icon.btn-topbar.btn-ghost-secondary.rounded-circle.light-dark-mode{ type: "button" }
             %i.bx.bx-moon.fs-22
         .dropdown.ms-sm-3.header-item.topbar-user
-          %button.btn.d-none#page-header-user-dropdown{ 'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-bs-toggle' => 'dropdown', type: 'button' }
+          %button.btn.d-none#page-header-user-dropdown{ 'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-bs-toggle' => 'dropdown', type: 'button', 'data-bs-auto-close': 'outside' }
             %span.d-flex.align-items-center
               %img.user-address-alias-avatar{ alt: 'Wallet logo', src: 'https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Clipart.png', height: 40 }
               .text-start.ms-3
                 .fw-medium.user-name-text.account-name
                 .fs-12.user-name-sub-text.account-address-abbreviated
           .dropdown-menu.dropdown-menu-end
-            .d-flex.flex-column
-              .d-flex.align-items-center.flex-wrap
-                %h6.dropdown-header.wallet-address#polkadot-user-account-menu-wallet-address
-                %button.btn.btn-icon.btn-sm.btn-light{ 'data-clipboard-target' => "#polkadot-user-account-menu-wallet-address" }
-                  %i.bi.bi-clipboard.fs-2.text-muted
-              .dropdown-divider
-              = link_to 'Change', '#', id: 'change-account-link', class: 'dropdown-item'
-
-            / / item
-            / %h6.dropdown-header Welcome Anna!
-            / %a.dropdown-item{ href: 'pages-profile.html' }
-            /   %i.mdi.mdi-account-circle.text-muted.fs-16.align-middle.me-1
-            /   %span.align-middle Profile
-            / %a.dropdown-item{ href: 'apps-chat.html' }
-            /   %i.mdi.mdi-message-text-outline.text-muted.fs-16.align-middle.me-1
-            /   %span.align-middle Messages
-            / %a.dropdown-item{ href: 'apps-tasks-kanban.html' }
-            /   %i.mdi.mdi-calendar-check-outline.text-muted.fs-16.align-middle.me-1
-            /   %span.align-middle Taskboard
-            / %a.dropdown-item{ href: 'pages-faqs.html' }
-            /   %i.mdi.mdi-lifebuoy.text-muted.fs-16.align-middle.me-1
-            /   %span.align-middle Help
-            / .dropdown-divider
-            / %a.dropdown-item{ href: 'pages-profile.html' }
-            /   %i.mdi.mdi-wallet.text-muted.fs-16.align-middle.me-1
-            /   %span.align-middle
-            /     Balance :
-            /     %b $5971.67
-            / %a.dropdown-item{ href: 'pages-profile-settings.html' }
-            /   %span.badge.bg-success-subtle.text-success.mt-1.float-end New
-            /   %i.mdi.mdi-cog-outline.text-muted.fs-16.align-middle.me-1
-            /   %span.align-middle Settings
-            / %a.dropdown-item{ href: 'auth-lockscreen-basic.html' }
-            /   %i.mdi.mdi-lock.text-muted.fs-16.align-middle.me-1
-            /   %span.align-middle Lock screen
-            / %a.dropdown-item{ href: 'auth-logout-basic.html' }
-            /   %i.mdi.mdi-logout.text-muted.fs-16.align-middle.me-1
-            /   %span.align-middle{ 'data-key' => 't-logout' } Logout
+            %h6.dropdown-header
+              .d-flex.flex-column.position-relative
+                .d-flex.align-items-center
+                  .wallet-address.me-2#polkadot-user-account-menu-wallet-address
+                  %button.btn.btn-icon.btn-sm
+                    %i.bi.bi-clipboard.text-muted.fs-4{ 'data-clipboard-target' => "#polkadot-user-account-menu-wallet-address" }
+            .dropdown-divider
+            = link_to 'Change', '#', id: 'change-account-link', class: 'dropdown-item'
         = render 'polkadot_connect_button'

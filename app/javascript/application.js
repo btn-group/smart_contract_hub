@@ -164,7 +164,7 @@ export const HELPERS = {
       checkIcon = document.createElement("i");
       checkIcon.classList.add("bi");
       checkIcon.classList.add("bi-check");
-      checkIcon.classList.add("fs-2x");
+      checkIcon.classList.add("fs-4");
 
       // Append check icon
       button.appendChild(checkIcon);
