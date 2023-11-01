@@ -4,6 +4,10 @@
 @import 'dropzone/src/dropzone';
 @import 'toastr/toastr';
 
+// === VELZON ===
+@import '../../../lib/assets/css/app.min';
+
+// === CUSTOM ===
 @import 'smart_contracts/index';
 
 .required::after {
