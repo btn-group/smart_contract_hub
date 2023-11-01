@@ -2,16 +2,15 @@
   .layout-width
     .navbar-header
       .d-flex
-        / LOGO
         .navbar-brand-box.horizontal-logo
-          %a.logo.logo-dark{ href: 'index.html' }
+          = link_to root_path, class: 'logo logo-dark' do
             %span.logo-sm
               / %img{alt: "", height: "22", src: "assets/images/logo-sm.png"}/
               SCH
             %span.logo-lg
               / %img{alt: "", height: "17", src: "assets/images/logo-dark.png"}/
               SCH
-          %a.logo.logo-light{ href: 'index.html' }
+          = link_to root_path, class: 'logo logo-light' do
             %span.logo-sm
               / %img{alt: "", height: "22", src: "assets/images/logo-sm.png"}/
               SCH
