@@ -6,7 +6,7 @@
           %i.bi.bi-search.fs-2.position-absolute.ms-3
           %input.form-control.form-control-lg#search-input{ placeholder: 'Search by contract address, group, id or wallet address', type: 'text', autocomplete: 'off', style: 'width: 650px; max-width 100%; padding-left: 60px;' }
         .align-self-center
-          = link_to new_smart_contract_path, class: 'btn btn-primary btn-lg', rel: 'noopener' do
+          = link_to new_smart_contract_path, class: 'btn btn-primary btn-lg' do
             New
       .overflow-auto
         %table.table.table-striped.mb-5.align-middle#smart-contracts-table
