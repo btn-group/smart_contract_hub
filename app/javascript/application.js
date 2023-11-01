@@ -12,6 +12,7 @@ ActiveStorage.start();
 
 // === VELZON ===
 import "../../lib/assets/js/layout";
+import "../../lib/assets/js/app";
 
 // === CUSTOM ===
 import "./src/polkadotjs";

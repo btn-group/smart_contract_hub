@@ -19,8 +19,11 @@
               / %img{alt: "", height: "17", src: "assets/images/logo-light.png"}/
               SCH
       .d-flex.align-items-center
+        .header-item
+          %button.btn.btn-icon.btn-topbar.btn-ghost-secondary.rounded-circle.light-dark-mode{ type: "button" }
+            %i.bx.bx-moon.fs-22
         .dropdown.ms-sm-3.header-item.topbar-user
-          %button.btn#page-header-user-dropdown{ 'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-bs-toggle' => 'dropdown', type: 'button' }
+          %button.btn.d-none#page-header-user-dropdown{ 'aria-expanded' => 'false', 'aria-haspopup' => 'true', 'data-bs-toggle' => 'dropdown', type: 'button' }
             %span.d-flex.align-items-center
               %img.user-address-alias-avatar{ alt: 'Wallet logo', src: 'https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Clipart.png', height: 40 }
               .text-start.ms-3
