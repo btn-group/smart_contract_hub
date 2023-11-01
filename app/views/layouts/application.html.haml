@@ -1,44 +1,32 @@
 !!!
-%html.h-100.js{ lang: 'eng' }
+%html{ 'data-layout' => 'horizontal', 'data-preloader' => 'disable', 'data-sidebar' => 'light', 'data-sidebar-image' => 'none', 'data-sidebar-size' => 'lg', 'data-topbar' => 'dark', lang: 'en' }
   %head
     %title Smart Contract Hub
     %meta{ charset: 'utf-8' }
     %link{ href: 'https://res.cloudinary.com/hv5cxagki/image/upload/c_scale,dpr_2,f_auto,h_15,q_auto/v1/logos/btn_purple_background_uu2ere', rel: 'shortcut icon' }
     %meta{ name: 'description', content: 'Smart contract hub for Aleph Zero.' }
     %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1, shrink-to-fit=no' }
-    %meta{ property: 'og:image', content: 'https://res.cloudinary.com/hv5cxagki/image/upload/c_scale,h_80/v1621228725/logos/btn_purple_background_uu2ere.png'
-     }
+    %meta{ property: 'og:image', content: 'https://res.cloudinary.com/hv5cxagki/image/upload/c_scale,h_80/v1621228725/logos/btn_purple_background_uu2ere.png' }
     %meta{ property: 'og:site_name', content: 'Smart Contract Hub' }
     = csrf_meta_tags
     = csp_meta_tag
 
-    -# === THEME STYLESHEETS ===
+    // === CUSTOM ===
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
     = javascript_include_tag 'application', 'data-turbo-track': 'reload'
+
+    // === DATATABLE ===
     %link{ href: 'https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.min.css', rel: 'stylesheet' }
     %script{ src: 'https://cdn.datatables.net/v/dt/dt-1.13.6/datatables.min.js' }
     %script{ src: 'https://cdn.datatables.net/plug-ins/1.13.6/api/processing().js', type: 'text/javascript' }
-    %script{ src: "https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js" }
-
+    // === CLIPBOARD ===
+    %script{ src: 'https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js' }
   %body{ class: "rails-env-#{Rails.env}" }
-    %nav.navbar.bg-body-tertiary
-      .container
-        = link_to 'Smart Contract Hub', root_path, class: 'navbar-brand'
-        .d-block
-          .dropdown.dropdown-menu-end.d-none#polkadot-user-menu-toggle
-            %a#navbarDropdown.nav-link{ "aria-expanded" => "false", "data-bs-toggle" => "dropdown", href: "#", role: "button", "data-bs-auto-close": "outside" }
-              .d-flex.align-items-center{ style: "height: 35px;" }
-                %img.h-100.user-address-alias-avatar{ alt: 'Wallet logo', src: 'https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Clipart.png' }
-                .ms-2
-                  .account-name.fw-bolder{ style: 'font-size: 13.8px;' }
-                  .account-address-abbreviated.fw-semibold.text-muted{ style: 'font-size: 12.9px;' }
-            .dropdown-menu.dropdown-menu-end.p-3{"aria-labelledby" => "navbarDropdown"}
-              .d-flex.flex-column
-                .d-flex.align-items-center.flex-wrap
-                  .wallet-address#polkadot-user-account-menu-wallet-address
-                  %button.btn.btn-icon.btn-sm.btn-light{ 'data-clipboard-target' => "#polkadot-user-account-menu-wallet-address" }
-                    %i.bi.bi-clipboard.fs-2.text-muted
-                = link_to 'Change', '#', id: 'change-account-link'
-          = render 'polkadot_connect_button'
-    = yield
+    #layout-wrapper
+      = render 'header'
+      .main-content
+        .page-content
+          = yield
+      = render 'footer'
+    = render 'preloader'
     = render 'polkadot_account_list'

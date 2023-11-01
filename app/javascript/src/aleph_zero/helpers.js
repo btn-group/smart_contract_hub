@@ -288,8 +288,8 @@ export const ALEPH_ZERO = {
     }
   },
   updateAfterAccountSet: () => {
-    $("#polkadot-user-menu-toggle").removeClass("d-none");
-    $("#polkadot-user-menu-toggle .wallet-address").text(
+    $("#page-header-user-dropdown").removeClass("d-none");
+    $(".dropdown-menu .wallet-address").text(
       ALEPH_ZERO.account.address
     );
     HELPERS.copyToClipboard("polkadot-user-account-menu-wallet-address");
@@ -298,7 +298,7 @@ export const ALEPH_ZERO = {
     $(".polkadot-connect-button").addClass("d-none");
     document.enableButton(".polkadot-connect-button");
     HELPERS.setUserAccountMenuToggle(
-      "#polkadot-user-menu-toggle",
+      "#page-header-user-dropdown",
       ALEPH_ZERO.account.address,
       ALEPH_ZERO.account.meta.name,
       ALEPH_ZERO.account.meta.source

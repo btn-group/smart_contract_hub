@@ -10,6 +10,9 @@ import Dropzone from "dropzone";
 import * as ActiveStorage from "@rails/activestorage";
 ActiveStorage.start();
 
+// === VELZON ===
+import "../../lib/assets/js/layout";
+
 // === CUSTOM ===
 import "./src/polkadotjs";
 import "./src/aleph_zero/helpers";
