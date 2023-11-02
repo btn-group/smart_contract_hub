@@ -1,8 +1,11 @@
-%footer.footer
+%footer.footer.d-flex.align-items-center
   .container-fluid
     .row
-      .col-sm-6
-        2023 © Velzon.
-      .col-sm-6
-        .text-sm-end.d-none.d-sm-block
-          Design &amp; Develop by Themesbrand
+      .col-12.d-flex.justify-content-between
+        = link_to 'https://btn.group', target: '_blank', rel: 'noopener' do
+          = image_tag 'https://res.cloudinary.com/hv5cxagki/image/upload/c_scale,dpr_2,f_auto,h_30,q_auto/v1/branding/black-with-text_jrkb7u_i1xuow_ii0vtw.png', class: 'logo logo-dark'
+          = image_tag 'https://res.cloudinary.com/hv5cxagki/image/upload/c_scale,dpr_2,f_auto,h_30,q_auto/v1/branding/logo_plus_text_1_fitfuq_uqsgxw.png', class: 'logo logo-light'
+        .text-end
+          = link_to 'https://alephzero.org/ecosystem-funding-program', target: '_blank', rel: 'noopener' do
+            = image_tag 'https://res.cloudinary.com/hv5cxagki/image/upload/v1698832330/logos/aleph-zero-efp.a76d0a07_xvnkap.svg', class: 'logo logo-dark'
+            /   = image_tag 'https://res.cloudinary.com/hv5cxagki/image/upload/v1698832330/logos/aleph-zero-efp.a76d0a07_xvnkap.svg', class: 'logo logo-light'
