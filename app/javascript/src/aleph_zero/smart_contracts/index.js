@@ -114,39 +114,27 @@ const SMART_CONTRACTS_INDEX = {
 
       // 3. Search
       let search = $("#search-input").val();
+      let searchBy = $("#search-by-select").val();
       let smartContracts = [];
       try {
-        if (search.length) {
+        if (
+          (search.length &&
+            ((["address", "addedBy"].includes(searchBy) &&
+              POLKADOTJS.validateAddress(search)) ||
+              ["id", "groupName", "azeroId"].includes(searchBy))) ||
+          search.length == 0
+        ) {
+          // 3. Delay
           await document.delay(500);
-          let response = await $.ajax({
-            type: "post",
-            url: ALEPH_ZERO.subsquid.url,
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({
-              query: `query MyQuery {
-                smartContracts(where: {address_containsInsensitive: "${search}", OR: {group: {name_containsInsensitive: "${search}"}, OR: {caller_containsInsensitive: "${search}", OR: {azeroId_containsInsensitive: "${search}"}}}}) {
-                  abiUrl
-                  address
-                  auditUrl
-                  azeroId
-                  caller
-                  chain
-                  contractUrl
-                  enabled
-                  github
-                  id
-                  projectName
-                  wasmUrl
-                  projectWebsite
-                  group {
-                    id
-                    name
-                  }
-                }
-              }`,
-            }),
-          });
-          smartContracts = response.data.smartContracts;
+          if (currentQueryCount == SMART_CONTRACTS_INDEX.queryCount) {
+            let response = await $.ajax({
+              type: "post",
+              url: ALEPH_ZERO.subsquid.url,
+              contentType: "application/json; charset=utf-8",
+              data: ALEPH_ZERO.subsquid.queryData(search, searchBy),
+            });
+            smartContracts = response.data.smartContracts;
+          }
         }
       } finally {
         if (currentQueryCount == SMART_CONTRACTS_INDEX.queryCount) {

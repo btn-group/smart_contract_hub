@@ -13,10 +13,17 @@
         .card-body.border.border-dashed.border-end-0.border-start-0
           %form
             .row.g-3
-              .col-12
+              .col-xxl-5.col-sm-12
                 .search-box
-                  %input.form-control.search.bg-light.border-light#search-input{ placeholder: 'Search by contract address, group, id or wallet address', type: 'text', autocomplete: 'off' }
+                  %input.form-control.search.bg-light.border-light#search-input{ placeholder: 'Search ...', type: 'text', autocomplete: 'off' }
                   %i.ri-search-line.search-icon
+              .col-xxl-3.col-sm-4
+                %select.form-select#search-by-select
+                  %option{ value: 'id' } ID
+                  %option{ value: 'address', selected: true } Address
+                  %option{ value: 'addedBy' } Added By
+                  %option{ value: 'groupName' } Group
+                  %option{ value: 'azeroId' } AZERO.ID
         .card-body
           .table-responsive.table-card.mb-4
             %table.table.align-middle.table-nowrap.mb-0#smart-contracts-table
