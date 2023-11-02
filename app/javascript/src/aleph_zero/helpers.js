@@ -136,6 +136,176 @@ export const ALEPH_ZERO = {
         document.showAlertDanger(err);
       }
     },
+    queryData: (search, searchBy) => {
+      let query;
+      if (search.length) {
+        switch (searchBy) {
+          case "id":
+            query = `query MyQuery {
+              smartContracts(where: {id_eq: "${search}"}) {
+                abiUrl
+                address
+                auditUrl
+                azeroId
+                caller
+                chain
+                contractUrl
+                enabled
+                github
+                id
+                projectName
+                wasmUrl
+                projectWebsite
+                group {
+                  id
+                  name
+                }
+              }
+            }`;
+            break;
+          case "address":
+            query = `query MyQuery {
+              smartContracts(where: {address_containsInsensitive: "${search}"}) {
+                abiUrl
+                address
+                auditUrl
+                azeroId
+                caller
+                chain
+                contractUrl
+                enabled
+                github
+                id
+                projectName
+                wasmUrl
+                projectWebsite
+                group {
+                  id
+                  name
+                }
+              }
+            }`;
+            break;
+          case "addedBy":
+            query = `query MyQuery {
+              smartContracts(where: {caller_containsInsensitive: "${search}"}) {
+                abiUrl
+                address
+                auditUrl
+                azeroId
+                caller
+                chain
+                contractUrl
+                enabled
+                github
+                id
+                projectName
+                wasmUrl
+                projectWebsite
+                group {
+                  id
+                  name
+                }
+              }
+            }`;
+            break;
+          case "groupName":
+            query = `query MyQuery {
+              smartContracts(where: {group: {name_containsInsensitive: "${search}"}) {
+                abiUrl
+                address
+                auditUrl
+                azeroId
+                caller
+                chain
+                contractUrl
+                enabled
+                github
+                id
+                projectName
+                wasmUrl
+                projectWebsite
+                group {
+                  id
+                  name
+                }
+              }
+            }`;
+            break;
+          case "azeroId":
+            query = `query MyQuery {
+              smartContracts(where: {azeroId_containsInsensitive: "${search}"}) {
+                abiUrl
+                address
+                auditUrl
+                azeroId
+                caller
+                chain
+                contractUrl
+                enabled
+                github
+                id
+                projectName
+                wasmUrl
+                projectWebsite
+                group {
+                  id
+                  name
+                }
+              }
+            }`;
+            break;
+          default:
+          // query = `query MyQuery {
+          //     smartContracts(where: {address_containsInsensitive: "${search}", OR: {group: {name_containsInsensitive: "${search}"}, OR: {caller_containsInsensitive: "${search}", OR: {azeroId_containsInsensitive: "${search}"}}}}) {
+          //       abiUrl
+          //       address
+          //       auditUrl
+          //       azeroId
+          //       caller
+          //       chain
+          //       contractUrl
+          //       enabled
+          //       github
+          //       id
+          //       projectName
+          //       wasmUrl
+          //       projectWebsite
+          //       group {
+          //         id
+          //         name
+          //       }
+          //     }
+          //   }`;
+        }
+      } else {
+        query = `query MyQuery {
+          smartContracts(limit: 100, orderBy: createdAt_DESC) {
+            abiUrl
+            address
+            auditUrl
+            azeroId
+            caller
+            chain
+            contractUrl
+            enabled
+            github
+            id
+            projectName
+            wasmUrl
+            projectWebsite
+            group {
+              id
+              name
+            }
+          }
+        }`;
+      }
+
+      return JSON.stringify({
+        query,
+      });
+    },
     waitForSync: async (response) => {
       let attempt = 1;
       let height = response.result.blockNumber.toNumber();
