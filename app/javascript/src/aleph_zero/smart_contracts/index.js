@@ -76,6 +76,7 @@ const SMART_CONTRACTS_INDEX = {
             Turbo.visit(`/smart_contracts/${smartContractId}/edit`);
           }
         );
+        $('#smart-contracts-table').removeClass('dataTable');
       },
     });
     SMART_CONTRACTS_INDEX.addListeners();

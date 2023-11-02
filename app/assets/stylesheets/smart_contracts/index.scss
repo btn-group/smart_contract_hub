@@ -1,6 +1,13 @@
 #smart-contracts-index {
+  table td.dt-control:before {
+      display: inline-block;
+      color: rgba(0, 0, 0, 0.5);
+      content: "►";
+  }
+
   .cell-wrapper-wrapper {
     height: 24px;
+    line-height: 24px;
     position: relative;
 
     .cell {
