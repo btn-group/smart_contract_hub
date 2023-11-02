@@ -17,12 +17,10 @@ const SMART_CONTRACTS_INDEX = {
           orderable: false,
           data: null,
           defaultContent: "",
-          width: 62,
         },
         {
           data: "id",
-          title: "#",
-          width: 20,
+          title: "ID",
         },
         {
           data: "address",
@@ -46,10 +44,8 @@ const SMART_CONTRACTS_INDEX = {
         },
         {
           searchable: false,
-          className: "text-end",
           defaultContent: "",
           title: "Actions",
-          width: 58,
           fnCreatedCell: function (nTd, _sData, oData, _iRow) {
             if (
               ALEPH_ZERO.account &&
