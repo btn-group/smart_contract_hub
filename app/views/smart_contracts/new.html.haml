@@ -52,3 +52,7 @@
                 .dropzone#audit-dropzone
                 = f.text_field :audit_url, hidden: true
             = render 'button_loading', button_classes: 'btn btn-primary mt-3', button_type: 'submit', ready_label: 'Create'
+        .card-footer
+          .card-text
+            %small.text-muted The smart contract address, chain, ABI, contract file and WASM can not be changed later on.
+
