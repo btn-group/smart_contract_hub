@@ -32,27 +32,42 @@
               = f.text_field :github, class: 'form-control'
             .row.mb-3
               .col-6.col-lg-3.mb-3
-                = f.label :abi, 'ABI (.json)', class: 'form-label required'
+                = f.label :abi, class: 'form-label required'
                 = f.file_field :abi, direct_upload: true, hidden: true, disabled: true
                 .dropzone#abi-dropzone
+                  .dz-message.needsclick
+                    .mb-3
+                      %i.display-4.text-muted.ri-upload-cloud-2-fill
+                    %h4 Drop .json file here or click to upload.
                 = f.text_field :abi_url, hidden: true, required: true
               .col-6.col-lg-3.mb-3
-                = f.label :contract, 'Contract (.contract)', class: 'form-label'
+                = f.label :contract, class: 'form-label'
                 = f.file_field :contract, direct_upload: true, hidden: true, disabled: true
                 .dropzone#contract-dropzone
+                  .dz-message.needsclick
+                    .mb-3
+                      %i.display-4.text-muted.ri-upload-cloud-2-fill
+                    %h4 Drop .contract file here or click to upload.
                 = f.text_field :contract_url, hidden: true
               .col-6.col-lg-3
-                = f.label :wasm, 'WASM (.wasm)', class: 'form-label'
+                = f.label :wasm, class: 'form-label'
                 = f.file_field :wasm, direct_upload: true, hidden: true, disabled: true
                 .dropzone#wasm-dropzone
+                  .dz-message.needsclick
+                    .mb-3
+                      %i.display-4.text-muted.ri-upload-cloud-2-fill
+                    %h4 Drop .wasm file here or click to upload.
                 = f.text_field :wasm_url, hidden: true
               .col-6.col-lg-3
-                = f.label :audit, 'Audit (.pdf)', class: 'form-label'
+                = f.label :audit, class: 'form-label'
                 = f.file_field :audit, direct_upload: true, hidden: true, disabled: true
                 .dropzone#audit-dropzone
+                  .dz-message.needsclick
+                    .mb-3
+                      %i.display-4.text-muted.ri-upload-cloud-2-fill
+                    %h4 Drop .pdf file here or click to upload.
                 = f.text_field :audit_url, hidden: true
             = render 'button_loading', button_classes: 'btn btn-primary mt-3', button_type: 'submit', ready_label: 'Create'
         .card-footer
           .card-text
             %small.text-muted The smart contract address, chain, ABI, contract file and WASM can not be changed later on.
-
