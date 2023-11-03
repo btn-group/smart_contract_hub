@@ -12,10 +12,14 @@
               = f.label :chain, class: 'form-label required'
               = f.select :chain, [['Production', 0], ['Testnet', 1]], { include_blank: false }, { class: 'form-select' }
             .mb-3
-              = f.label :azero_id, 'AZERO.ID', class: 'form-label required'
+              .label-with-hint-container
+                = f.label :azero_id, 'AZERO.ID', class: 'form-label required'
+                %i.ms-2.ri-question-line{ 'data-bs-placement' => 'top', 'data-bs-toggle' => 'tooltip', title: 'Tooltip on top' }
               = f.select :azero_id, [], { include_blank: false }, { class: 'form-select' }
             .mb-3
-              = f.label :group_id, 'Group', class: 'form-label'
+              .label-with-hint-container
+                = f.label :group_id, 'Group', class: 'form-label'
+                %i.ms-2.ri-question-line{ tabindex: '-1', 'data-bs-trigger': 'focus', 'data-bs-html': 'true', 'data-bs-container': "body", 'data-bs-toggle': 'popover', 'data-bs-placement' => 'top', 'data-bs-container' => 'body', 'data-bs-content': 'Associating a group will: <ul class="ps-3"><li>enable finding by group.</li><li>increase trustability.</li></ul>Groups can be created at <a href="https://btn.group/aleph_zero/groups" target="_blank" rel="noopener">https://btn.group/aleph_zero/groups</a>.' }
               = f.select :group_id, [], { include_blank: true }, { class: 'form-select' }
             .mb-3
               = f.label :project_name, class: 'form-label'
@@ -28,22 +32,22 @@
               = f.text_field :github, class: 'form-control'
             .row.mb-3
               .col-6.col-lg-3.mb-3
-                = f.label :abi, class: 'form-label required'
+                = f.label :abi, 'ABI (.json)', class: 'form-label required'
                 = f.file_field :abi, direct_upload: true, hidden: true, disabled: true
                 .dropzone#abi-dropzone
                 = f.text_field :abi_url, hidden: true, required: true
               .col-6.col-lg-3.mb-3
-                = f.label :contract, class: 'form-label'
+                = f.label :contract, 'Contract (.contract)', class: 'form-label'
                 = f.file_field :contract, direct_upload: true, hidden: true, disabled: true
                 .dropzone#contract-dropzone
                 = f.text_field :contract_url, hidden: true
               .col-6.col-lg-3
-                = f.label :wasm, class: 'form-label'
+                = f.label :wasm, 'WASM (.wasm)', class: 'form-label'
                 = f.file_field :wasm, direct_upload: true, hidden: true, disabled: true
                 .dropzone#wasm-dropzone
                 = f.text_field :wasm_url, hidden: true
               .col-6.col-lg-3
-                = f.label :audit, class: 'form-label'
+                = f.label :audit, 'Audit (.pdf)', class: 'form-label'
                 = f.file_field :audit, direct_upload: true, hidden: true, disabled: true
                 .dropzone#audit-dropzone
                 = f.text_field :audit_url, hidden: true

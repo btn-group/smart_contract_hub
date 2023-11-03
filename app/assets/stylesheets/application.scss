@@ -12,6 +12,7 @@
 @import 'application/footer';
 @import 'application/polkadot_account_list';
 @import 'smart_contracts/index';
+@import 'smart_contracts/new';
 
 .required::after {
   color: var(--bs-red);
