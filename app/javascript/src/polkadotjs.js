@@ -221,23 +221,12 @@ export const POLKADOTJS = {
     );
   },
   initAccountList: (accounts) => {
-    $("#polkadot-account-list .modal-body").html("");
+    $("#polkadot-account-list .list-group").html("");
     _.sortBy(accounts, ["meta.source", "meta.name"]).forEach(function (
       account
     ) {
-      $("#polkadot-account-list .modal-body").append(
-        `<div class="overflow-hidden" data-account-address= '${
-          account.address
-        }', data-account-name= '${account.meta.name}', data-account-source= '${
-          account.meta.source
-        }'><a href='#' class='d-flex align-items-center text-decoration-none'><div class='text-center me-3' style='height: 40px; width: 40px;'><img class="h-100" src='https://res.cloudinary.com/hv5cxagki/image/upload/c_pad,dpr_2,f_auto,h_25,w_25,q_100/v1/${HELPERS.walletCloudinaryPublicId(
-          account.meta.source
-        )}'></div><div class="d-block"><div class="fw-bold text-gray-900">${
-          account.meta.name
-        }</div><div class="text-muted fw-semibold"><div class="lh-base">${
-          account.address
-        }</div></div></div>`
-      );
+      // https://themesbrand.com/velzon/html/saas/ui-lists.html#
+      $("#polkadot-account-list .list-group").append(`<a href="javascript:void(0);" class="d-flex align-items-center border-0 text-decoration-none list-group-item list-group-item-action" data-account-address= '${account.address}', data-account-name= '${account.meta.name}', data-account-source='${account.meta.source}'><div class='text-center me-3' style='height: 40px; width: 40px;'><img class="h-100" src='https://res.cloudinary.com/hv5cxagki/image/upload/c_pad,dpr_2,f_auto,h_25,w_25,q_100/v1/${HELPERS.walletCloudinaryPublicId(account.meta.source)}'></div><div class="d-block"><h5 class="list-title fs-15 mb-1">${account.meta.name}</h5><h5 class="list-title fs-15 mb-1 text-muted">${account.address}</h5></div></a>`);
     });
     // Enable clicking change button
     $("#change-account-link").click(function (e) {

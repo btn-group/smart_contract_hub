@@ -1,8 +1,8 @@
 .modal.fade#polkadot-account-list{ 'aria-hidden' => 'true', role: 'dialog', tabindex: '-1', style: '--bs-modal-width: 575px; max-width: 100%;' }
-  .modal-dialog.modal-dialog-scrollable.modal-dialog-centered.mw-fit-content
+  .modal-dialog
     .modal-content
-      .modal-header.pb-0.border-0
-        %h3.modal-title Select an account
-        .btn.btn-icon.btn-sm{ 'aria-label' => 'Close', 'data-bs-dismiss' => 'modal' }
-          %i.bi-x-lg
+      .modal-header
+        %h5.modal-title Select an account
+        %button.btn-close{ "aria-label" => "Close", "data-bs-dismiss" => "modal", type: "button" }
       .modal-body
+        .list-group
