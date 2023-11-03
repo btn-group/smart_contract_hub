@@ -1,13 +1,12 @@
-#smart-contracts-index {
-  .dt-control::before {
-    color: rgba(0, 0, 0, .5);
-    content: '►';
-    display: inline-block;
+#polkadot-account-list {
+  .logo-container {
+    height: 40px;
+    width: 40px;
   }
 
   .cell-wrapper-wrapper {
-    height: 24px;
-    line-height: 24px;
+    height: 19px;
+    line-height: 19px;
     position: relative;
 
     .cell {
