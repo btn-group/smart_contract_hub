@@ -12,10 +12,14 @@
               = f.label :smart_contract_address, class: 'form-label required'
               = f.text_field :smart_contract_address, class: 'form-control', required: true, disabled: true
             .mb-3
-              = f.label :azero_id, 'AZERO.ID', class: 'form-label required'
+              .label-with-hint-container
+                = f.label :azero_id, 'AZERO.ID', class: 'form-label required'
+                %i.ms-2.ri-question-line{ tabindex: '-1', 'data-bs-trigger': 'focus', 'data-bs-html': 'true', 'data-bs-container': 'body', 'data-bs-toggle': 'popover', 'data-bs-placement' => 'top', 'data-bs-container' => 'body', 'data-bs-content': 'Associating an AZERO.ID is mandatory. It will: <ul class="ps-3"><li>enable finding by AZERO.ID.</li><li>increase trustability by making it easier to identify the creator.</li></ul>An AZERO.ID can be created <a href="https://azero.id/" target="_blank" rel="noopener">here</a>.' }
               = f.select :azero_id, [], { include_blank: false }, { class: 'form-select' }
             .mb-3
-              = f.label :group_id, 'Group', class: 'form-label'
+              .label-with-hint-container
+                = f.label :group_id, 'Group', class: 'form-label'
+                %i.ms-2.ri-question-line{ tabindex: '-1', 'data-bs-trigger': 'focus', 'data-bs-html': 'true', 'data-bs-container': 'body', 'data-bs-toggle': 'popover', 'data-bs-placement' => 'top', 'data-bs-container' => 'body', 'data-bs-content': 'Associating a group will: <ul class="ps-3"><li>enable finding by group.</li><li>increase trustability.</li></ul>Groups can be created <a href="https://btn.group/aleph_zero/groups" target="_blank" rel="noopener">here</a>.' }
               = f.select :group_id, [], { include_blank: true }, { class: 'form-select' }
             .mb-3
               = f.label :project_name, class: 'form-label'
@@ -36,3 +40,6 @@
               = f.check_box :enabled
               = f.label :enabled, class: 'form-label'
             = render 'button_loading', button_classes: 'btn btn-primary mt-3', button_type: 'submit', ready_label: 'Update'
+        .card-footer
+          .card-text
+            %small.text-muted The smart contract address, chain, ABI, contract file and WASM can not be changed. If any of these fields are incorrect, please disable this record and create a new one.

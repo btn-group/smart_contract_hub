@@ -5,6 +5,7 @@ import { POLKADOTJS } from "../../polkadotjs";
 const SMART_CONTRACTS_EDIT = {
   smartContract: undefined,
   init: async () => {
+    HELPERS.initPopovers();
     SMART_CONTRACTS_EDIT.addListeners();
     // === GET SMART CONTRACT ===
     await SMART_CONTRACTS_EDIT.getAndSetContract();
