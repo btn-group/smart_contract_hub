@@ -1,5 +1,6 @@
 import "@hotwired/turbo-rails";
 import "./src/jquery";
+import "@popperjs/core";
 import "bootstrap";
 import "./src/lodash";
 import "./src/toastr";
@@ -194,6 +195,13 @@ export const HELPERS = {
         button.classList.remove("btn-success");
       }, 3000);
     });
+  },
+  // $ needs time to load tooltip
+  initPopovers: async () => {
+    while (!$().tooltip) {
+      await document.delay(500);
+    }
+    $('[data-bs-toggle="popover"]').popover({});
   },
   walletCloudinaryPublicId: function (id) {
     switch (id) {
