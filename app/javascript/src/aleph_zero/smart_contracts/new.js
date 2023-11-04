@@ -86,7 +86,8 @@ const SMART_CONTRACTS_NEW = {
           document.smartContractNewForm["smart_contract[audit_url]"].value ||
           undefined;
         let groupId =
-          document.smartContractNewForm["smart_contract[group_id]"].value;
+          document.smartContractNewForm["smart_contract[group_id]"].value ||
+          undefined;
         let projectName =
           document.smartContractNewForm["smart_contract[project_name]"].value ||
           undefined;

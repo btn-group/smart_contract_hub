@@ -47,7 +47,8 @@ const SMART_CONTRACTS_EDIT = {
         let azeroId =
           document.smartContractEditForm["smart_contract[azero_id]"].value;
         let groupId =
-          document.smartContractEditForm["smart_contract[group_id]"].value;
+          document.smartContractEditForm["smart_contract[group_id]"].value ||
+          undefined;
         let auditUrl =
           document.smartContractEditForm["smart_contract[audit_url]"].value ||
           undefined;
