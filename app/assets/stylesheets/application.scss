@@ -22,8 +22,11 @@
 // === DROPZONE ===
 .dropzone {
   border-style: dashed;
+  padding: 12px;
 
   .dz-message {
+    font-size: 16px;
+    font-weight: 300;
     margin: 0;
   }
 
