@@ -44,7 +44,6 @@ const SMART_CONTRACTS_INDEX = {
           },
         },
         {
-          searchable: false,
           defaultContent: "",
           title: "Actions",
           fnCreatedCell: function (nTd, _sData, oData, _iRow) {
@@ -172,7 +171,7 @@ const SMART_CONTRACTS_INDEX = {
     let html =
       "<div class='table-responsive'><table class='table fs-6 align-middle mb-0'><tbody>";
     // id
-    html += `<tr><th>#</th><td>${d.id}</td></tr>`;
+    html += `<tr><th>ID</th><td>${d.id}</td></tr>`;
     // smart_contract_address
     if (d.chain == 0) {
       html += `<tr><th>Address</th><td><a href="https://alephzero.subscan.io/wasm_contract/${d.address}" target="_blank">${d.address}</a></td></tr>`;
@@ -192,11 +191,11 @@ const SMART_CONTRACTS_INDEX = {
     // abi_url
     html += `<tr><th>ABI URL</th><td><a href="${d.abiUrl}" target="_blank">${d.abiUrl}</a></td></tr>`;
     // contract_url
-    html += `<tr><th>Contract URL</th><td><a href="${d.contractUrl}" target="_blank">${d.contractUrl}</a></td></tr>`;
+    html += `<tr><th>Contract URL</th><td><a href="${d.contractUrl}" target="_blank">${d.contractUrl || ""}</a></td></tr>`;
     // wasm_url
-    html += `<tr><th>WASM URL</th><td><a href="${d.wasmUrl}" target="_blank">${d.wasmUrl}</a></td></tr>`;
+    html += `<tr><th>WASM URL</th><td><a href="${d.wasmUrl}" target="_blank">${d.wasmUrl || ""}</a></td></tr>`;
     // audit_url
-    html += `<tr><th>Audit URL</th><td><a href="${d.auditUrl}" target="_blank">${d.auditUrl}</a></td></tr>`;
+    html += `<tr><th>Audit URL</th><td><a href="${d.auditUrl}" target="_blank">${d.auditUrl || ""}</a></td></tr>`;
     // group_id
     if (d.group) {
       html += `<tr><th>Group</th><td><a href="https://btn.group/aleph_zero/groups?id=${d.group.id}" target="_blank">${d.group.name}</a></td></tr>`;
@@ -204,11 +203,11 @@ const SMART_CONTRACTS_INDEX = {
       html += `<tr><th>Group</th><td></td></tr>`;
     }
     // project_name
-    html += `<tr><th>Project Name</th><td>${d.projectName}</td></tr>`;
+    html += `<tr><th>Project Name</th><td>${d.projectName || ''}</td></tr>`;
     // project_website
-    html += `<tr><th>Project Website</th><td><a href="${d.projectWebsite}" target="_blank">${d.projectWebsite}</a></td></tr>`;
+    html += `<tr><th>Project Website</th><td><a href="${d.projectWebsite}" target="_blank">${d.projectWebsite || ''}</a></td></tr>`;
     // github
-    html += `<tr><th>Github</th><td><a href="${d.github}" target="_blank">${d.github}</a></td></tr>`;
+    html += `<tr><th>Github</th><td><a href="${d.github}" target="_blank">${d.github || ''}</a></td></tr>`;
     html += "</tbody></table></div>";
     return html;
   },
