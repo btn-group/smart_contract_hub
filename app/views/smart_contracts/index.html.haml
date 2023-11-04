@@ -15,15 +15,15 @@
             .row.g-3
               .col-xxl-5.col-sm-12
                 .search-box
-                  %input.form-control.search.bg-light.border-light#search-input{ placeholder: 'Search ...', type: 'text', autocomplete: 'off' }
+                  %input.form-control.search.bg-light.border-light#search-input{ placeholder: 'Search ...', type: 'text', autocomplete: 'off', value: params[:search] }
                   %i.ri-search-line.search-icon
               .col-xxl-3.col-sm-4
                 %select.form-select#search-by-select
-                  %option{ value: 'id' } ID
-                  %option{ value: 'address', selected: true } Address
-                  %option{ value: 'addedBy' } Added By
-                  %option{ value: 'groupName' } Group
-                  %option{ value: 'azeroId' } AZERO.ID
+                  %option{ value: 'id', selected: params[:search_by] == 'id' } ID
+                  %option{ value: 'address', selected: params[:search_by] == 'address' || params[:search_by].blank? } Address
+                  %option{ value: 'addedBy', selected: params[:search_by] == 'addedBy' } Added By
+                  %option{ value: 'groupName', selected: params[:search_by] == 'groupName' } Group
+                  %option{ value: 'azeroId', selected: params[:search_by] == 'azeroId' } AZERO.ID
         .card-body
           .table-responsive.table-card.mb-4
             %table.table.align-middle.table-nowrap.mb-0#smart-contracts-table

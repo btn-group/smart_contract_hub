@@ -1,5 +1,6 @@
 import { HELPERS } from "../../../application";
 import { ALEPH_ZERO } from "../helpers";
+import { POLKADOTJS } from "../../polkadotjs";
 
 const SMART_CONTRACTS_INDEX = {
   datatable: undefined,
