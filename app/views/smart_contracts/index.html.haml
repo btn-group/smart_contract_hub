@@ -15,15 +15,12 @@
             .row.g-3
               .col-xxl-5.col-sm-12
                 .search-box
-                  %input.form-control.search.bg-light.border-light#search-input{ placeholder: 'Search ...', type: 'text', autocomplete: 'off' }
+                  %input.form-control.search.bg-light.border-light#search-input{ placeholder: 'Search ...', type: 'text', autocomplete: 'off', value: params[:search] }
                   %i.ri-search-line.search-icon
               .col-xxl-3.col-sm-4
                 %select.form-select#search-by-select
-                  %option{ value: 'id' } ID
-                  %option{ value: 'address', selected: true } Address
-                  %option{ value: 'addedBy' } Added By
-                  %option{ value: 'groupName' } Group
-                  %option{ value: 'azeroId' } AZERO.ID
+                  - [{ value: 'id', label: 'ID' }, { value: 'address', label: 'Address' }, { value: 'addedBy', label: 'Added By' }, { value: 'groupName', label: 'Group' }, { value: 'azeroId', label: 'AZERO.id' }].each do |option_details|
+                    %option{ value: option_details[:value], selected: params[:search_by] == option_details[:value] || (option_details[:value] == 'address' && params[:search_by].blank?) }= option_details[:label]
         .card-body
           .table-responsive.table-card.mb-4
             %table.table.align-middle.table-nowrap.mb-0#smart-contracts-table

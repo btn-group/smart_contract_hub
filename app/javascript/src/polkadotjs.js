@@ -157,6 +157,7 @@ export const POLKADOTJS = {
               );
 
               resolve({
+                decodedOutput,
                 dryResult,
                 result,
                 successEvent,
