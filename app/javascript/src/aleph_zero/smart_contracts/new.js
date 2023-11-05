@@ -44,6 +44,21 @@ const SMART_CONTRACTS_NEW = {
       });
     });
 
+    // === CUSTOM VALIDATIONS ===
+    $("#smart_contract_smart_contract_address").on("input", async (_evt) => {
+      let customValidity = "";
+      if (
+        !POLKADOTJS.validateAddress(
+          $("#smart_contract_smart_contract_address").val()
+        )
+      ) {
+        customValidity = "Invalid address.";
+      }
+      $("#smart_contract_smart_contract_address")[0].setCustomValidity(
+        customValidity
+      );
+    });
+
     // === DROPZONE ===
     SMART_CONTRACTS_NEW.createDropZones();
 
@@ -63,7 +78,12 @@ const SMART_CONTRACTS_NEW = {
     //     github: Option<String>,
     // ) -> Result<SmartContract> {
     document.smartContractNewForm.onsubmit = async (e) => {
+      e.target.classList.add("was-validated");
+      e.stopPropagation();
       e.preventDefault();
+      if (!e.target.checkValidity()) {
+        return;
+      }
       document.disableButton(e.submitter);
       try {
         let address =
