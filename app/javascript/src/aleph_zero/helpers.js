@@ -136,13 +136,19 @@ export const ALEPH_ZERO = {
         document.showAlertDanger(err);
       }
     },
-    queryData: (search, searchBy) => {
+    queryData: (search, searchBy, status) => {
       let query;
+      let statusQuery = "";
+      if (status == "enabled") {
+        statusQuery = ", enabled_eq: true";
+      } else if (status == "disabled") {
+        statusQuery = ", enabled_eq: false";
+      }
       if (search.length) {
         switch (searchBy) {
           case "id":
             query = `query MyQuery {
-              smartContracts(where: {id_eq: "${search}"}) {
+              smartContracts(where: {id_eq: "${search}"${statusQuery}}) {
                 abiUrl
                 address
                 auditUrl
@@ -165,7 +171,7 @@ export const ALEPH_ZERO = {
             break;
           case "address":
             query = `query MyQuery {
-              smartContracts(where: {address_containsInsensitive: "${search}"}) {
+              smartContracts(where: {address_containsInsensitive: "${search}"${statusQuery}}) {
                 abiUrl
                 address
                 auditUrl
@@ -188,7 +194,7 @@ export const ALEPH_ZERO = {
             break;
           case "addedBy":
             query = `query MyQuery {
-              smartContracts(where: {caller_containsInsensitive: "${search}"}) {
+              smartContracts(where: {caller_containsInsensitive: "${search}"${statusQuery}}) {
                 abiUrl
                 address
                 auditUrl
@@ -211,7 +217,7 @@ export const ALEPH_ZERO = {
             break;
           case "groupName":
             query = `query MyQuery {
-              smartContracts(where: {group: {name_containsInsensitive: "${search}"}) {
+              smartContracts(where: {group: {name_containsInsensitive: "${search}"${statusQuery}}) {
                 abiUrl
                 address
                 auditUrl
@@ -234,7 +240,7 @@ export const ALEPH_ZERO = {
             break;
           case "azeroId":
             query = `query MyQuery {
-              smartContracts(where: {azeroId_containsInsensitive: "${search}"}) {
+              smartContracts(where: {azeroId_containsInsensitive: "${search}"${statusQuery}}) {
                 abiUrl
                 address
                 auditUrl
@@ -280,7 +286,7 @@ export const ALEPH_ZERO = {
         }
       } else {
         query = `query MyQuery {
-          smartContracts(limit: 100, orderBy: createdAt_DESC) {
+          smartContracts(limit: 100, orderBy: createdAt_DESC, where:{${statusQuery}}) {
             abiUrl
             address
             auditUrl

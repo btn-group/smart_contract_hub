@@ -116,6 +116,7 @@ const SMART_CONTRACTS_INDEX = {
       // 3. Search
       let search = $("#search-input").val();
       let searchBy = $("#search-by-select").val();
+      let status = $("#status-select").val();
       let smartContracts = [];
       try {
         if (
@@ -132,7 +133,7 @@ const SMART_CONTRACTS_INDEX = {
               type: "post",
               url: ALEPH_ZERO.subsquid.url,
               contentType: "application/json; charset=utf-8",
-              data: ALEPH_ZERO.subsquid.queryData(search, searchBy),
+              data: ALEPH_ZERO.subsquid.queryData(search, searchBy, status),
             });
             smartContracts = response.data.smartContracts;
           }
@@ -191,11 +192,17 @@ const SMART_CONTRACTS_INDEX = {
     // abi_url
     html += `<tr><th>ABI URL</th><td><a href="${d.abiUrl}" target="_blank">${d.abiUrl}</a></td></tr>`;
     // contract_url
-    html += `<tr><th>Contract URL</th><td><a href="${d.contractUrl}" target="_blank">${d.contractUrl || ""}</a></td></tr>`;
+    html += `<tr><th>Contract URL</th><td><a href="${
+      d.contractUrl
+    }" target="_blank">${d.contractUrl || ""}</a></td></tr>`;
     // wasm_url
-    html += `<tr><th>WASM URL</th><td><a href="${d.wasmUrl}" target="_blank">${d.wasmUrl || ""}</a></td></tr>`;
+    html += `<tr><th>WASM URL</th><td><a href="${d.wasmUrl}" target="_blank">${
+      d.wasmUrl || ""
+    }</a></td></tr>`;
     // audit_url
-    html += `<tr><th>Audit URL</th><td><a href="${d.auditUrl}" target="_blank">${d.auditUrl || ""}</a></td></tr>`;
+    html += `<tr><th>Audit URL</th><td><a href="${
+      d.auditUrl
+    }" target="_blank">${d.auditUrl || ""}</a></td></tr>`;
     // group_id
     if (d.group) {
       html += `<tr><th>Group</th><td><a href="https://btn.group/aleph_zero/groups?id=${d.group.id}" target="_blank">${d.group.name}</a></td></tr>`;
@@ -203,11 +210,15 @@ const SMART_CONTRACTS_INDEX = {
       html += `<tr><th>Group</th><td></td></tr>`;
     }
     // project_name
-    html += `<tr><th>Project Name</th><td>${d.projectName || ''}</td></tr>`;
+    html += `<tr><th>Project Name</th><td>${d.projectName || ""}</td></tr>`;
     // project_website
-    html += `<tr><th>Project Website</th><td><a href="${d.projectWebsite}" target="_blank">${d.projectWebsite || ''}</a></td></tr>`;
+    html += `<tr><th>Project Website</th><td><a href="${
+      d.projectWebsite
+    }" target="_blank">${d.projectWebsite || ""}</a></td></tr>`;
     // github
-    html += `<tr><th>Github</th><td><a href="${d.github}" target="_blank">${d.github || ''}</a></td></tr>`;
+    html += `<tr><th>Github</th><td><a href="${d.github}" target="_blank">${
+      d.github || ""
+    }</a></td></tr>`;
     html += "</tbody></table></div>";
     return html;
   },
