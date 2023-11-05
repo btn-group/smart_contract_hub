@@ -193,7 +193,7 @@ const SMART_CONTRACTS_INDEX = {
     html += `<tr><th>ID</th><td>${d.id}</td></tr>`;
     // smart_contract_address
     if (d.chain == 0) {
-      html += `<tr><th>Address</th><td><a href="https://alephzero.subscan.io/wasm_contract/${d.address}" target="_blank">${d.address}</a></td></tr>`;
+      html += `<tr><th>Address</th><td><a class="link-primary" href="https://alephzero.subscan.io/wasm_contract/${d.address}" target="_blank">${d.address}</a></td></tr>`;
     } else {
       html += `<tr><th>Address</th><td>${d.address}</td></tr>`;
     }
@@ -202,39 +202,39 @@ const SMART_CONTRACTS_INDEX = {
       d.chain
     )}</td></tr>`;
     // caller
-    html += `<tr><th>Added By</th><td><a href="https://alephzero.subscan.io/account/${d.caller}" target="_blank">${d.caller}</a></td></tr>`;
+    html += `<tr><th>Added By</th><td><a class="link-primary" href="https://alephzero.subscan.io/account/${d.caller}" target="_blank">${d.caller}</a></td></tr>`;
     // enabled
     html += `<tr><th>Enabled</th><td>${d.enabled}</td></tr>`;
     // azero_id
-    html += `<tr><th>AZERO.ID</th><td><a href="https://azero.id/id/${d.azeroId}" target="_blank">${d.azeroId}</a></td></tr>`;
+    html += `<tr><th>AZERO.ID</th><td><a class="link-primary" href="https://azero.id/id/${d.azeroId}" target="_blank">${d.azeroId}</a></td></tr>`;
     // abi_url
-    html += `<tr><th>ABI URL</th><td><a href="${d.abiUrl}" target="_blank">${d.abiUrl}</a></td></tr>`;
+    html += `<tr><th>ABI URL</th><td><a class="link-primary" href="${d.abiUrl}" target="_blank">${d.abiUrl}</a></td></tr>`;
     // contract_url
-    html += `<tr><th>Contract URL</th><td><a href="${
+    html += `<tr><th>Contract URL</th><td><a class="link-primary" href="${
       d.contractUrl
     }" target="_blank">${d.contractUrl || ""}</a></td></tr>`;
     // wasm_url
-    html += `<tr><th>WASM URL</th><td><a href="${d.wasmUrl}" target="_blank">${
+    html += `<tr><th>WASM URL</th><td><a class="link-primary" href="${d.wasmUrl}" target="_blank">${
       d.wasmUrl || ""
     }</a></td></tr>`;
     // audit_url
-    html += `<tr><th>Audit URL</th><td><a href="${
+    html += `<tr><th>Audit URL</th><td><a class="link-primary" href="${
       d.auditUrl
     }" target="_blank">${d.auditUrl || ""}</a></td></tr>`;
     // group_id
     if (d.group) {
-      html += `<tr><th>Group</th><td><a href="https://btn.group/aleph_zero/groups?id=${d.group.id}" target="_blank">${d.group.name}</a></td></tr>`;
+      html += `<tr><th>Group</th><td><a class="link-primary" href="https://btn.group/aleph_zero/groups?id=${d.group.id}" target="_blank">${d.group.name}</a></td></tr>`;
     } else {
       html += `<tr><th>Group</th><td></td></tr>`;
     }
     // project_name
     html += `<tr><th>Project Name</th><td>${d.projectName || ""}</td></tr>`;
     // project_website
-    html += `<tr><th>Project Website</th><td><a href="${
+    html += `<tr><th>Project Website</th><td><a class="link-primary" href="${
       d.projectWebsite
     }" target="_blank">${d.projectWebsite || ""}</a></td></tr>`;
     // github
-    html += `<tr><th>Github</th><td><a href="${d.github}" target="_blank">${
+    html += `<tr><th>Github</th><td><a class="link-primary" href="${d.github}" target="_blank">${
       d.github || ""
     }</a></td></tr>`;
     html += "</tbody></table></div>";
