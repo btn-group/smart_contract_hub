@@ -87,7 +87,9 @@ const SMART_CONTRACTS_EDIT = {
         await ALEPH_ZERO.subsquid.waitForSync(response);
         HELPERS.toastr.message = "Success";
         HELPERS.toastr.alertType = document.showAlertSuccess;
-        Turbo.visit("/");
+        Turbo.visit(
+          `/?search=${JSON.parse(response.decodedOutput).Ok.id}&search_by=id`
+        );
       } catch (err) {
         document.showAlertDanger(err);
       } finally {

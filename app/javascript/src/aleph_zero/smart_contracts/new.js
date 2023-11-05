@@ -128,7 +128,7 @@ const SMART_CONTRACTS_NEW = {
         HELPERS.toastr.message = "Success";
         HELPERS.toastr.alertType = document.showAlertSuccess;
         Turbo.visit(
-          `?search=${JSON.parse(response.decodedOutput).Ok.id}&search_by=id`
+          `/?search=${JSON.parse(response.decodedOutput).Ok.id}&search_by=id`
         );
       } catch (err) {
         document.showAlertDanger(err);
