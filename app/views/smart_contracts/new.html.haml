@@ -67,7 +67,9 @@
                       %i.display-4.text-muted.ri-upload-cloud-2-fill
                     .text-muted Drop .pdf file here or click to upload.
                 = f.text_field :audit_url, hidden: true
-            = render 'button_loading', button_classes: 'btn btn-primary mt-3', button_type: 'submit', ready_label: 'Create'
+            .d-flex.mt-3
+              = link_to "Cancel", root_path, class: 'btn btn-light me-3'
+              = render 'button_loading', button_classes: 'btn btn-primary', button_type: 'submit', ready_label: 'Create'
         .card-footer
           .card-text
             %small.text-muted The smart contract address, chain, ABI, contract file and WASM can not be changed later on.
