@@ -4,10 +4,12 @@
       .card
         .card-body
           %h1 New smart contract
-          = form_for SmartContract.new, multipart: true, html: { name: 'smartContractNewForm' } do |f|
+          = form_for SmartContract.new, multipart: true, html: { name: 'smartContractNewForm', novalidate: "", class: 'needs-validation' } do |f|
             .mb-3
               = f.label :smart_contract_address, class: 'form-label required'
-              = f.text_field :smart_contract_address, class: 'form-control', required: true
+              = f.text_field :smart_contract_address, class: 'form-control', required: ""
+              .invalid-feedback
+                Invalid address.
             .mb-3
               = f.label :chain, class: 'form-label required'
               = f.select :chain, [['Production', 0], ['Testnet', 1]], { include_blank: false }, { class: 'form-select' }
@@ -40,6 +42,8 @@
                       %i.display-4.text-muted.ri-upload-cloud-2-fill
                     .text-muted Drop .json file here or click to upload.
                 = f.text_field :abi_url, hidden: true, required: true
+                .invalid-feedback
+                  File required.
               .col-6.col-lg-3.mb-3
                 = f.label :contract, class: 'form-label'
                 = f.file_field :contract, direct_upload: true, hidden: true, disabled: true
