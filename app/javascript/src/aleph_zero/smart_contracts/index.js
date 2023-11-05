@@ -147,6 +147,14 @@ const SMART_CONTRACTS_INDEX = {
         }
       }
     });
+
+    $("#search-by-select").on("change", async (_evt) => {
+      $("#search-input").trigger("input");
+    });
+
+    $("#status-select").on("change", async (_evt) => {
+      $("#search-input").trigger("input");
+    });
   },
   chainToString: (index) => {
     let mapping = { 0: "Production", 1: "Testnet" };
