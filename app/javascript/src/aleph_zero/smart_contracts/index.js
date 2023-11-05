@@ -44,6 +44,7 @@ const SMART_CONTRACTS_INDEX = {
           },
         },
         {
+          className: "text-end",
           defaultContent: "",
           title: "Actions",
           fnCreatedCell: function (nTd, _sData, oData, _iRow) {
