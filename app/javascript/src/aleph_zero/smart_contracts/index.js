@@ -53,7 +53,7 @@ const SMART_CONTRACTS_INDEX = {
             ) {
               let html =
                 '<div class="d-flex justify-content-end flex-shrink-0">';
-              html += `<a href="#" data-smart-contract-id=${oData.id} class="edit-smart-contract-link btn btn-icon btn-color-muted btn-bg-light btn-active-color-primary btn-sm"><i class="bi bi-pencil-square fs-3"></i></a>`;
+              html += `<a href="#" data-smart-contract-id=${oData.id} class="edit-smart-contract-link btn btn-icon btn-color-muted btn-bg-light btn-active-color-primary btn-sm"><i class="bi bi-pencil-square fs-4 link-primary"></i></a>`;
               html += "</div>";
               $(nTd).html(html);
             }
