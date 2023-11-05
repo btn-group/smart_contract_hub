@@ -204,7 +204,13 @@ const SMART_CONTRACTS_INDEX = {
     // caller
     html += `<tr><th>Added By</th><td><a class="link-primary" href="https://alephzero.subscan.io/account/${d.caller}" target="_blank">${d.caller}</a></td></tr>`;
     // enabled
-    html += `<tr><th>Enabled</th><td>${d.enabled}</td></tr>`;
+    let enabledButtonHtml;
+    if (d.enabled) {
+      enabledButtonHtml = '<span class="badge bg-success">Enabled</span>'
+    } else {
+      enabledButtonHtml = '<span class="badge bg-danger">Disabled</span>'
+    }
+    html += `<tr><th>Status</th><td>${enabledButtonHtml}</td></tr>`;
     // azero_id
     html += `<tr><th>AZERO.ID</th><td><a class="link-primary" href="https://azero.id/id/${d.azeroId}" target="_blank">${d.azeroId}</a></td></tr>`;
     // abi_url
