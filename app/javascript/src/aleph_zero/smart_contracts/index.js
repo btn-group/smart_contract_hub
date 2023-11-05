@@ -119,13 +119,18 @@ const SMART_CONTRACTS_INDEX = {
       let status = $("#status-select").val();
       let smartContracts = [];
       try {
+        // Check validation
         if (
           (search.length &&
             ((["address", "addedBy"].includes(searchBy) &&
               POLKADOTJS.validateAddress(search)) ||
-              ["id", "groupName", "azeroId"].includes(searchBy))) ||
+              !["address", "addedBy"].includes(searchBy))) ||
           search.length == 0
         ) {
+          $("#smart-contracts-index form").removeClass("was-validated");
+          $("#search-input")[0].setCustomValidity("");
+          $("#smart-contracts-index .invalid-feedback").removeClass("d-block");
+          $("#search-input").addClass("border-light");
           // 3. Delay
           await document.delay(500);
           if (currentQueryCount == SMART_CONTRACTS_INDEX.queryCount) {
@@ -137,6 +142,11 @@ const SMART_CONTRACTS_INDEX = {
             });
             smartContracts = response.data.smartContracts;
           }
+        } else {
+          $("#smart-contracts-index form").addClass("was-validated");
+          $("#search-input")[0].setCustomValidity("Invalid address.");
+          $("#smart-contracts-index .invalid-feedback").addClass("d-block");
+          $("#search-input").removeClass("border-light");
         }
       } finally {
         if (currentQueryCount == SMART_CONTRACTS_INDEX.queryCount) {
