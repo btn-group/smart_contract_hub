@@ -144,6 +144,36 @@ const SMART_CONTRACTS_INDEX = {
               data: ALEPH_ZERO.subsquid.queryData(search, searchBy, status),
             });
             smartContracts = response.data.smartContracts;
+            smartContracts.forEach(function (smartContract) {
+              if (
+                smartContract.abiUrl &&
+                smartContract.abiUrl.includes("storj") &&
+                !smartContract.abiUrl.includes("?download=1")
+              ) {
+                smartContract.abiUrl += "?download=1";
+              }
+              if (
+                smartContract.contractUrl &&
+                smartContract.contractUrl.includes("storj") &&
+                !smartContract.contractUrl.includes("?download=1")
+              ) {
+                smartContract.contractUrl += "?download=1";
+              }
+              if (
+                smartContract.wasmUrl &&
+                smartContract.wasmUrl.includes("storj") &&
+                !smartContract.wasmUrl.includes("?download=1")
+              ) {
+                smartContract.wasmUrl += "?download=1";
+              }
+              if (
+                smartContract.auditUrl &&
+                smartContract.auditUrl.includes("storj") &&
+                !smartContract.auditUrl.includes("?download=1")
+              ) {
+                smartContract.auditUrl += "?download=1";
+              }
+            });
           }
         } else {
           $("#smart-contracts-index form").addClass("was-validated");
