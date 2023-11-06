@@ -91,7 +91,6 @@ const SMART_CONTRACTS_INDEX = {
 
     // Add event listener for opening and closing details
     SMART_CONTRACTS_INDEX.datatable.on("click", "td.dt-control", function (e) {
-      window.e = e;
       let tr = e.target.closest("tr");
       let row = SMART_CONTRACTS_INDEX.datatable.row(tr);
 
