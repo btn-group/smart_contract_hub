@@ -1,8 +1,26 @@
 #smart-contracts-index {
-  .dt-control::before {
-    color: rgba(0, 0, 0, .5);
-    content: '►';
-    display: inline-block;
+  tbody {
+    .dt-control::before {
+      background-color: #337ab7;
+      border: .15em solid #fff;
+      border-radius: 1em;
+      box-shadow: 0 0 .2em #444;
+      box-sizing: content-box;
+      content: '+';
+      color: #fff;
+      cursor: pointer;
+      display: block;
+      font-family: 'Courier New', Courier, monospace;
+      height: 1em;
+      line-height: 1em;
+      text-align: center;
+      width: 1em;
+    }
+
+    .dt-control.expanded::before {
+      background-color: #ed5e5e;
+      content: '-';
+    }
   }
 
   .cell-wrapper-wrapper {

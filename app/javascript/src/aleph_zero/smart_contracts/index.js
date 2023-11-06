@@ -14,7 +14,7 @@ const SMART_CONTRACTS_INDEX = {
     SMART_CONTRACTS_INDEX.datatable = new DataTable("#smart-contracts-table", {
       columns: [
         {
-          className: "dt-control",
+          className: "dt-control position-relative",
           orderable: false,
           data: null,
           defaultContent: "",
@@ -97,11 +97,13 @@ const SMART_CONTRACTS_INDEX = {
       if (row.child.isShown()) {
         // This row is already open - close it
         row.child.hide();
+        e.target.classList.remove("expanded");
       } else {
         // Open this row
         row
           .child(SMART_CONTRACTS_INDEX.datatableChildRowFormat(row.data()))
           .show();
+        e.target.classList.add("expanded");
       }
     });
 
@@ -207,9 +209,9 @@ const SMART_CONTRACTS_INDEX = {
     // enabled
     let enabledButtonHtml;
     if (d.enabled) {
-      enabledButtonHtml = '<span class="badge bg-success">Enabled</span>'
+      enabledButtonHtml = '<span class="badge bg-success">Enabled</span>';
     } else {
-      enabledButtonHtml = '<span class="badge bg-danger">Disabled</span>'
+      enabledButtonHtml = '<span class="badge bg-danger">Disabled</span>';
     }
     html += `<tr><th>Status</th><td>${enabledButtonHtml}</td></tr>`;
     // azero_id
@@ -221,9 +223,9 @@ const SMART_CONTRACTS_INDEX = {
       d.contractUrl
     }" target="_blank">${d.contractUrl || ""}</a></td></tr>`;
     // wasm_url
-    html += `<tr><th>WASM URL</th><td><a class="link-primary" href="${d.wasmUrl}" target="_blank">${
-      d.wasmUrl || ""
-    }</a></td></tr>`;
+    html += `<tr><th>WASM URL</th><td><a class="link-primary" href="${
+      d.wasmUrl
+    }" target="_blank">${d.wasmUrl || ""}</a></td></tr>`;
     // audit_url
     html += `<tr><th>Audit URL</th><td><a class="link-primary" href="${
       d.auditUrl
@@ -241,9 +243,9 @@ const SMART_CONTRACTS_INDEX = {
       d.projectWebsite
     }" target="_blank">${d.projectWebsite || ""}</a></td></tr>`;
     // github
-    html += `<tr><th>Github</th><td><a class="link-primary" href="${d.github}" target="_blank">${
-      d.github || ""
-    }</a></td></tr>`;
+    html += `<tr><th>Github</th><td><a class="link-primary" href="${
+      d.github
+    }" target="_blank">${d.github || ""}</a></td></tr>`;
     html += "</tbody></table></div>";
     return html;
   },
