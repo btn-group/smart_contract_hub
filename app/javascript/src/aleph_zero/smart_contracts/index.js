@@ -235,9 +235,11 @@ const SMART_CONTRACTS_INDEX = {
   //     github: Option<String>,
   // }
   datatableChildRowFormat: (d) => {
-    let html =
-      "<div class='row'><div class='col-xl-6'><h6>Smart Contract</h6><div class='card border-1'><div class='table-responsive'><table class='table fs-6 align-middle mb-0'><tbody>";
+    let html = "<div class='row'>";
+    html += "<div class='col-lg-9'>";
     // === INFO ABOUT SMART CONTRACT ===
+    html +=
+      "<h6>Smart Contract</h6><div class='card border-1'><div class='table-responsive'><table class='table fs-6 align-middle mb-0'><tbody>";
     // smart_contract_address
     if (d.chain == 0) {
       html += `<tr><th>Address</th><td><a class="link-primary" href="https://alephzero.subscan.io/wasm_contract/${d.address}" target="_blank">${d.address}</a></td></tr>`;
@@ -258,10 +260,10 @@ const SMART_CONTRACTS_INDEX = {
     html += `<tr><th>Github</th><td><a class="link-primary" href="${
       d.github
     }" target="_blank">${d.github || ""}</a></td></tr>`;
-    html += "</tbody></table></div></div></div>";
+    html += "</tbody></table></div></div>";
     // === INFO ABOUT USER ===
     html +=
-      "<div class='col-xl-6'><h6>Added By</h6><div class='card border-1'><div class='table-responsive'><table class='table fs-6 align-middle mb-0'><tbody>";
+      "<h6>Added By</h6><div class='card border-1'><div class='table-responsive'><table class='table fs-6 align-middle mb-0'><tbody>";
     // caller
     html += `<tr><th>Address</th><td><a class="link-primary" href="https://alephzero.subscan.io/account/${d.caller}" target="_blank">${d.caller}</a></td></tr>`;
     // azero_id
@@ -273,9 +275,15 @@ const SMART_CONTRACTS_INDEX = {
       html += `<tr><th>Group</th><td></td></tr>`;
     }
     // date
-    html += `<tr><th>Date</th><td>${new Date(d.createdAt).toLocaleDateString("en-us", { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' })}</td></tr>`;
+    html += `<tr><th>Date</th><td>${new Date(d.createdAt).toLocaleDateString(
+      "en-us",
+      { weekday: "long", year: "numeric", month: "short", day: "numeric" }
+    )}</td></tr>`;
     html += "</tbody></table></div></div>";
+    // Closing col
+    html += "</div>";
     // === INFO ABOUT FILES ===
+    html += "<div class='col-lg-3'>";
     html +=
       "<h6>Files</h6><div class='card border-1'><div class='table-responsive'><table class='table fs-6 align-middle mb-0'><tbody>";
     // abi_url
@@ -286,7 +294,6 @@ const SMART_CONTRACTS_INDEX = {
       html += `<a class="link-primary" href="${d.contractUrl}" target="_blank"><i class="ri-download-2-line fs-4"></i></a>`;
     }
     html += "</td></tr>";
-
     // wasm_url
     html += "<tr><th>WASM</th><td class='text-end'>";
     if (d.wasmUrl) {
@@ -299,6 +306,8 @@ const SMART_CONTRACTS_INDEX = {
       html += `<a class="link-primary" href="${d.auditUrl}" target="_blank"><i class="ri-download-2-line fs-4"></i></a>`;
     }
     html += "</td></tr>";
+    html += "</tbody></table></div></div>";
+    // closing col and row
     html += "</div></div>";
     return html;
   },
