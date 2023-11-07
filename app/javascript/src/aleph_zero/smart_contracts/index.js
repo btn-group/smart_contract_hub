@@ -44,6 +44,21 @@ const SMART_CONTRACTS_INDEX = {
           },
         },
         {
+          data: "enabled",
+          title: "Status",
+          fnCreatedCell: function (nTd, sData, _oData, _iRow) {
+            let enabledButtonHtml;
+            if (sData) {
+              enabledButtonHtml = '<span class="badge bg-success">Enabled</span>';
+            } else {
+              enabledButtonHtml = '<span class="badge bg-danger">Disabled</span>';
+            }
+            $(nTd).html(
+              enabledButtonHtml
+            );
+          },
+        },
+        {
           className: "text-end",
           defaultContent: "",
           title: "Actions",
@@ -221,10 +236,8 @@ const SMART_CONTRACTS_INDEX = {
   // }
   datatableChildRowFormat: (d) => {
     let html =
-      "<div class='row'><div class='col-xl-6'><div class='card border-1'><div class='table-responsive'><table class='table fs-6 align-middle mb-0'><tbody>";
+      "<div class='row'><div class='col-xl-6'><h6>Smart Contract</h6><div class='card border-1'><div class='table-responsive'><table class='table fs-6 align-middle mb-0'><tbody>";
     // === INFO ABOUT SMART CONTRACT ===
-    // id
-    html += `<tr><th>ID</th><td>${d.id}</td></tr>`;
     // smart_contract_address
     if (d.chain == 0) {
       html += `<tr><th>Address</th><td><a class="link-primary" href="https://alephzero.subscan.io/wasm_contract/${d.address}" target="_blank">${d.address}</a></td></tr>`;
@@ -235,14 +248,6 @@ const SMART_CONTRACTS_INDEX = {
     html += `<tr><th>Chain</th><td>${SMART_CONTRACTS_INDEX.chainToString(
       d.chain
     )}</td></tr>`;
-    // enabled
-    let enabledButtonHtml;
-    if (d.enabled) {
-      enabledButtonHtml = '<span class="badge bg-success">Enabled</span>';
-    } else {
-      enabledButtonHtml = '<span class="badge bg-danger">Disabled</span>';
-    }
-    html += `<tr><th>Status</th><td>${enabledButtonHtml}</td></tr>`;
     // project_name
     html += `<tr><th>Project Name</th><td>${d.projectName || ""}</td></tr>`;
     // project_website
