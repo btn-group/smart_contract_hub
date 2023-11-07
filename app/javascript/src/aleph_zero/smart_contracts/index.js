@@ -221,7 +221,8 @@ const SMART_CONTRACTS_INDEX = {
   // }
   datatableChildRowFormat: (d) => {
     let html =
-      "<div class='table-responsive'><table class='table fs-6 align-middle mb-0'><tbody>";
+      "<div class='row'><div class='col-xl-6'><div class='card border-1'><div class='table-responsive'><table class='table fs-6 align-middle mb-0'><tbody>";
+    // === INFO ABOUT SMART CONTRACT ===
     // id
     html += `<tr><th>ID</th><td>${d.id}</td></tr>`;
     // smart_contract_address
@@ -234,8 +235,6 @@ const SMART_CONTRACTS_INDEX = {
     html += `<tr><th>Chain</th><td>${SMART_CONTRACTS_INDEX.chainToString(
       d.chain
     )}</td></tr>`;
-    // caller
-    html += `<tr><th>Added By</th><td><a class="link-primary" href="https://alephzero.subscan.io/account/${d.caller}" target="_blank">${d.caller}</a></td></tr>`;
     // enabled
     let enabledButtonHtml;
     if (d.enabled) {
@@ -244,28 +243,6 @@ const SMART_CONTRACTS_INDEX = {
       enabledButtonHtml = '<span class="badge bg-danger">Disabled</span>';
     }
     html += `<tr><th>Status</th><td>${enabledButtonHtml}</td></tr>`;
-    // azero_id
-    html += `<tr><th>AZERO.ID</th><td><a class="link-primary" href="https://azero.id/id/${d.azeroId}" target="_blank">${d.azeroId}</a></td></tr>`;
-    // abi_url
-    html += `<tr><th>ABI URL</th><td><a class="link-primary" href="${d.abiUrl}" target="_blank">${d.abiUrl}</a></td></tr>`;
-    // contract_url
-    html += `<tr><th>Contract URL</th><td><a class="link-primary" href="${
-      d.contractUrl
-    }" target="_blank">${d.contractUrl || ""}</a></td></tr>`;
-    // wasm_url
-    html += `<tr><th>WASM URL</th><td><a class="link-primary" href="${
-      d.wasmUrl
-    }" target="_blank">${d.wasmUrl || ""}</a></td></tr>`;
-    // audit_url
-    html += `<tr><th>Audit URL</th><td><a class="link-primary" href="${
-      d.auditUrl
-    }" target="_blank">${d.auditUrl || ""}</a></td></tr>`;
-    // group_id
-    if (d.group) {
-      html += `<tr><th>Group</th><td><a class="link-primary" href="https://btn.group/aleph_zero/groups?id=${d.group.id}" target="_blank">${d.group.name}</a></td></tr>`;
-    } else {
-      html += `<tr><th>Group</th><td></td></tr>`;
-    }
     // project_name
     html += `<tr><th>Project Name</th><td>${d.projectName || ""}</td></tr>`;
     // project_website
@@ -276,7 +253,46 @@ const SMART_CONTRACTS_INDEX = {
     html += `<tr><th>Github</th><td><a class="link-primary" href="${
       d.github
     }" target="_blank">${d.github || ""}</a></td></tr>`;
-    html += "</tbody></table></div>";
+    html += "</tbody></table></div></div></div>";
+    // === INFO ABOUT USER ===
+    html +=
+      "<div class='col-xl-6'><h6>Added By</h6><div class='card border-1'><div class='table-responsive'><table class='table fs-6 align-middle mb-0'><tbody>";
+    // caller
+    html += `<tr><th>Address</th><td><a class="link-primary" href="https://alephzero.subscan.io/account/${d.caller}" target="_blank">${d.caller}</a></td></tr>`;
+    // azero_id
+    html += `<tr><th>AZERO.ID</th><td><a class="link-primary" href="https://azero.id/id/${d.azeroId}" target="_blank">${d.azeroId}</a></td></tr>`;
+    // group_id
+    if (d.group) {
+      html += `<tr><th>Group</th><td><a class="link-primary" href="https://btn.group/aleph_zero/groups?id=${d.group.id}" target="_blank">${d.group.name}</a></td></tr>`;
+    } else {
+      html += `<tr><th>Group</th><td></td></tr>`;
+    }
+    html += "</tbody></table></div></div>";
+    // === INFO ABOUT FILES ===
+    html +=
+      "<div class='card border-1'><div class='table-responsive'><table class='table fs-6 align-middle mb-0'><tbody>";
+    // abi_url
+    html += `<tr><th>ABI</th><td><a class="link-primary" href="${d.abiUrl}" target="_blank"><i class="ri-download-2-line fs-4"></i></a></td></tr>`;
+    // contract_url
+    html += "<tr><th>Contract</th><td>";
+    if (d.contractUrl) {
+      html += `<a class="link-primary" href="${d.contractUrl}" target="_blank"><i class="ri-download-2-line fs-4"></i></a>`;
+    }
+    html += "</td></tr>";
+
+    // wasm_url
+    html += "<tr><th>WASM</th><td>";
+    if (d.wasmUrl) {
+      html += `<a class="link-primary" href="${d.wasmUrl}" target="_blank"><i class="ri-download-2-line fs-4"></i></a>`;
+    }
+    html += "</td></tr>";
+    // audit_url
+    html += "<tr><th>Audit</th><td>";
+    if (d.auditUrl) {
+      html += `<a class="link-primary" href="${d.auditUrl}" target="_blank"><i class="ri-download-2-line fs-4"></i></a>`;
+    }
+    html += "</td></tr>";
+    html += "</div></div>";
     return html;
   },
 };
