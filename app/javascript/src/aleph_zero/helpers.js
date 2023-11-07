@@ -137,7 +137,7 @@ export const ALEPH_ZERO = {
       }
     },
     queryData: (search, searchBy, status) => {
-      let query;
+      let queryFilterParams;
       let statusQuery = "";
       if (status == "enabled") {
         statusQuery = ", enabled_eq: true";
@@ -147,173 +147,46 @@ export const ALEPH_ZERO = {
       if (search.length) {
         switch (searchBy) {
           case "id":
-            query = `query MyQuery {
-              smartContracts(where: {id_eq: "${search}"${statusQuery}}) {
-                abiUrl
-                address
-                auditUrl
-                azeroId
-                caller
-                chain
-                contractUrl
-                enabled
-                github
-                id
-                projectName
-                wasmUrl
-                projectWebsite
-                createdAt
-                group {
-                  id
-                  name
-                }
-              }
-            }`;
+            queryFilterParams = `where: {id_eq: "${search}"${statusQuery}}`;
             break;
           case "address":
-            query = `query MyQuery {
-              smartContracts(where: {address_containsInsensitive: "${search}"${statusQuery}}) {
-                abiUrl
-                address
-                auditUrl
-                azeroId
-                caller
-                chain
-                contractUrl
-                enabled
-                github
-                id
-                projectName
-                wasmUrl
-                projectWebsite
-                createdAt
-                group {
-                  id
-                  name
-                }
-              }
-            }`;
+            queryFilterParams = `where: {address_containsInsensitive: "${search}"${statusQuery}}`;
             break;
           case "addedBy":
-            query = `query MyQuery {
-              smartContracts(where: {caller_containsInsensitive: "${search}"${statusQuery}}) {
-                abiUrl
-                address
-                auditUrl
-                azeroId
-                caller
-                chain
-                contractUrl
-                enabled
-                github
-                id
-                projectName
-                wasmUrl
-                projectWebsite
-                createdAt
-                group {
-                  id
-                  name
-                }
-              }
-            }`;
+            queryFilterParams = `where: {caller_containsInsensitive: "${search}"${statusQuery}}`;
             break;
           case "groupName":
-            query = `query MyQuery {
-              smartContracts(where: {group: {name_containsInsensitive: "${search}"${statusQuery}}) {
-                abiUrl
-                address
-                auditUrl
-                azeroId
-                caller
-                chain
-                contractUrl
-                enabled
-                github
-                id
-                projectName
-                wasmUrl
-                projectWebsite
-                createdAt
-                group {
-                  id
-                  name
-                }
-              }
-            }`;
+            queryFilterParams = `where: {group: {name_containsInsensitive: "${search}"${statusQuery}}`;
             break;
-          case "azeroId":
-            query = `query MyQuery {
-              smartContracts(where: {azeroId_containsInsensitive: "${search}"${statusQuery}}) {
-                abiUrl
-                address
-                auditUrl
-                azeroId
-                caller
-                chain
-                contractUrl
-                enabled
-                github
-                id
-                projectName
-                wasmUrl
-                projectWebsite
-                createdAt
-                group {
-                  id
-                  name
-                }
-              }
-            }`;
-            break;
+          // azeroid
           default:
-          // query = `query MyQuery {
-          //     smartContracts(where: {address_containsInsensitive: "${search}", OR: {group: {name_containsInsensitive: "${search}"}, OR: {caller_containsInsensitive: "${search}", OR: {azeroId_containsInsensitive: "${search}"}}}}) {
-          //       abiUrl
-          //       address
-          //       auditUrl
-          //       azeroId
-          //       caller
-          //       chain
-          //       contractUrl
-          //       enabled
-          //       github
-          //       id
-          //       projectName
-          //       wasmUrl
-          //       projectWebsite
-          //       group {
-          //         id
-          //         name
-          //       }
-          //     }
-          //   }`;
+            queryFilterParams = `where: {azeroId_containsInsensitive: "${search}"${statusQuery}}`;
         }
       } else {
-        query = `query MyQuery {
-          smartContracts(limit: 100, orderBy: createdAt_DESC, where:{${statusQuery}}) {
-            abiUrl
-            address
-            auditUrl
-            azeroId
-            caller
-            chain
-            contractUrl
-            enabled
-            github
-            id
-            projectName
-            wasmUrl
-            projectWebsite
-            createdAt
-            group {
-              id
-              name
-            }
-          }
-        }`;
+        queryFilterParams = `limit: 100, orderBy: createdAt_DESC, where:{${statusQuery}}`;
       }
-
+      let query = `query MyQuery {
+        smartContracts(${queryFilterParams}) {
+          abiUrl
+          address
+          auditUrl
+          azeroId
+          caller
+          chain
+          contractUrl
+          enabled
+          github
+          id
+          projectName
+          wasmUrl
+          projectWebsite
+          createdAt
+          group {
+            id
+            name
+          }
+        }
+      }`;
       return JSON.stringify({
         query,
       });
