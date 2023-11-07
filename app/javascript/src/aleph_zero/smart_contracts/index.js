@@ -272,6 +272,8 @@ const SMART_CONTRACTS_INDEX = {
     } else {
       html += `<tr><th>Group</th><td></td></tr>`;
     }
+    // date
+    html += `<tr><th>Date</th><td>${new Date(d.createdAt).toLocaleDateString("en-us", { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' })}</td></tr>`;
     html += "</tbody></table></div></div>";
     // === INFO ABOUT FILES ===
     html +=

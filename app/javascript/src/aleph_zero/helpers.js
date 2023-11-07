@@ -162,6 +162,7 @@ export const ALEPH_ZERO = {
                 projectName
                 wasmUrl
                 projectWebsite
+                createdAt
                 group {
                   id
                   name
@@ -185,6 +186,7 @@ export const ALEPH_ZERO = {
                 projectName
                 wasmUrl
                 projectWebsite
+                createdAt
                 group {
                   id
                   name
@@ -208,6 +210,7 @@ export const ALEPH_ZERO = {
                 projectName
                 wasmUrl
                 projectWebsite
+                createdAt
                 group {
                   id
                   name
@@ -231,6 +234,7 @@ export const ALEPH_ZERO = {
                 projectName
                 wasmUrl
                 projectWebsite
+                createdAt
                 group {
                   id
                   name
@@ -254,6 +258,7 @@ export const ALEPH_ZERO = {
                 projectName
                 wasmUrl
                 projectWebsite
+                createdAt
                 group {
                   id
                   name
@@ -300,6 +305,7 @@ export const ALEPH_ZERO = {
             projectName
             wasmUrl
             projectWebsite
+            createdAt
             group {
               id
               name
