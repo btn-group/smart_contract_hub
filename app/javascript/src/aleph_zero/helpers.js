@@ -10,14 +10,14 @@ export const ALEPH_ZERO = {
   b3: "5HimuS19MhHX9EggD9oZzx297qt3UxEdkcc5NWAianPAQwHG",
   contracts: {
     azGroups: {
-      address: (environment = "staging") => {
+      address: (environment = "production") => {
         if (environment == "production") {
-          return "FILLTHISLATER";
+          return "5HMYuwaZt2F9L7VaS89Z8w4EZ2Azu2SoFthaeE6YTHEBD7dg";
         } else {
           return "5EHMGoUrkSHCBqLYmAMbzBeXJwZzeGLVXgpWw585j8ciyrte";
         }
       },
-      getContract: async (environment = "staging") => {
+      getContract: async (environment = "production") => {
         let address = ALEPH_ZERO.contracts.azGroups.address(environment);
         if (!ALEPH_ZERO.contractsByAddress[address]) {
           let api = await ALEPH_ZERO.api(environment);
@@ -33,14 +33,14 @@ export const ALEPH_ZERO = {
     azeroIdRouter: {
       domains: [],
       primaryDomain: undefined,
-      address: (environment = "staging") => {
+      address: (environment = "production") => {
         if (environment == "production") {
-          return "FILLTHISLATER";
+          return "5FfRtDtpS3Vcr7BTChjPiQNrcAKu3VLv4E1NGF6ng6j3ZopJ";
         } else {
           return "5HXjj3xhtRMqRYCRaXTDcVPz3Mez2XBruyujw6UEkvn8PCiA";
         }
       },
-      getContract: async (environment = "staging") => {
+      getContract: async (environment = "production") => {
         let address = ALEPH_ZERO.contracts.azeroIdRouter.address(environment);
         if (!ALEPH_ZERO.contractsByAddress[address]) {
           let api = await ALEPH_ZERO.api(environment);
@@ -52,7 +52,7 @@ export const ALEPH_ZERO = {
         }
         return ALEPH_ZERO.contractsByAddress[address];
       },
-      getAndSetDomains: async (environment = "staging") => {
+      getAndSetDomains: async (environment = "production") => {
         try {
           ALEPH_ZERO.contracts.azeroIdRouter.domains = [];
           ALEPH_ZERO.contracts.azeroIdRouter.primaryDomain = undefined;
@@ -80,14 +80,14 @@ export const ALEPH_ZERO = {
       },
     },
     smartContractHub: {
-      address: (environment = "staging") => {
+      address: (environment = "production") => {
         if (environment == "production") {
-          return "FILLTHISLATER";
+          return "5DHxiJXTEtgf4yuSMw8mhnwjTn11ME77wwBSU6rVjg8bszKQ";
         } else {
           return "5DnHpTfNHYQE7YB6PV3D7DPL8gVSfqUd6mwCKzuYgHgqPtS3";
         }
       },
-      getContract: async (environment = "staging") => {
+      getContract: async (environment = "production") => {
         let address =
           ALEPH_ZERO.contracts.smartContractHub.address(environment);
         if (!ALEPH_ZERO.contractsByAddress[address]) {
@@ -367,7 +367,7 @@ export const ALEPH_ZERO = {
     }
   },
   // AKA API
-  api: async (environment = "staging") => {
+  api: async (environment = "production") => {
     let apis;
     let httpUrls = await ALEPH_ZERO.httpUrls(environment);
     switch (environment) {
@@ -420,7 +420,7 @@ export const ALEPH_ZERO = {
     });
     return signer;
   },
-  httpUrls: async (environment = "staging") => {
+  httpUrls: async (environment = "production") => {
     let urls = ["wss://ws.azero.dev"];
     if (environment == "staging") {
       urls = ["wss://ws.test.azero.dev"];
