@@ -49,13 +49,13 @@ const SMART_CONTRACTS_INDEX = {
           fnCreatedCell: function (nTd, sData, _oData, _iRow) {
             let enabledButtonHtml;
             if (sData) {
-              enabledButtonHtml = '<span class="badge bg-success">Enabled</span>';
+              enabledButtonHtml =
+                '<span class="badge bg-success">Enabled</span>';
             } else {
-              enabledButtonHtml = '<span class="badge bg-danger">Disabled</span>';
+              enabledButtonHtml =
+                '<span class="badge bg-danger">Disabled</span>';
             }
-            $(nTd).html(
-              enabledButtonHtml
-            );
+            $(nTd).html(enabledButtonHtml);
           },
         },
         {
@@ -275,24 +275,24 @@ const SMART_CONTRACTS_INDEX = {
     html += "</tbody></table></div></div>";
     // === INFO ABOUT FILES ===
     html +=
-      "<div class='card border-1'><div class='table-responsive'><table class='table fs-6 align-middle mb-0'><tbody>";
+      "<h6>Files</h6><div class='card border-1'><div class='table-responsive'><table class='table fs-6 align-middle mb-0'><tbody>";
     // abi_url
-    html += `<tr><th>ABI</th><td><a class="link-primary" href="${d.abiUrl}" target="_blank"><i class="ri-download-2-line fs-4"></i></a></td></tr>`;
+    html += `<tr><th>ABI (.json)</th><td class='text-end'><a class="link-primary" href="${d.abiUrl}" target="_blank"><i class="ri-download-2-line fs-4"></i></a></td></tr>`;
     // contract_url
-    html += "<tr><th>Contract</th><td>";
+    html += "<tr><th>Contract (.contract)</th><td class='text-end'>";
     if (d.contractUrl) {
       html += `<a class="link-primary" href="${d.contractUrl}" target="_blank"><i class="ri-download-2-line fs-4"></i></a>`;
     }
     html += "</td></tr>";
 
     // wasm_url
-    html += "<tr><th>WASM</th><td>";
+    html += "<tr><th>WASM</th><td class='text-end'>";
     if (d.wasmUrl) {
       html += `<a class="link-primary" href="${d.wasmUrl}" target="_blank"><i class="ri-download-2-line fs-4"></i></a>`;
     }
     html += "</td></tr>";
     // audit_url
-    html += "<tr><th>Audit</th><td>";
+    html += "<tr><th>Audit</th><td class='text-end'>";
     if (d.auditUrl) {
       html += `<a class="link-primary" href="${d.auditUrl}" target="_blank"><i class="ri-download-2-line fs-4"></i></a>`;
     }
