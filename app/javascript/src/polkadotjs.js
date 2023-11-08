@@ -19,7 +19,7 @@ import { HELPERS } from "../application";
 export const POLKADOTJS = {
   maxU128: "340282366920938463463374607431768211454",
   // https://polkadot.js.org/docs/extension/usage/
-  activatePolkadotjsExtension: async (askToConnectWallet = true) => {
+  activatePolkadotjsExtension: async (askToConnectWallet) => {
     if ($(".polkadotjs").length) {
       let polkadotConnectButtonSelector = ".polkadot-connect-button";
       $(polkadotConnectButtonSelector).removeClass("d-none");
