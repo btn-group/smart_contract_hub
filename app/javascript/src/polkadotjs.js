@@ -19,18 +19,20 @@ import { HELPERS } from "../application";
 export const POLKADOTJS = {
   maxU128: "340282366920938463463374607431768211454",
   // https://polkadot.js.org/docs/extension/usage/
-  activatePolkadotjsExtension: async () => {
+  activatePolkadotjsExtension: async (askToConnectWallet = true) => {
     if ($(".polkadotjs").length) {
       let polkadotConnectButtonSelector = ".polkadot-connect-button";
       $(polkadotConnectButtonSelector).removeClass("d-none");
       document
         .querySelectorAll(polkadotConnectButtonSelector)
         .forEach((item) => {
-          item.addEventListener("click", async (_evt) => {
+          item.addEventListener("click", async () => {
             await POLKADOTJS.connectPolkadotjsExtension();
           });
         });
-      return await POLKADOTJS.connectPolkadotjsExtension();
+      if (askToConnectWallet) {
+        return await POLKADOTJS.connectPolkadotjsExtension();
+      }
     }
   },
   ApiPromise,
