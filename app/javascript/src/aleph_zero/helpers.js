@@ -210,7 +210,7 @@ export const ALEPH_ZERO = {
     },
   },
   activatePolkadotJsExtension: async () => {
-    let response = await POLKADOTJS.activatePolkadotjsExtension();
+    let response = await POLKADOTJS.activatePolkadotjsExtension(true);
     ALEPH_ZERO.extensions = response.extensions;
     ALEPH_ZERO.allAccounts = response.allAccounts;
     // Set account

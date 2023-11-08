@@ -97,7 +97,16 @@ const SMART_CONTRACTS_INDEX = {
     });
     SMART_CONTRACTS_INDEX.addListeners();
     $("html").attr("data-preloader", "disable");
-    await ALEPH_ZERO.activatePolkadotJsExtension();
+    // Do not ask to connect wallet
+    if (
+      HELPERS.cookies.get("polkadot_account_name") &&
+      HELPERS.cookies.get("polkadot_extension")
+    ) {
+      await ALEPH_ZERO.activatePolkadotJsExtension();
+    } else {
+      await POLKADOTJS.activatePolkadotjsExtension(false);
+      $("#search-input").trigger("input");
+    }
   },
   addListeners: () => {
     $(document).on("aleph_zero_account_selected", async () => {
