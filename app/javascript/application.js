@@ -117,16 +117,7 @@ export const HELPERS = {
               dropZone.getAcceptedFiles()[0] &&
               dropZone.getAcceptedFiles()[0].upload.uuid == file.upload.uuid
             ) {
-              let url;
-              let storjPrefix;
-              if ($("body.rails-env-development").length) {
-                storjPrefix = `jxilw2olwgoskdx2k4fvsswcfwfa/smart-contract-hub-development`;
-              } else {
-                storjPrefix = `juldos5d7qtuwqx2itvdhgtgp3vq/smart-contract-hub-production`;
-              }
-              $(inputSelector).val(
-                `https://link.storjshare.io/s/${storjPrefix}/${blob.key}?download=1`
-              );
+              $(inputSelector).val(HELPERS.storj.downloadUrl(blob.key));
             }
           });
         }
@@ -138,6 +129,17 @@ export const HELPERS = {
       dropZone.on("removedfile", function () {
         $(inputSelector).val(undefined);
       });
+    },
+  },
+  storj: {
+    downloadUrl: (fileName) => {
+      let storjPrefix;
+      if ($("body.rails-env-development").length) {
+        storjPrefix = `jxilw2olwgoskdx2k4fvsswcfwfa/smart-contract-hub-development`;
+      } else {
+        storjPrefix = `juldos5d7qtuwqx2itvdhgtgp3vq/smart-contract-hub-production`;
+      }
+      return `https://link.storjshare.io/s/${storjPrefix}/${fileName}?download=1`;
     },
   },
   toastr: {},
