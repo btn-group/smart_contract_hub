@@ -22,7 +22,7 @@ export const ALEPH_ZERO = {
         if (!ALEPH_ZERO.contractsByAddress[address]) {
           let api = await ALEPH_ZERO.api(environment);
           let metadata = await $.ajax({
-            url: "https://link.storjshare.io/juldos5d7qtuwqx2itvdhgtgp3vq/smart-contract-hub-production/nffzk9lj74mu4i85uxz2qphxok61.json?download=1",
+            url: "https://link.storjshare.io/s/juldos5d7qtuwqx2itvdhgtgp3vq/smart-contract-hub-production/nffzk9lj74mu4i85uxz2qphxok61.json?download=1",
           });
           ALEPH_ZERO.contractsByAddress[address] =
             new POLKADOTJS.ContractPromise(api, metadata, address);
@@ -45,7 +45,7 @@ export const ALEPH_ZERO = {
         if (!ALEPH_ZERO.contractsByAddress[address]) {
           let api = await ALEPH_ZERO.api(environment);
           let metadata = await $.ajax({
-            url: "https://link.storjshare.io/juldos5d7qtuwqx2itvdhgtgp3vq/smart-contract-hub-production/jt86lapudzdtrjxbz0ljdyi66jp9.json?download=1",
+            url: "https://link.storjshare.io/s/juldos5d7qtuwqx2itvdhgtgp3vq/smart-contract-hub-production/jt86lapudzdtrjxbz0ljdyi66jp9.json?download=1",
           });
           ALEPH_ZERO.contractsByAddress[address] =
             new POLKADOTJS.ContractPromise(api, metadata, address);
@@ -93,7 +93,7 @@ export const ALEPH_ZERO = {
         if (!ALEPH_ZERO.contractsByAddress[address]) {
           let api = await ALEPH_ZERO.api(environment);
           let metadata = await $.ajax({
-            url: "https://res.cloudinary.com/hv5cxagki/raw/upload/v1696657037/abis/aleph_zero/az_smart_contract_hub_y0crzt.json",
+            url: "https://link.storjshare.io/s/juldos5d7qtuwqx2itvdhgtgp3vq/smart-contract-hub-production/6pi4croy3dm9xdrouzle07nffyxz.json?download=1",
           });
           ALEPH_ZERO.contractsByAddress[address] =
             new POLKADOTJS.ContractPromise(api, metadata, address);
