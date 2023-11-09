@@ -118,12 +118,15 @@ export const HELPERS = {
               dropZone.getAcceptedFiles()[0].upload.uuid == file.upload.uuid
             ) {
               let url;
+              let storjPrefix;
               if ($("body.rails-env-development").length) {
-                url = `https://link.storjshare.io/jxilw2olwgoskdx2k4fvsswcfwfa/smart-contract-hub-development/${blob.key}`;
+                storjPrefix = `jxilw2olwgoskdx2k4fvsswcfwfa/smart-contract-hub-development`;
               } else {
-                url = `https://link.storjshare.io/juldos5d7qtuwqx2itvdhgtgp3vq/smart-contract-hub-production/${blob.key}`;
+                storjPrefix = `juldos5d7qtuwqx2itvdhgtgp3vq/smart-contract-hub-production`;
               }
-              $(inputSelector).val(url);
+              $(inputSelector).val(
+                `https://link.storjshare.io/s/${storjPrefix}/${blob.key}?download=1`
+              );
             }
           });
         }
