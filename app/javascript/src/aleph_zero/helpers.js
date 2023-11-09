@@ -158,6 +158,9 @@ export const ALEPH_ZERO = {
           case "groupName":
             queryFilterParams = `where: {group: {name_containsInsensitive: "${search}"${statusQuery}}`;
             break;
+          case "projectName":
+            queryFilterParams = `where: {projectName_containsInsensitive: "${search}"${statusQuery}}`;
+            break;
           // azeroid
           default:
             queryFilterParams = `where: {azeroId_containsInsensitive: "${search}"${statusQuery}}`;
