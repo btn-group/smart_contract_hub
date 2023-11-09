@@ -1,13 +1,13 @@
 #smart-contracts-index {
   tbody {
     .dt-control::before {
-      background-color: #337ab7;
-      border: .15em solid #fff;
+      background-color: var(--vz-blue);
+      border: .15em solid var(--vz-white);
       border-radius: 1em;
-      box-shadow: 0 0 .2em #444;
+      box-shadow: 0 0 .2em var(--vz-gray-700);
       box-sizing: content-box;
+      color: var(--vz-white);
       content: '+';
-      color: #fff;
       cursor: pointer;
       display: block;
       font-family: 'Courier New', Courier, monospace;
@@ -18,8 +18,14 @@
     }
 
     .dt-control.expanded::before {
-      background-color: #ed5e5e;
+      background-color: var(--vz-red);
       content: '-';
+    }
+
+    table {
+      th {
+        opacity: .5;
+      }
     }
   }
 
@@ -44,12 +50,6 @@
         text-overflow: ellipsis;
         white-space: nowrap;
       }
-    }
-  }
-
-  .col-xl-6 {
-    th {
-      color: gray;
     }
   }
 }
