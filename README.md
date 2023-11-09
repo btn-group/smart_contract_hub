@@ -15,7 +15,7 @@ rspec
 rubocop -A
 haml-lint app/views/
 yarn prettier --write app/javascript/
-scss-lint app/assets/stylesheets/
+scss-lint
 ```
 
 ## Velzon template 
