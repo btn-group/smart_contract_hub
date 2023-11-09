@@ -9,27 +9,6 @@ export const ALEPH_ZERO = {
   apisProduction: undefined,
   b3: "5HimuS19MhHX9EggD9oZzx297qt3UxEdkcc5NWAianPAQwHG",
   contracts: {
-    azGroups: {
-      address: (environment = "production") => {
-        if (environment == "production") {
-          return "5HMYuwaZt2F9L7VaS89Z8w4EZ2Azu2SoFthaeE6YTHEBD7dg";
-        } else {
-          return "5EHMGoUrkSHCBqLYmAMbzBeXJwZzeGLVXgpWw585j8ciyrte";
-        }
-      },
-      getContract: async (environment = "production") => {
-        let address = ALEPH_ZERO.contracts.azGroups.address(environment);
-        if (!ALEPH_ZERO.contractsByAddress[address]) {
-          let api = await ALEPH_ZERO.api(environment);
-          let metadata = await $.ajax({
-            url: "https://link.storjshare.io/s/juldos5d7qtuwqx2itvdhgtgp3vq/smart-contract-hub-production/nffzk9lj74mu4i85uxz2qphxok61.json?download=1",
-          });
-          ALEPH_ZERO.contractsByAddress[address] =
-            new POLKADOTJS.ContractPromise(api, metadata, address);
-        }
-        return ALEPH_ZERO.contractsByAddress[address];
-      },
-    },
     azeroIdRouter: {
       domains: [],
       primaryDomain: undefined,
