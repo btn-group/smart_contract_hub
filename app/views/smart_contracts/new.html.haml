@@ -4,10 +4,10 @@
       .card
         .card-body
           %h1 New smart contract
-          = form_for SmartContract.new, multipart: true, html: { name: 'smartContractNewForm', novalidate: "", class: 'needs-validation' } do |f|
+          = form_for SmartContract.new, multipart: true, html: { name: 'smartContractNewForm', novalidate: '', class: 'needs-validation' } do |f|
             .mb-3
               = f.label :smart_contract_address, class: 'form-label required'
-              = f.text_field :smart_contract_address, class: 'form-control', required: ""
+              = f.text_field :smart_contract_address, class: 'form-control', required: ''
               .invalid-feedback
                 Invalid address.
             .mb-3
@@ -72,7 +72,7 @@
                     .text-muted Drop .pdf file here or click to upload.
                 = f.text_field :audit_url, hidden: true
             .d-flex.mt-3
-              = link_to "Cancel", root_path, class: 'btn btn-light me-3'
+              = link_to 'Cancel', root_path, class: 'btn btn-light me-3'
               = render 'button_loading', button_classes: 'btn btn-primary', button_type: 'submit', ready_label: 'Create'
         .card-footer
           .card-text
