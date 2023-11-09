@@ -18,15 +18,25 @@ const SMART_CONTRACTS_INDEX = {
           orderable: false,
           data: null,
           defaultContent: "",
+          width: "5%",
         },
         {
           data: "id",
           title: "ID",
+          width: "5%",
         },
         {
           data: "address",
           title: "Smart Contract",
-          width: "40%",
+          fnCreatedCell: function (nTd, sData, _oData, _iRow) {
+            $(nTd).html(
+              `<div class="cell-wrapper-wrapper"><div class="cell"><div class="cell-overflow">${sData}</div></div></div>`
+            );
+          },
+        },
+        {
+          data: "projectName",
+          title: "Project",
           fnCreatedCell: function (nTd, sData, _oData, _iRow) {
             $(nTd).html(
               `<div class="cell-wrapper-wrapper"><div class="cell"><div class="cell-overflow">${sData}</div></div></div>`
@@ -36,7 +46,6 @@ const SMART_CONTRACTS_INDEX = {
         {
           data: "caller",
           title: "Added By",
-          width: "40%",
           fnCreatedCell: function (nTd, sData, _oData, _iRow) {
             $(nTd).html(
               `<div class="cell-wrapper-wrapper"><div class="cell"><div class="cell-overflow">${sData}</div></div></div>`
@@ -46,6 +55,7 @@ const SMART_CONTRACTS_INDEX = {
         {
           data: "enabled",
           title: "Status",
+          width: "5%",
           fnCreatedCell: function (nTd, sData, _oData, _iRow) {
             let enabledButtonHtml;
             if (sData) {
@@ -62,6 +72,7 @@ const SMART_CONTRACTS_INDEX = {
           className: "text-end",
           defaultContent: "",
           title: "Actions",
+          width: "5%",
           fnCreatedCell: function (nTd, _sData, oData, _iRow) {
             if (
               ALEPH_ZERO.account &&

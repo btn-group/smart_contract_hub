@@ -21,7 +21,7 @@
                   Invalid address.
             .col-xxl-3.col-sm-4
               %select.form-select#search-by-select
-                - [{ value: 'nil', label: 'Search by' }, { value: 'id', label: 'ID' }, { value: 'address', label: 'Address' }, { value: 'addedBy', label: 'Added By' }, { value: 'groupName', label: 'Group' }, { value: 'azeroId', label: 'AZERO.id' }].each do |option_details|
+                - [{ value: 'nil', label: 'Search by' }, { value: 'id', label: 'ID' }, { value: 'address', label: 'Address' }, { value: 'projectName', label: 'Project' }, { value: 'addedBy', label: 'Added By' }, { value: 'groupName', label: 'Group' }, { value: 'azeroId', label: 'AZERO.id' }].each do |option_details|
                   %option{ disabled: option_details[:value] == 'nil', value: option_details[:value], selected: params[:search_by] == option_details[:value] || (option_details[:value] == 'address' && params[:search_by].blank?) }= option_details[:label]
             .col-xxl-3.col-sm-4
               %select.form-select#status-select
