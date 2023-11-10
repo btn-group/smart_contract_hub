@@ -38,7 +38,7 @@ const SMART_CONTRACTS_EDIT = {
     // ) -> Result<SmartContract> {
     document.smartContractEditForm.onsubmit = async (e) => {
       e.preventDefault();
-      document.disableButton(e.submitter);
+      HELPERS.button.disable(e.submitter);
       try {
         let id = Number(
           document.smartContractEditForm["smart_contract[id]"].value
@@ -93,7 +93,7 @@ const SMART_CONTRACTS_EDIT = {
       } catch (err) {
         document.showAlertDanger(err);
       } finally {
-        document.enableButton(e.submitter);
+        HELPERS.button.enable(e.submitter);
       }
     };
   },

@@ -84,7 +84,7 @@ const SMART_CONTRACTS_NEW = {
       if (!e.target.checkValidity()) {
         return;
       }
-      document.disableButton(e.submitter);
+      HELPERS.button.disable(e.submitter);
       try {
         let address =
           document.smartContractNewForm[
@@ -153,7 +153,7 @@ const SMART_CONTRACTS_NEW = {
       } catch (err) {
         document.showAlertDanger(err);
       } finally {
-        document.enableButton(e.submitter);
+        HELPERS.button.enable(e.submitter);
       }
     };
   },

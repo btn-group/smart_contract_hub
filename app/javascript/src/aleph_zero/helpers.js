@@ -222,7 +222,7 @@ export const ALEPH_ZERO = {
           // 3. User has multiple accounts: Show modal to select account
         } else {
           $("#polkadot-account-list").modal("show");
-          document.enableButton(".polkadot-connect-button");
+          HELPERS.button.enable(".polkadot-connect-button");
         }
       }
     }
@@ -331,7 +331,7 @@ export const ALEPH_ZERO = {
     document.cookie = `polkadot_account_name=${ALEPH_ZERO.account.meta.name};`;
     document.cookie = `polkadot_extension=${ALEPH_ZERO.account.meta.source};`;
     $(".polkadot-connect-button").addClass("d-none");
-    document.enableButton(".polkadot-connect-button");
+    HELPERS.button.enable(".polkadot-connect-button");
     HELPERS.setUserAccountMenuToggle(
       "#page-header-user-dropdown",
       ALEPH_ZERO.account.address,
