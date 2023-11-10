@@ -198,13 +198,20 @@ export const HELPERS = {
 
         // Remove button highlight
         button.classList.remove("btn-success");
-      }, 3000);
+      }, 3_000);
+    });
+  },
+  delay: async (ms) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve("");
+      }, ms);
     });
   },
   // $ needs time to load tooltip
   initPopovers: async () => {
     while (!$().tooltip) {
-      await document.delay(500);
+      await HELPERS.delay(500);
     }
     $('[data-bs-toggle="popover"]').popover({});
   },
@@ -234,14 +241,6 @@ export const HELPERS = {
       `${address.substring(0, 3)}...${address.slice(-3)}`
     );
   },
-};
-
-document.delay = async (ms) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve("");
-    }, ms);
-  });
 };
 
 document.disableButton = function (selector) {

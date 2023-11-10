@@ -170,7 +170,7 @@ const SMART_CONTRACTS_INDEX = {
           $("#smart-contracts-index .invalid-feedback").removeClass("d-block");
           $("#search-input").addClass("border-light");
           // 3. Delay
-          await document.delay(500);
+          await HELPERS.delay(500);
           if (currentQueryCount == SMART_CONTRACTS_INDEX.queryCount) {
             let response = await $.ajax({
               type: "post",
