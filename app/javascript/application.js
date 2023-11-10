@@ -23,6 +23,20 @@ import "./src/aleph_zero/smart_contracts/new";
 import "./src/aleph_zero/smart_contracts/edit";
 
 export const HELPERS = {
+  button: {
+    disable: function (selector) {
+      let $button = $(selector);
+      $button.prop("disabled", true);
+      $button.find(".loading").removeClass("d-none");
+      $button.find(".ready").addClass("d-none");
+    },
+    enable: function (selector) {
+      let $button = $(selector);
+      $button.prop("disabled", false);
+      $button.find(".loading").addClass("d-none");
+      $button.find(".ready").removeClass("d-none");
+    }
+  },
   cookies: {
     get: (id) => {
       return document.cookie
@@ -93,7 +107,7 @@ export const HELPERS = {
             .closest("form")
             .find("button[type='submit']");
           $button.find(".loading-status").text("Uploading file...");
-          document.disableButton($button);
+          HELPERS.button.disable($button);
           $(selector).attr("data-uploading-file", true);
 
           // disable form submit button and set text of button to uploading file
@@ -106,7 +120,7 @@ export const HELPERS = {
               $(selector).closest("form").find('[data-uploading-file="true"]')
                 .length == 0
             ) {
-              document.enableButton($button);
+              HELPERS.button.enable($button);
               $button.find(".loading-status").text("Loading...");
             }
             if (error) {
@@ -241,18 +255,4 @@ export const HELPERS = {
       `${address.substring(0, 3)}...${address.slice(-3)}`
     );
   },
-};
-
-document.disableButton = function (selector) {
-  let $button = $(selector);
-  $button.prop("disabled", true);
-  $button.find(".loading").removeClass("d-none");
-  $button.find(".ready").addClass("d-none");
-};
-
-document.enableButton = function (selector) {
-  let $button = $(selector);
-  $button.prop("disabled", false);
-  $button.find(".loading").addClass("d-none");
-  $button.find(".ready").removeClass("d-none");
 };
