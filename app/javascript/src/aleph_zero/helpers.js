@@ -178,7 +178,7 @@ export const ALEPH_ZERO = {
       let height = response.result.blockNumber.toNumber();
       let syncing = true;
       while (syncing) {
-        await document.delay(3_000);
+        await HELPERS.delay(3_000);
         let squidHeight = await ALEPH_ZERO.subsquid.height();
         if (squidHeight >= height) {
           syncing = false;
@@ -257,7 +257,7 @@ export const ALEPH_ZERO = {
           }
         }
         while (ALEPH_ZERO.apisProduction.length == 0) {
-          await document.delay(1_000);
+          await HELPERS.delay(1_000);
         }
         apis = ALEPH_ZERO.apisProduction;
         break;
