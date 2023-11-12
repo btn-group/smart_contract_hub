@@ -2,7 +2,7 @@ import { HELPERS } from "../../../application";
 import { ALEPH_ZERO } from "../helpers";
 import { POLKADOTJS } from "../../polkadotjs";
 
-const SMART_CONTRACTS_EDIT = {
+export const SMART_CONTRACTS_EDIT = {
   smartContract: undefined,
   init: async () => {
     HELPERS.initPopovers();
@@ -16,12 +16,6 @@ const SMART_CONTRACTS_EDIT = {
     await ALEPH_ZERO.activatePolkadotJsExtension();
   },
   addListeners: () => {
-    $(document).on("aleph_zero_account_selected", async () => {
-      await SMART_CONTRACTS_EDIT.validateAuthorisedToEdit();
-      SMART_CONTRACTS_EDIT.getAndSetGroups();
-      SMART_CONTRACTS_EDIT.getAndSetAzeroIds();
-    });
-
     // === FORMS ===
     // #[allow(clippy::too_many_arguments)]
     // #[ink(message)]
@@ -212,10 +206,3 @@ const SMART_CONTRACTS_EDIT = {
     }
   },
 };
-
-// Even with turbo, init is called every time as listeners need to be replaced
-$(document).on("turbo:load", function () {
-  if ($("#smart-contracts-edit").length) {
-    SMART_CONTRACTS_EDIT.init();
-  }
-});

@@ -17,11 +17,67 @@ import "../../lib/assets/js/app";
 
 // === CUSTOM ===
 import "./src/polkadotjs";
-import "./src/aleph_zero/helpers";
-import "./src/aleph_zero/smart_contracts/index";
-import "./src/aleph_zero/smart_contracts/new";
-import "./src/aleph_zero/smart_contracts/edit";
+import { ALEPH_ZERO } from "./src/aleph_zero/helpers";
+import { SMART_CONTRACTS_INDEX } from "./src/aleph_zero/smart_contracts/index";
+import { SMART_CONTRACTS_NEW } from "./src/aleph_zero/smart_contracts/new";
+import { SMART_CONTRACTS_EDIT } from "./src/aleph_zero/smart_contracts/edit";
 
+// === GLOBAL LISTENERS ===
+$(document).on("turbo:load", function () {
+  if ($("#smart-contracts-edit").length) {
+    SMART_CONTRACTS_EDIT.init();
+  }
+  if ($("#smart-contracts-index").length) {
+    SMART_CONTRACTS_INDEX.init();
+  }
+  if ($("#smart-contracts-new").length) {
+    SMART_CONTRACTS_NEW.init();
+  }
+});
+$(document).on("aleph_zero_account_selected", async () => {
+  if ($("#smart-contracts-edit").length) {
+    await SMART_CONTRACTS_EDIT.validateAuthorisedToEdit();
+    SMART_CONTRACTS_EDIT.getAndSetGroups();
+    SMART_CONTRACTS_EDIT.getAndSetAzeroIds();
+  }
+  if ($("#smart-contracts-index").length) {
+    $("#search-input").trigger("input");
+  }
+  if ($("#smart-contracts-new").length) {
+    await ALEPH_ZERO.contracts.azeroIdRouter.getAndSetDomains();
+    let $selectBox = $("select[name='smart_contract[azero_id]']");
+    $selectBox.html("");
+    ALEPH_ZERO.contracts.azeroIdRouter.domains.forEach(function (domain) {
+      $selectBox.append(
+        $("<option>", {
+          value: domain,
+          text: domain,
+          selected: domain == ALEPH_ZERO.contracts.azeroIdRouter.primaryDomain,
+        })
+      );
+    });
+
+    $selectBox = $("select[name='smart_contract[group_id]']");
+    $selectBox.html("");
+    $selectBox.append(
+      $("<option>", {
+        value: undefined,
+        text: "",
+      })
+    );
+    let groupUsers = await ALEPH_ZERO.subsquid.groupUsers();
+    groupUsers.forEach(function (groupUser) {
+      $selectBox.append(
+        $("<option>", {
+          value: groupUser.group.id,
+          text: groupUser.group.name,
+        })
+      );
+    });
+  }
+});
+
+// === HELPERS ===
 export const HELPERS = {
   button: {
     disable: function (selector) {
@@ -35,7 +91,7 @@ export const HELPERS = {
       $button.prop("disabled", false);
       $button.find(".loading").addClass("d-none");
       $button.find(".ready").removeClass("d-none");
-    }
+    },
   },
   cookies: {
     get: (id) => {

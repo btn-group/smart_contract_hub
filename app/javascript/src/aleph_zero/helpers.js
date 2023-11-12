@@ -188,7 +188,9 @@ export const ALEPH_ZERO = {
         attempt += 1;
         if (attempt == 20) {
           syncing = true;
-          document.showAlertInfo("Subsquid is out of sync. Transaction was successful but results will not appear in search until sync is fixed.");
+          document.showAlertInfo(
+            "Subsquid is out of sync. Transaction was successful but results will not appear in search until sync is fixed."
+          );
         }
       }
     },

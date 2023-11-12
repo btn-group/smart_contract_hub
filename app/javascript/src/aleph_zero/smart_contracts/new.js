@@ -2,7 +2,7 @@ import { HELPERS } from "../../../application";
 import { ALEPH_ZERO } from "../helpers";
 import { POLKADOTJS } from "../../polkadotjs";
 
-const SMART_CONTRACTS_NEW = {
+export const SMART_CONTRACTS_NEW = {
   init: async () => {
     SMART_CONTRACTS_NEW.addListeners();
     await HELPERS.initPopovers();
@@ -10,40 +10,6 @@ const SMART_CONTRACTS_NEW = {
     await ALEPH_ZERO.activatePolkadotJsExtension();
   },
   addListeners: () => {
-    $(document).on("aleph_zero_account_selected", async () => {
-      await ALEPH_ZERO.contracts.azeroIdRouter.getAndSetDomains();
-      let $selectBox = $("select[name='smart_contract[azero_id]']");
-      $selectBox.html("");
-      ALEPH_ZERO.contracts.azeroIdRouter.domains.forEach(function (domain) {
-        $selectBox.append(
-          $("<option>", {
-            value: domain,
-            text: domain,
-            selected:
-              domain == ALEPH_ZERO.contracts.azeroIdRouter.primaryDomain,
-          })
-        );
-      });
-
-      $selectBox = $("select[name='smart_contract[group_id]']");
-      $selectBox.html("");
-      $selectBox.append(
-        $("<option>", {
-          value: undefined,
-          text: "",
-        })
-      );
-      let groupUsers = await ALEPH_ZERO.subsquid.groupUsers();
-      groupUsers.forEach(function (groupUser) {
-        $selectBox.append(
-          $("<option>", {
-            value: groupUser.group.id,
-            text: groupUser.group.name,
-          })
-        );
-      });
-    });
-
     // === CUSTOM VALIDATIONS ===
     $("#smart_contract_smart_contract_address").on("input", async (_evt) => {
       let customValidity = "";
@@ -198,10 +164,3 @@ const SMART_CONTRACTS_NEW = {
     );
   },
 };
-
-// Even with turbo, init is called every time as listeners need to be replaced
-$(document).on("turbo:load", function () {
-  if ($("#smart-contracts-new").length) {
-    SMART_CONTRACTS_NEW.init();
-  }
-});
