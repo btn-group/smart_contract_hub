@@ -184,7 +184,7 @@ export const ALEPH_ZERO = {
           syncing = false;
         }
         attempt += 1;
-        if (attempt == 5) {
+        if (attempt == 20) {
           syncing = true;
           document.showAlertInfo("Subsquid is out of sync");
         }
