@@ -2,7 +2,7 @@ import { HELPERS } from "../../../application";
 import { ALEPH_ZERO } from "../helpers";
 import { POLKADOTJS } from "../../polkadotjs";
 
-const SMART_CONTRACTS_INDEX = {
+export const SMART_CONTRACTS_INDEX = {
   datatable: undefined,
   queryCount: 0,
   init: async () => {
@@ -120,10 +120,6 @@ const SMART_CONTRACTS_INDEX = {
     }
   },
   addListeners: () => {
-    $(document).on("aleph_zero_account_selected", async () => {
-      $("#search-input").trigger("input");
-    });
-
     // Add event listener for opening and closing details
     SMART_CONTRACTS_INDEX.datatable.on("click", "td.dt-control", function (e) {
       let tr = e.target.closest("tr");
@@ -332,10 +328,3 @@ const SMART_CONTRACTS_INDEX = {
     return html;
   },
 };
-
-// Even with turbo, init is called every time as listeners need to be replaced
-$(document).on("turbo:load", function () {
-  if ($("#smart-contracts-index").length) {
-    SMART_CONTRACTS_INDEX.init();
-  }
-});
