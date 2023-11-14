@@ -25,10 +25,8 @@
                   %option{ disabled: option_details[:value] == 'nil', value: option_details[:value], selected: params[:search_by] == option_details[:value] || (option_details[:value] == 'address' && params[:search_by].blank?) }= option_details[:label]
             .col-xxl-3.col-sm-4
               %select.form-select#status-select
-                %option{ value: 'nil', disabled: true } Status
-                %option{ value: '' } All
-                %option{ value: 'enabled', selected: true } Enabled
-                %option{ value: 'disabled' } Disabled
+                - [{ value: 'nil', label: 'Status' }, { value: 'all', label: 'All' }, { value: 'enabled', label: 'Enabled' }, { value: 'disabled', label: 'Disabled' }].each do |option_details|
+                  %option{ disabled: option_details[:value] == 'nil', value: option_details[:value], selected: params[:enabled] == option_details[:value] || (option_details[:value] == 'enabled' && params[:enabled].blank?) }= option_details[:label]
         .card-body
           .table-responsive.table-card.mb-4
             %table.table.align-middle.table-nowrap.mb-0#smart-contracts-table

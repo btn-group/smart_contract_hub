@@ -82,7 +82,9 @@ export const SMART_CONTRACTS_EDIT = {
         HELPERS.toastr.message = "Success";
         HELPERS.toastr.alertType = document.showAlertSuccess;
         Turbo.visit(
-          `/?search=${JSON.parse(response.decodedOutput).Ok.id}&search_by=id`
+          `/?search=${
+            JSON.parse(response.decodedOutput).Ok.id
+          }&search_by=id&enabled=all`
         );
       } catch (err) {
         document.showAlertDanger(err);
