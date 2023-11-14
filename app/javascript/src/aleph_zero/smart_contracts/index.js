@@ -43,12 +43,11 @@ export const SMART_CONTRACTS_INDEX = {
           },
         },
         {
-          data: "azeroId",
-          title: "Added By",
+          data: "chain",
+          title: "Chain",
+          width: "5%",
           fnCreatedCell: function (nTd, sData, _oData, _iRow) {
-            $(nTd).html(
-              `<div class="cell-wrapper-wrapper"><div class="cell-holder"><div class="cell-overflow">${sData}</div></div></div>`
-            );
+            $(nTd).html(SMART_CONTRACTS_INDEX.chainToString(sData));
           },
         },
         {
@@ -64,6 +63,15 @@ export const SMART_CONTRACTS_INDEX = {
                 '<span class="badge bg-danger">Disabled</span>';
             }
             $(nTd).html(enabledButtonHtml);
+          },
+        },
+        {
+          data: "azeroId",
+          title: "Added By",
+          fnCreatedCell: function (nTd, sData, _oData, _iRow) {
+            $(nTd).html(
+              `<div class="cell-wrapper-wrapper"><div class="cell-holder"><div class="cell-overflow">${sData}</div></div></div>`
+            );
           },
         },
         {
@@ -152,7 +160,7 @@ export const SMART_CONTRACTS_INDEX = {
         $("th")
           .eq(1)
           .css({ width: `${$("th").eq(1).width()}px` });
-        // Address
+        // Smart Contract
         $("th")
           .eq(2)
           .css({ width: `${$("th").eq(2).width() + 20}px` });
@@ -160,7 +168,7 @@ export const SMART_CONTRACTS_INDEX = {
         $("th")
           .eq(3)
           .css({ width: `${$("th").eq(3).width() + 20}px` });
-        // Added By
+        // Chain
         $("th")
           .eq(4)
           .css({ width: `${$("th").eq(4).width() + 20}px` });
@@ -168,10 +176,14 @@ export const SMART_CONTRACTS_INDEX = {
         $("th")
           .eq(5)
           .css({ width: `${$("th").eq(5).width()}px` });
-        // Actions
+        // Added By
         $("th")
           .eq(6)
-          .css({ width: `${$("th").eq(5).width()}px` });
+          .css({ width: `${$("th").eq(6).width() + 20}px` });
+        // Actions
+        $("th")
+          .eq(7)
+          .css({ width: `${$("th").eq(7).width()}px` });
       }
     );
 
