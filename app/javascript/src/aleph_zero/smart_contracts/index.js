@@ -44,7 +44,7 @@ export const SMART_CONTRACTS_INDEX = {
           },
         },
         {
-          data: "caller",
+          data: "azeroId",
           title: "Added By",
           fnCreatedCell: function (nTd, sData, _oData, _iRow) {
             $(nTd).html(
