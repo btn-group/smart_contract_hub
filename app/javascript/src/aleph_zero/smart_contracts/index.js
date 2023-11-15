@@ -231,7 +231,7 @@ export const SMART_CONTRACTS_INDEX = {
     });
   },
   chainToString: (index) => {
-    let mapping = { 0: "Production", 1: "Testnet" };
+    let mapping = { 0: "Mainnet", 1: "Testnet" };
     return mapping[index];
   },
   // pub struct SmartContract {
