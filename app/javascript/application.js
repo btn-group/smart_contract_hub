@@ -24,6 +24,7 @@ import { SMART_CONTRACTS_EDIT } from "./src/aleph_zero/smart_contracts/edit";
 
 // === GLOBAL LISTENERS ===
 $(document).on("turbo:load", function () {
+  $("html").attr("data-preloader", "enable");
   if ($("#smart-contracts-edit").length) {
     SMART_CONTRACTS_EDIT.init();
   }
