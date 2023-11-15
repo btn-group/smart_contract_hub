@@ -95,7 +95,7 @@ export const SMART_CONTRACTS_NEW = {
           account.address,
           contract,
           "create",
-          { value: 1_000_000_000_000 },
+          undefined,
           [
             address,
             chain,
