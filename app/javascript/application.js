@@ -1,6 +1,6 @@
 import "@hotwired/turbo-rails";
 import "./src/jquery";
-import "@popperjs/core";
+import Popper from "popper.js";
 import "bootstrap";
 import "./src/lodash";
 import "./src/toastr";
