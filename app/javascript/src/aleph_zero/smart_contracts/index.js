@@ -37,9 +37,11 @@ export const SMART_CONTRACTS_INDEX = {
           data: "projectName",
           title: "Project",
           fnCreatedCell: function (nTd, sData, _oData, _iRow) {
-            $(nTd).html(
-              `<div class="cell-wrapper-wrapper"><div class="cell-holder"><div class="cell-overflow">${sData}</div></div></div>`
-            );
+            if (sData) {
+              $(nTd).html(
+                `<div class="cell-wrapper-wrapper"><div class="cell-holder"><div class="cell-overflow">${sData}</div></div></div>`
+              );
+            }
           },
         },
         {
