@@ -12,25 +12,24 @@ export const SMART_CONTRACTS_INDEX = {
       HELPERS.toastr.alertType = undefined;
     }
     SMART_CONTRACTS_INDEX.datatable = new DataTable("#smart-contracts-table", {
+      autoWidth: false,
       columns: [
         {
           className: "dt-control position-relative",
           orderable: false,
           data: null,
           defaultContent: "",
-          width: "5%",
         },
         {
           data: "id",
           title: "ID",
-          width: "5%",
         },
         {
           data: "address",
           title: "Smart Contract",
           fnCreatedCell: function (nTd, sData, _oData, _iRow) {
             $(nTd).html(
-              `<div class="cell-wrapper-wrapper"><div class="cell"><div class="cell-overflow">${sData}</div></div></div>`
+              `<div class="cell-wrapper-wrapper"><div class="cell-holder"><div class="cell-overflow">${sData}</div></div></div>`
             );
           },
         },
@@ -39,7 +38,7 @@ export const SMART_CONTRACTS_INDEX = {
           title: "Project",
           fnCreatedCell: function (nTd, sData, _oData, _iRow) {
             $(nTd).html(
-              `<div class="cell-wrapper-wrapper"><div class="cell"><div class="cell-overflow">${sData}</div></div></div>`
+              `<div class="cell-wrapper-wrapper"><div class="cell-holder"><div class="cell-overflow">${sData}</div></div></div>`
             );
           },
         },
@@ -48,14 +47,13 @@ export const SMART_CONTRACTS_INDEX = {
           title: "Added By",
           fnCreatedCell: function (nTd, sData, _oData, _iRow) {
             $(nTd).html(
-              `<div class="cell-wrapper-wrapper"><div class="cell"><div class="cell-overflow">${sData}</div></div></div>`
+              `<div class="cell-wrapper-wrapper"><div class="cell-holder"><div class="cell-overflow">${sData}</div></div></div>`
             );
           },
         },
         {
           data: "enabled",
           title: "Status",
-          width: "5%",
           fnCreatedCell: function (nTd, sData, _oData, _iRow) {
             let enabledButtonHtml;
             if (sData) {
@@ -71,8 +69,6 @@ export const SMART_CONTRACTS_INDEX = {
         {
           className: "text-end",
           defaultContent: "",
-          title: "Actions",
-          width: "5%",
           fnCreatedCell: function (nTd, _sData, oData, _iRow) {
             if (
               ALEPH_ZERO.account &&
@@ -137,6 +133,47 @@ export const SMART_CONTRACTS_INDEX = {
         e.target.classList.add("expanded");
       }
     });
+
+    $(window).resize(function () {
+      $(".cell-holder").removeClass("cell");
+      SMART_CONTRACTS_INDEX.datatable.columns.adjust();
+      $(".cell-holder").addClass("cell");
+    });
+
+    SMART_CONTRACTS_INDEX.datatable.on(
+      "column-sizing.dt",
+      function (e, settings) {
+        // SETTING MAX WIDTHS - MUST BE DONE BEFORE ADDING CELL CLASS
+        // Expand
+        $("th")
+          .eq(0)
+          .css({ width: `${$("th").eq(0).width()}px` });
+        // ID
+        $("th")
+          .eq(1)
+          .css({ width: `${$("th").eq(1).width()}px` });
+        // Address
+        $("th")
+          .eq(2)
+          .css({ width: `${$("th").eq(2).width() + 20}px` });
+        // Project
+        $("th")
+          .eq(3)
+          .css({ width: `${$("th").eq(3).width() + 20}px` });
+        // Added By
+        $("th")
+          .eq(4)
+          .css({ width: `${$("th").eq(4).width() + 20}px` });
+        // Status
+        $("th")
+          .eq(5)
+          .css({ width: `${$("th").eq(5).width()}px` });
+        // Actions
+        $("th")
+          .eq(6)
+          .css({ width: `${$("th").eq(5).width()}px` });
+      }
+    );
 
     $("#search-input").on("input", async (_evt) => {
       // 1. Set to loading and clear table
@@ -217,6 +254,7 @@ export const SMART_CONTRACTS_INDEX = {
           SMART_CONTRACTS_INDEX.datatable.rows.add(smartContracts);
           $("#smart-contracts-table").width("100%");
           SMART_CONTRACTS_INDEX.datatable.columns.adjust().draw();
+          $(window).trigger("resize");
           SMART_CONTRACTS_INDEX.datatable.processing(false);
         }
       }
