@@ -7,6 +7,7 @@ export const SMART_CONTRACTS_NEW = {
     SMART_CONTRACTS_NEW.addListeners();
     await HELPERS.initPopovers();
     $("html").attr("data-preloader", "disable");
+    POLKADOTJS.listenForConnectButtonClick(ALEPH_ZERO);
     await ALEPH_ZERO.activatePolkadotJsExtension();
   },
   addListeners: () => {
