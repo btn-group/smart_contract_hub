@@ -17,28 +17,13 @@ import {
 import { HELPERS } from "../application";
 
 export const POLKADOTJS = {
+  connectButtonSelector: ".polkadot-connect-button",
   maxU128: "340282366920938463463374607431768211454",
-  // https://polkadot.js.org/docs/extension/usage/
-  activatePolkadotjsExtension: async (askToConnectWallet) => {
-    if ($(".polkadotjs").length) {
-      let polkadotConnectButtonSelector = ".polkadot-connect-button";
-      $(polkadotConnectButtonSelector).removeClass("d-none");
-      document
-        .querySelectorAll(polkadotConnectButtonSelector)
-        .forEach((item) => {
-          item.addEventListener("click", async () => {
-            await POLKADOTJS.connectPolkadotjsExtension();
-          });
-        });
-      if (askToConnectWallet) {
-        return await POLKADOTJS.connectPolkadotjsExtension();
-      }
-    }
-  },
   ApiPromise,
   BN,
+  // https://polkadot.js.org/docs/extension/usage/
   connectPolkadotjsExtension: async () => {
-    HELPERS.button.disable(".polkadot-connect-button");
+    HELPERS.button.disable(POLKADOTJS.connectButtonSelector);
     // returns an array of all the injected sources
     // (this needs to be called first, before other requests)
     // this call fires up the authorization popup
@@ -59,7 +44,7 @@ export const POLKADOTJS = {
       };
     } catch (err) {
       document.showAlertDanger(err);
-      HELPERS.button.enable(".polkadot-connect-button");
+      HELPERS.button.enable(POLKADOTJS.connectButtonSelector);
     }
   },
   contractCallDryRun,
@@ -258,6 +243,18 @@ export const POLKADOTJS = {
         scope.updateAfterAccountSelect(e);
       }
     );
+  },
+  listenForConnectButtonClick: (scope) => {
+    if ($(".polkadotjs").length) {
+      $(POLKADOTJS.connectButtonSelector).removeClass("d-none");
+      document
+        .querySelectorAll(POLKADOTJS.connectButtonSelector)
+        .forEach((item) => {
+          item.addEventListener("click", async () => {
+            await scope.activatePolkadotJsExtension();
+          });
+        });
+    }
   },
   // https://polkadot.js.org/docs/util-crypto/examples/validate-address
   validateAddress: function (address) {

@@ -13,6 +13,7 @@ export const SMART_CONTRACTS_EDIT = {
     // === DROPZONE ===
     SMART_CONTRACTS_EDIT.createDropZones();
     $("html").attr("data-preloader", "disable");
+    POLKADOTJS.listenForConnectButtonClick(ALEPH_ZERO);
     await ALEPH_ZERO.activatePolkadotJsExtension();
   },
   addListeners: () => {

@@ -196,7 +196,7 @@ export const ALEPH_ZERO = {
     },
   },
   activatePolkadotJsExtension: async () => {
-    let response = await POLKADOTJS.activatePolkadotjsExtension(true);
+    let response = await POLKADOTJS.connectPolkadotjsExtension();
     ALEPH_ZERO.extensions = response.extensions;
     ALEPH_ZERO.allAccounts = response.allAccounts;
     // Set account
@@ -210,7 +210,8 @@ export const ALEPH_ZERO = {
       ) {
         ALEPH_ZERO.allAccounts.forEach(function (account) {
           if (
-            account.meta.name == HELPERS.cookies.get("sch_polkadot_account_name") &&
+            account.meta.name ==
+              HELPERS.cookies.get("sch_polkadot_account_name") &&
             account.meta.source == HELPERS.cookies.get("sch_polkadot_extension")
           ) {
             ALEPH_ZERO.account = account;
@@ -226,7 +227,7 @@ export const ALEPH_ZERO = {
           // 3. User has multiple accounts: Show modal to select account
         } else {
           $("#polkadot-account-list").modal("show");
-          HELPERS.button.enable(".polkadot-connect-button");
+          HELPERS.button.enable(POLKADOTJS.connectButtonSelector);
         }
       }
     }
@@ -297,14 +298,6 @@ export const ALEPH_ZERO = {
     link = `https://alephzero.subscan.io/${type}/${identifier}`;
     return link;
   },
-  // 18th Feb 2023 - This is currently returning the wrong details.
-  // metadata: async () => {
-  // try {
-  //   return await ALEPH_ZERO.subscan("api/scan/metadata");
-  // } catch (err) {
-  //   document.showAlertDanger(err);
-  // }
-  // },
   updateAfterAccountSelect: (event) => {
     let setNewAccount = false;
     let newAddress = event.currentTarget.dataset.accountAddress;
@@ -334,8 +327,8 @@ export const ALEPH_ZERO = {
     HELPERS.copyToClipboard("polkadot-user-account-menu-wallet-address");
     document.cookie = `sch_polkadot_account_name=${ALEPH_ZERO.account.meta.name};`;
     document.cookie = `sch_polkadot_extension=${ALEPH_ZERO.account.meta.source};`;
-    $(".polkadot-connect-button").addClass("d-none");
-    HELPERS.button.enable(".polkadot-connect-button");
+    $(POLKADOTJS.connectButtonSelector).addClass("d-none");
+    HELPERS.button.enable(POLKADOTJS.connectButtonSelector);
     HELPERS.setUserAccountMenuToggle(
       "#page-header-user-dropdown",
       ALEPH_ZERO.account.address,

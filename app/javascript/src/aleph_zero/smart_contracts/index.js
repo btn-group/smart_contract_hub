@@ -106,6 +106,7 @@ export const SMART_CONTRACTS_INDEX = {
     });
     SMART_CONTRACTS_INDEX.addListeners();
     $("html").attr("data-preloader", "disable");
+    POLKADOTJS.listenForConnectButtonClick(ALEPH_ZERO);
     // Do not ask to connect wallet
     if (
       HELPERS.cookies.get("sch_polkadot_account_name") &&
@@ -113,7 +114,6 @@ export const SMART_CONTRACTS_INDEX = {
     ) {
       await ALEPH_ZERO.activatePolkadotJsExtension();
     } else {
-      await POLKADOTJS.activatePolkadotjsExtension(false);
       $("#search-input").trigger("input");
     }
   },
