@@ -205,13 +205,13 @@ export const ALEPH_ZERO = {
       POLKADOTJS.listenForAccountSelect(ALEPH_ZERO);
       // 1. User has previously selected account and that info is stored in cookies
       if (
-        HELPERS.cookies.get("polkadot_account_name") &&
-        HELPERS.cookies.get("polkadot_extension")
+        HELPERS.cookies.get("sch_polkadot_account_name") &&
+        HELPERS.cookies.get("sch_polkadot_extension")
       ) {
         ALEPH_ZERO.allAccounts.forEach(function (account) {
           if (
-            account.meta.name == HELPERS.cookies.get("polkadot_account_name") &&
-            account.meta.source == HELPERS.cookies.get("polkadot_extension")
+            account.meta.name == HELPERS.cookies.get("sch_polkadot_account_name") &&
+            account.meta.source == HELPERS.cookies.get("sch_polkadot_extension")
           ) {
             ALEPH_ZERO.account = account;
             ALEPH_ZERO.updateAfterAccountSet();
@@ -332,8 +332,8 @@ export const ALEPH_ZERO = {
     $("#page-header-user-dropdown").removeClass("d-none");
     $(".dropdown-menu .wallet-address").text(ALEPH_ZERO.account.address);
     HELPERS.copyToClipboard("polkadot-user-account-menu-wallet-address");
-    document.cookie = `polkadot_account_name=${ALEPH_ZERO.account.meta.name};`;
-    document.cookie = `polkadot_extension=${ALEPH_ZERO.account.meta.source};`;
+    document.cookie = `sch_polkadot_account_name=${ALEPH_ZERO.account.meta.name};`;
+    document.cookie = `sch_polkadot_extension=${ALEPH_ZERO.account.meta.source};`;
     $(".polkadot-connect-button").addClass("d-none");
     HELPERS.button.enable(".polkadot-connect-button");
     HELPERS.setUserAccountMenuToggle(
