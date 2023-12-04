@@ -108,8 +108,8 @@ export const SMART_CONTRACTS_INDEX = {
     $("html").attr("data-preloader", "disable");
     // Do not ask to connect wallet
     if (
-      HELPERS.cookies.get("polkadot_account_name") &&
-      HELPERS.cookies.get("polkadot_extension")
+      HELPERS.cookies.get("sch_polkadot_account_name") &&
+      HELPERS.cookies.get("sch_polkadot_extension")
     ) {
       await ALEPH_ZERO.activatePolkadotJsExtension();
     } else {
