@@ -21,8 +21,8 @@
                   Invalid address.
             .col-xxl-3.col-sm-4
               %select.form-select#search-by-select
-                - [{ value: 'nil', label: 'Search by' }, { value: 'id', label: 'ID' }, { value: 'address', label: 'Smart Contract' }, { value: 'projectName', label: 'Project' }, { value: 'addedBy', label: 'Added By Address' }, { value: 'groupName', label: 'Added By Group' }, { value: 'azeroId', label: 'Added By AZERO.ID' }].each do |option_details|
-                  %option{ disabled: option_details[:value] == 'nil', value: option_details[:value], selected: params[:search_by] == option_details[:value] || (option_details[:value] == 'address' && params[:search_by].blank?) }= option_details[:label]
+                - [{ value: 'nil', label: 'Search by' }, { value: 'id', label: 'ID' }, { value: 'project/address', label: 'Project / Smart Contract' }, { value: 'addedBy', label: 'Added By Address' }, { value: 'groupName', label: 'Added By Group' }, { value: 'azeroId', label: 'Added By AZERO.ID' }].each do |option_details|
+                  %option{ disabled: option_details[:value] == 'nil', value: option_details[:value], selected: params[:search_by] == option_details[:value] || (option_details[:value] == 'project/address' && params[:search_by].blank?) }= option_details[:label]
             .col-xxl-3.col-sm-4
               %select.form-select#status-select
                 - [{ value: 'nil', label: 'Status' }, { value: 'all', label: 'All' }, { value: 'enabled', label: 'Enabled' }, { value: 'disabled', label: 'Disabled' }].each do |option_details|

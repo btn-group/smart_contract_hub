@@ -195,9 +195,9 @@ export const SMART_CONTRACTS_INDEX = {
         // Check validation
         if (
           (search.length &&
-            ((["address", "addedBy"].includes(searchBy) &&
+            ((["addedBy"].includes(searchBy) &&
               POLKADOTJS.validateAddress(search)) ||
-              !["address", "addedBy"].includes(searchBy))) ||
+              !["addedBy"].includes(searchBy))) ||
           search.length == 0
         ) {
           $("#smart-contracts-index form").removeClass("was-validated");
