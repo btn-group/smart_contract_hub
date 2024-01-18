@@ -128,17 +128,14 @@ export const ALEPH_ZERO = {
           case "id":
             queryFilterParams = `where: {id_eq: "${search}"${statusQuery}}`;
             break;
-          case "address":
-            queryFilterParams = `where: {address_containsInsensitive: "${search}"${statusQuery}}`;
+          case "project/address":
+            queryFilterParams = `where: {address_containsInsensitive: "${search}"${statusQuery}, OR: {projectName_containsInsensitive: "${search}"${statusQuery}}}`;
             break;
           case "addedBy":
             queryFilterParams = `where: {caller_containsInsensitive: "${search}"${statusQuery}}`;
             break;
           case "groupName":
             queryFilterParams = `where: {group: {name_containsInsensitive: "${search}"${statusQuery}}`;
-            break;
-          case "projectName":
-            queryFilterParams = `where: {projectName_containsInsensitive: "${search}"${statusQuery}}`;
             break;
           // azeroid
           default:
