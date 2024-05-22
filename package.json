@@ -1,13 +1,10 @@
 {
   "name": "smart_contract_hub",
   "private": true,
-  "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
-    "build:css": "sass ./app/assets/stylesheets/application.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules"
-  },
   "dependencies": {
     "@azns/resolver-core": "^1.6.0",
     "@hotwired/turbo-rails": "^7.3.0",
+    "@nightlylabs/wallet-selector-polkadot": "^0.2.5",
     "@polkadot/api": "^9.14.0",
     "@polkadot/api-contract": "^9.14.0",
     "@polkadot/extension-dapp": "^0.44.8",
@@ -33,5 +30,9 @@
   },
   "engines": {
     "node": "18.13.0"
+  },
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
+    "build:css": "sass ./app/assets/stylesheets/application.scss ./app/assets/builds/application.css --no-source-map --load-path=node_modules"
   }
 }

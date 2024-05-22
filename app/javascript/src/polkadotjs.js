@@ -1,3 +1,6 @@
+// === NIGHTLY ===
+import { NightlyConnectAdapter } from "@nightlylabs/wallet-selector-polkadot";
+
 // === POLKADOT ===
 import { ApiPromise, WsProvider } from "@polkadot/api";
 import { ContractPromise } from "@polkadot/api-contract";
@@ -17,6 +20,7 @@ import {
 import { HELPERS } from "../application";
 
 export const POLKADOTJS = {
+  adapter: undefined,
   connectButtonSelector: ".polkadot-connect-button",
   maxU128: "340282366920938463463374607431768211454",
   ApiPromise,
@@ -28,20 +32,26 @@ export const POLKADOTJS = {
     // (this needs to be called first, before other requests)
     // this call fires up the authorization popup
     try {
-      const extensions = await web3Enable("Smart Contract Hub");
-      // no extension installed, or the user did not accept the authorization
-      // in this case we should inform the use and give a link to the extension
-      if (extensions.length === 0) {
-        throw "Please install SubWallet, Aleph Zero Signer, Polkadotjs or Talisman browser extension. If you have one of these extensions installed already, please goto the settings and allow Smart Contract Hub access.";
-      }
-      // returns an array of { address, meta: { name, source } }
-      // meta.source contains the name of the extension that provides this account
-      const allAccounts = await web3Accounts();
-      POLKADOTJS.initAccountList(allAccounts);
-      return {
-        extensions,
-        allAccounts,
-      };
+      POLKADOTJS.adapter = await NightlyConnectAdapter.build(
+        {
+          appMetadata: {
+            name: "Smart Contract Hub",
+            description:
+              "Find and share smart contract metadata on Aleph Zero and Aleph Zero Testnet.",
+            icon: "https://docs.nightly.app/img/logo.png",
+            // additionalInfo: 'Courtesy of Nightly Connect team'
+          },
+          network: "AlephZero",
+          //   persistent: false  -  Add this if you want to make the session non-persistent
+        },
+        // { initOnConnect: true, disableModal: true, disableEagerConnect: true }  -  You may specify the connection options object here
+        // document.getElementById("modalAnchor")  -  You can pass an optional anchor element for the modal here
+      );
+      // Trigger connection
+      await POLKADOTJS.adapter.connect();
+      const accounts = await POLKADOTJS.adapter.accounts.get();
+      POLKADOTJS.initAccountList(accounts);
+      return { accounts };
     } catch (err) {
       document.showAlertDanger(err);
       HELPERS.button.enable(POLKADOTJS.connectButtonSelector);
@@ -210,22 +220,10 @@ export const POLKADOTJS = {
   },
   initAccountList: (accounts) => {
     $("#polkadot-account-list .list-group").html("");
-    _.sortBy(accounts, ["meta.source", "meta.name"]).forEach(function (
-      account
-    ) {
+    _.sortBy(accounts, ["name"]).forEach(function (account) {
       // https://themesbrand.com/velzon/html/saas/ui-lists.html#
       $("#polkadot-account-list .list-group").append(
-        `<a href="javascript:void(0);" class="d-flex align-items-center border-0 list-group-item list-group-item-action px-0" data-account-address= '${
-          account.address
-        }', data-account-name= '${account.meta.name}', data-account-source='${
-          account.meta.source
-        }'><div class='text-center me-2 logo-container'><img class="h-100" src='https://res.cloudinary.com/hv5cxagki/image/upload/c_pad,dpr_2,f_auto,h_25,w_25,q_100/v1/${HELPERS.walletCloudinaryPublicId(
-          account.meta.source
-        )}'></div><div class="flex-fill"><h5 class="list-title fs-15 mb-1">${
-          account.meta.name
-        }</h5><h7 class="fs-14 mb-0 text-muted"><div class="cell-wrapper-wrapper"><div class="cell"><div class="cell-overflow">${
-          account.address
-        }</div></div></div></h7></div></a>`
+        `<a href="javascript:void(0);" class="d-flex align-items-center border-0 list-group-item list-group-item-action px-0" data-account-address= '${account.address}', data-account-name='${account.name}', data-account-source='${POLKADOTJS.adapter.selectedWallet.name}'><div class='text-center me-3 logo-container'><img class="h-100" src='${POLKADOTJS.adapter.selectedWallet.image.default}'></div><div class="flex-fill"><h5 class="list-title mb-1">${account.name}</h5><h7 class="mb-0 list-subtitle">${account.address}</h7></div></a>`,
       );
     });
     // Enable clicking change button

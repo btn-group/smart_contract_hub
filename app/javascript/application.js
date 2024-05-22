@@ -285,26 +285,10 @@ export const HELPERS = {
     }
     $('[data-bs-toggle="popover"]').popover({});
   },
-  walletCloudinaryPublicId: function (id) {
-    switch (id) {
-      case "keplr":
-        return "logos/b8thbiihwftyjolgjjz2_dhy5mr";
-      case "polkadot-js":
-        return "logos/download_qbpd9p";
-      case "subwallet-js":
-        return "logos/subwallet.3be275bc71284f30e5bc_cwag5o";
-      case "talisman":
-        return "logos/Talisman-Icon-Red_e75eas.png";
-      default:
-        return "external-content.duckduckgo-1_memqe7";
-    }
-  },
-  setUserAccountMenuToggle: (parentSelector, address, name, source) => {
+  setUserAccountMenuToggle: (parentSelector, address, name, logoUrl) => {
     $(`${parentSelector} img.user-address-alias-avatar`).attr(
       "src",
-      `https://res.cloudinary.com/hv5cxagki/image/upload/c_scale,dpr_2,f_auto,h_25,q_100/${HELPERS.walletCloudinaryPublicId(
-        source
-      )}`
+      logoUrl
     );
     $(`${parentSelector} .account-name`).text(name);
     $(`${parentSelector} .account-address-abbreviated`).text(
