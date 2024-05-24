@@ -176,8 +176,6 @@ export const ALEPH_ZERO = {
       while (syncing) {
         await HELPERS.delay(3_000);
         let squidHeight = await ALEPH_ZERO.subsquid.height();
-        console.log(squidHeight);
-        console.log(height);
         if (squidHeight >= height) {
           syncing = false;
         }
@@ -205,9 +203,9 @@ export const ALEPH_ZERO = {
       ) {
         ALEPH_ZERO.accounts.forEach(function (account) {
           if (
-            account.meta.name ==
+            account.name ==
               HELPERS.cookies.get("sch_polkadot_account_name") &&
-            account.meta.source == HELPERS.cookies.get("sch_polkadot_extension")
+            POLKADOTJS.adapter.selectedWallet.name == HELPERS.cookies.get("sch_polkadot_extension")
           ) {
             ALEPH_ZERO.account = account;
             ALEPH_ZERO.updateAfterAccountSet();
@@ -309,7 +307,7 @@ export const ALEPH_ZERO = {
     $("#page-header-user-dropdown").removeClass("d-none");
     $(".dropdown-menu .wallet-address").text(ALEPH_ZERO.account.address);
     HELPERS.copyToClipboard("polkadot-user-account-menu-wallet-address");
-    document.cookie = `sch_polkadot_account_name=${ALEPH_ZERO.account.meta.name};`;
+    document.cookie = `sch_polkadot_account_name=${ALEPH_ZERO.account.name};`;
     document.cookie = `sch_polkadot_extension=${POLKADOTJS.adapter.selectedWallet.name};`;
     $(POLKADOTJS.connectButtonSelector).addClass("d-none");
     HELPERS.button.enable(POLKADOTJS.connectButtonSelector);
