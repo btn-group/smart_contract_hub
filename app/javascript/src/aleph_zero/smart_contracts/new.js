@@ -87,7 +87,7 @@ export const SMART_CONTRACTS_NEW = {
 
         let api = await ALEPH_ZERO.api();
         let account = ALEPH_ZERO.account;
-        api.setSigner(ALEPH_ZERO.getSigner());
+        api.setSigner(POLKADOTJS.adapter.signer);
         const contract = await ALEPH_ZERO.contracts[
           "smartContractHub"
         ].getContract();

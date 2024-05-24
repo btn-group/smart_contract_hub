@@ -4,7 +4,7 @@ import { POLKADOTJS } from "./../polkadotjs";
 
 export const ALEPH_ZERO = {
   account: undefined,
-  allAccounts: undefined,
+  accounts: undefined,
   apisStaging: undefined,
   apisProduction: undefined,
   b3: "5HimuS19MhHX9EggD9oZzx297qt3UxEdkcc5NWAianPAQwHG",
@@ -82,7 +82,6 @@ export const ALEPH_ZERO = {
     },
   },
   contractsByAddress: {},
-  extensions: undefined,
   subsquid: {
     url: "https://squid.subsquid.io/smart-contract-hub/graphql",
     groupUsers: async () => {
@@ -177,8 +176,6 @@ export const ALEPH_ZERO = {
       while (syncing) {
         await HELPERS.delay(3_000);
         let squidHeight = await ALEPH_ZERO.subsquid.height();
-        console.log(squidHeight);
-        console.log(height);
         if (squidHeight >= height) {
           syncing = false;
         }
@@ -194,22 +191,21 @@ export const ALEPH_ZERO = {
   },
   activatePolkadotJsExtension: async () => {
     let response = await POLKADOTJS.connectPolkadotjsExtension();
-    ALEPH_ZERO.extensions = response.extensions;
-    ALEPH_ZERO.allAccounts = response.allAccounts;
+    ALEPH_ZERO.accounts = response.accounts;
     // Set account
     // There's three options here
-    if (ALEPH_ZERO.allAccounts.length) {
+    if (ALEPH_ZERO.accounts.length) {
       POLKADOTJS.listenForAccountSelect(ALEPH_ZERO);
       // 1. User has previously selected account and that info is stored in cookies
       if (
         HELPERS.cookies.get("sch_polkadot_account_name") &&
         HELPERS.cookies.get("sch_polkadot_extension")
       ) {
-        ALEPH_ZERO.allAccounts.forEach(function (account) {
+        ALEPH_ZERO.accounts.forEach(function (account) {
           if (
-            account.meta.name ==
+            account.name ==
               HELPERS.cookies.get("sch_polkadot_account_name") &&
-            account.meta.source == HELPERS.cookies.get("sch_polkadot_extension")
+            POLKADOTJS.adapter.selectedWallet.name == HELPERS.cookies.get("sch_polkadot_extension")
           ) {
             ALEPH_ZERO.account = account;
             ALEPH_ZERO.updateAfterAccountSet();
@@ -218,8 +214,8 @@ export const ALEPH_ZERO = {
       }
       if (!ALEPH_ZERO.account) {
         // 2. User has one account: Auto-select that account
-        if (ALEPH_ZERO.allAccounts.length == 1) {
-          ALEPH_ZERO.account = ALEPH_ZERO.allAccounts[0];
+        if (ALEPH_ZERO.accounts.length == 1) {
+          ALEPH_ZERO.account = ALEPH_ZERO.accounts[0];
           ALEPH_ZERO.updateAfterAccountSet();
           // 3. User has multiple accounts: Show modal to select account
         } else {
@@ -274,15 +270,6 @@ export const ALEPH_ZERO = {
       document.showAlertDanger(err);
     }
   },
-  getSigner: () => {
-    let signer;
-    ALEPH_ZERO.extensions.forEach(function (extension) {
-      if (extension.name == ALEPH_ZERO.account.meta.source) {
-        signer = extension.signer;
-      }
-    });
-    return signer;
-  },
   httpUrls: async (environment = "production") => {
     let urls = ["wss://ws.azero.dev"];
     if (environment == "staging") {
@@ -298,11 +285,9 @@ export const ALEPH_ZERO = {
   updateAfterAccountSelect: (event) => {
     let setNewAccount = false;
     let newAddress = event.currentTarget.dataset.accountAddress;
-    let newSource = event.currentTarget.dataset.accountSource;
     if (ALEPH_ZERO.account) {
       if (
-        ALEPH_ZERO.account.address != newAddress ||
-        ALEPH_ZERO.account.meta.source != newSource
+        ALEPH_ZERO.account.address != newAddress
       ) {
         setNewAccount = true;
       }
@@ -310,8 +295,8 @@ export const ALEPH_ZERO = {
       setNewAccount = true;
     }
     if (setNewAccount) {
-      ALEPH_ZERO.allAccounts.forEach(function (account) {
-        if (account.address == newAddress && account.meta.source == newSource) {
+      ALEPH_ZERO.accounts.forEach(function (account) {
+        if (account.address == newAddress) {
           ALEPH_ZERO.account = account;
           ALEPH_ZERO.updateAfterAccountSet();
         }
@@ -322,15 +307,15 @@ export const ALEPH_ZERO = {
     $("#page-header-user-dropdown").removeClass("d-none");
     $(".dropdown-menu .wallet-address").text(ALEPH_ZERO.account.address);
     HELPERS.copyToClipboard("polkadot-user-account-menu-wallet-address");
-    document.cookie = `sch_polkadot_account_name=${ALEPH_ZERO.account.meta.name};`;
-    document.cookie = `sch_polkadot_extension=${ALEPH_ZERO.account.meta.source};`;
+    document.cookie = `sch_polkadot_account_name=${ALEPH_ZERO.account.name};`;
+    document.cookie = `sch_polkadot_extension=${POLKADOTJS.adapter.selectedWallet.name};`;
     $(POLKADOTJS.connectButtonSelector).addClass("d-none");
     HELPERS.button.enable(POLKADOTJS.connectButtonSelector);
     HELPERS.setUserAccountMenuToggle(
       "#page-header-user-dropdown",
       ALEPH_ZERO.account.address,
-      ALEPH_ZERO.account.meta.name,
-      ALEPH_ZERO.account.meta.source
+      ALEPH_ZERO.account.name,
+      POLKADOTJS.adapter.selectedWallet.image.default
     );
     $(document).trigger("aleph_zero_account_selected", {});
   },
