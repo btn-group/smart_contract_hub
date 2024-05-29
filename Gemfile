@@ -23,7 +23,7 @@ gem 'pg', '~> 1.1'
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.6'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.0.5', '>= 7.0.5.1'
+gem 'rails', '~> 7.0.8'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
 gem 'ruby-vips', '>= 2.1.0'
